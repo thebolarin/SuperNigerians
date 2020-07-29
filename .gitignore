@@ -136,4 +136,3 @@ tmp/
 .DS_Store
 yarn.lock
 migrations/
-config/
