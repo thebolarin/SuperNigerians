@@ -22,6 +22,11 @@ const postSchema = new Schema(
             type: String,
             required: true
         },
+        status: {
+            type: String,
+            enum : ['true', 'false'], 
+            default: 'false'
+        },
         media: {
             type: Array,
             required:true
