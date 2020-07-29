@@ -38,9 +38,9 @@ app.get("/", (req, res) => {
 app.use((req, res, next) => {
   next(createError(404));
 });
-
+const MONGO_URI = process.env.MONGODB_URI;
 mongoose
-  .connect(config.database, {
+  .connect(MONGO_URI, {
     useNewUrlParser: true,
     useCreateIndex: true,
     useUnifiedTopology: true,
