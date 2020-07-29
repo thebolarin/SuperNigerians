@@ -29,7 +29,6 @@ const postSchema = new Schema(
         },
         media: {
             type: Array,
-            required:true
         },
         creator: {
             type: Schema.Types.ObjectId,
