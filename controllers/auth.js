@@ -7,7 +7,7 @@ const sendEmail = require('../utils/send-email');
 const asyncHandler = require('../middleware/async');
 const { validateUserRequest, validateUserRegistration } = require('../utils/request-body-validator');
 const { userCheck, userCreate } = require('../utils/user-check');
-const { passwordHash } = require('../utils/password-hash');
+// const { passwordHash } = require('../utils/password-hash');
 const {
   errorUserLogin, errorUserRegister
 } = require('../utils/response');
@@ -35,7 +35,7 @@ const URL = process.env.NODE_ENV === 'development'
       },
       validationErrors: [],
     };
-    renderPage(res, 'auth/register', data, 'Register', '/register');
+    renderPage(res, 'auth/signup', data, 'Register', '/register');
   
   };
 
@@ -57,21 +57,20 @@ const getUserLogin = (req, res) => {
     },
     validationErrors: [],
   };
-  renderPage(res, 'auth/login', data, 'login', '/login');
+  renderPage(res, 'auth/signin', data, 'login', '/login');
 
 };
 
 const postUserRegister = async(req, res) => {
-  const { firstname, lastname, phone, email, password, username } = req.body;
+  const { firstname, lastname, email, password } = req.body;
   const userDetails = {
     firstname, 
     lastname,
     email,
-    phone,
-    username
   }
   validateUserRegistration(req, res, userDetails);
   userCheck(email).then(async (user) => {
+    console.log(user)
     if (!user) {
       const salt = await bcrypt.genSalt(10);
       const hashedPassword = bcrypt.hashSync(password, salt);
@@ -88,12 +87,14 @@ const postUserRegister = async(req, res) => {
           req.session.user = user;
           req.session.createdAt = Date.now();
           req.session.isLoggedIn = true;
+          console.log(user)
           if (user && user.role === 'admin') {
             return res.redirect('/admin/dashboard');
           }
           return res.redirect('/');
         }
       } catch (error) {
+        console.log(error);
         return errorUserRegister(req, res, userDetails,'Error Occoured')
       }
     }
@@ -125,6 +126,7 @@ const postUserLogin = async (req, res, next) => {
           return errorUserLogin(req, res, email, password, 'Invalid email or password.',);
         })
         .catch(() => {
+          console.log('invalid user')
           res.redirect('/login');
         });
     })
@@ -154,7 +156,7 @@ const getReset = (req, res) => {
     },
     validationErrors: [],
   };
-  renderPage(res, 'auth/recoverPassword', data, 'Recover Password', '/recover/password');
+  renderPage(res, 'auth/forgotPassword', data, 'Recover Password', '/recover/password');
 };
 
 const getNewPassword = (req, res) => {
@@ -201,6 +203,7 @@ const getResetPasswordToken = () => {
 const postReset = asyncHandler(async (req, res) => {
   const { email } = req.body;
   const user = await userCheck(email);
+  console.log(user);
   if (!user) {
     req.flash('error', 'User with this email is not found');
     return res.redirect('/recover/password');
@@ -213,14 +216,9 @@ const postReset = asyncHandler(async (req, res) => {
     resetTokenExpiration,
   } = getResetPasswordToken();
 
-  await User.update({
-    resetToken,
-    resetTokenExpiration,
-  }, {
-    where: {
-      email
-    },
-  });
+  user.resetToken = resetToken;
+  user.resetTokenExpiration = resetTokenExpiration;
+   user.save();
 
   // Create reset url
   const resetUrl = `${URL}/password/reset/${token}`;
@@ -252,17 +250,14 @@ const postReset = asyncHandler(async (req, res) => {
 // @access    Public
 const postNewPassword = asyncHandler(async (req, res) => {
   // Get hashed token
-  const resetToken = crypto
+  console.log(req.body.token);
+  const token = crypto
     .createHash('sha256')
     .update(req.body.token, 'utf8')
     .digest('hex');
 
-  const user = await User.findOne({
-    where: {
-      resetToken,
-    },
-  });
-
+  const user = await User.findOne({resetToken : token});
+   
   if (!user) {
     req.flash('error', 'Invalid token');
     return res.redirect('/recover/password');
@@ -272,10 +267,9 @@ const postNewPassword = asyncHandler(async (req, res) => {
     req.flash('error', 'Reset password token expired,please try again');
     return res.redirect('/recover/password');
   }
+  const salt = bcrypt.genSaltSync(10);
 
-
-  // Set new password
-  user.password = passwordHash(req.body.password);
+  user.password = bcrypt.hashSync(req.body.password, salt);
   user.resetToken = null;
   user.resetTokenExpiration = null;
   await user.save();
