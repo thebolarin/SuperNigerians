@@ -49,9 +49,9 @@ app.use((req, res, next) => {
   next();
 });
 // ************ REGISTER ROUTES HERE ********** //
-app.get("/", (req, res) => {
-  res.send("Welcome to Express!");
-});
+// app.get("/", (req, res) => {
+//   res.send("Welcome to Express!");
+// });
 app.use(auth);
 app.use(indexRouter);
 // ************ END ROUTE REGISTRATION ********** //
