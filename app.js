@@ -72,10 +72,7 @@ mongoose
     useUnifiedTopology: true,
   })
   .then((db) => {
-<<<<<<< HEAD
-=======
    
->>>>>>> 560815b2e78bdd263597e1c58f319dfa76dc6f64
     console.log("Database connected successfully");
   })
   .catch((err) => console.log("Connection to database failed =>", err));
