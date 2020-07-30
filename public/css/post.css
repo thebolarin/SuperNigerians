@@ -1,0 +1,30 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  overflow-x: hidden;
+  width: 100%;
+  /*margin-top: 10px;*/
+  position: relative;
+  font-family: "Lora", poppins;
+}
+
+a,
+a:hover {
+  text-decoration: none;
+  list-style-type: none;
+  color: inherit;
+}
+p {
+  line-height: 1.9;
+  word-spacing: 1;
+  font-size: 16px;
+}
+
+@media (min-width: 992px) {
+  #singlePostPix {
+    width: 50%;
+  }
+}
