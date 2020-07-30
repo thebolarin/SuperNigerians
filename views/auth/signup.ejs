@@ -21,27 +21,38 @@
                     <div class="col-md-6 d-flex align-items-center justify-content-center">
                         <div>
                             <h3 class="my-4 text-center prj-green-text"><span>Sign Up</span></h3>
+                            <% if (errorMessage) { %>
+                            <div role="alert" class="alert alert-danger user-message user-message--error">
+                                <%= errorMessage %>
+                            </div>
+                            <% }if (success && success.length > 0) { %>
+                            <div role="alert" class="alert alert-success user-message">
+                                <%= success %>
+                            </div>
+                            <% } %>
                             <form name="signUpForm" action="" method="POST" class="bg-light p-5 contact-form">
+                                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                                 <div class="row">
                                     <div class="form-group col-12 col-md">
                                         <label for="firstName" class="prj-normal-text">First name</label>
-                                        <input type="text" name="firstName" class="form-control prj-form-control"
+                                        <input type="text" name="firstname" class="form-control prj-form-control"
                                             id="firstName" placeholder="e.g. Olu" autocapitalize="on"
-                                            autocomplete="name" required />
+                                            autocomplete="name" required value="<%- oldInput.firstname %>" />
                                     </div>
                                     <div class="form-group col-12 col-md">
                                         <label for="lastName" class="prj-normal-text">Last name</label>
-                                        <input type="text" name="lastName" class="form-control prj-form-control"
+                                        <input type="text" name="lastname" class="form-control prj-form-control"
                                             id="lastName" placeholder="e.g. Ola" autocapitalize="on"
-                                            autocomplete="family-name" minlength="2" required />
+                                            autocomplete="family-name" minlength="2" required
+                                            value="<%- oldInput.lastname %>" />
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="form-group col">
                                         <label for="email" class="prj-normal-text">Email address</label>
                                         <input type="email" name="email" class="form-control prj-form-control"
-                                            id="email" placeholder="e.g. oluola@gmail.com" autocomplete="email"
-                                            required />
+                                            id="email" placeholder="e.g. oluola@gmail.com" autocomplete="email" required
+                                            value="<%- oldInput.email %>" />
                                     </div>
                                 </div>
                                 <div class="row">
@@ -82,7 +93,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
             </div>
         </section>
     </main>
