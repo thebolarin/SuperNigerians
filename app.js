@@ -9,6 +9,7 @@ const logger = require("morgan");
 const mongoose = require("mongoose");
 const csrf = require('csurf');
 const multer = require('multer');
+const indexRouter = require('./routes')
 const config = require("./config/database");
 const auth = require('./routes/auth');
 
@@ -52,6 +53,7 @@ app.get("/", (req, res) => {
   res.send("Welcome to Express!");
 });
 app.use(auth);
+app.use(indexRouter);
 // ************ END ROUTE REGISTRATION ********** //
 
 // catch 404 and forward to error handler
