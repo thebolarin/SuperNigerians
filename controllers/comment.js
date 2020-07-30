@@ -1,6 +1,7 @@
 const Comment = require('../models/comment');
 const Post = require('../models/post');
 
+
 const postExist = async (postId) => {
     const post = await Post.findById({ postId });
     return post;
