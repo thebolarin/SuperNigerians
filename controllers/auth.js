@@ -1,7 +1,6 @@
 /* eslint-disable consistent-return */
 const crypto = require('crypto');
 const bcrypt = require('bcryptjs');
-// const { message } = require('../../Utils/email-signup-template');
 const { renderPage } = require('../utils/render-page');
 const User = require('../models/user');
 const sendEmail = require('../utils/send-email');
