@@ -35,7 +35,7 @@ const URL = process.env.NODE_ENV === 'development'
       },
       validationErrors: [],
     };
-    renderPage(res, 'auth/register', data, 'Register', '/register');
+    renderPage(res, 'auth/signup', data, 'Register', '/register');
   
   };
 
@@ -62,16 +62,15 @@ const getUserLogin = (req, res) => {
 };
 
 const postUserRegister = async(req, res) => {
-  const { firstname, lastname, phone, email, password, username } = req.body;
+  const { firstname, lastname, email, password } = req.body;
   const userDetails = {
     firstname, 
     lastname,
     email,
-    phone,
-    username
   }
   validateUserRegistration(req, res, userDetails);
   userCheck(email).then(async (user) => {
+    console.log(user)
     if (!user) {
       const salt = await bcrypt.genSalt(10);
       const hashedPassword = bcrypt.hashSync(password, salt);
@@ -88,12 +87,14 @@ const postUserRegister = async(req, res) => {
           req.session.user = user;
           req.session.createdAt = Date.now();
           req.session.isLoggedIn = true;
+          console.log(user)
           if (user && user.role === 'admin') {
             return res.redirect('/admin/dashboard');
           }
           return res.redirect('/');
         }
       } catch (error) {
+        console.log(error);
         return errorUserRegister(req, res, userDetails,'Error Occoured')
       }
     }

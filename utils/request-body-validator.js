@@ -31,7 +31,7 @@ const validateUserRegistration = (req, res, oldInput) => {
       oldInput,
       validationErrors: errors.array(),
     }
-    renderPage(res ,'auth/register', data, 'Register','/register' )
+    renderPage(res ,'auth/signup', data, 'Register','/register' )
   }
 };
 
