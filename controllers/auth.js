@@ -72,20 +72,18 @@ const postUserRegister = async(req, res) => {
   }
   validateUserRegistration(req, res, userDetails);
   userCheck(email).then(async (user) => {
-    console.log(user)
     if (!user) {
-      console.log(user)
-      const hashedPassword = bcrypt.hashSync(password, 8);
+      const salt = await bcrypt.genSalt(10);
+      const hashedPassword = bcrypt.hashSync(password, salt);
       try {
         const saveUser = await userCreate({...userDetails, password: hashedPassword});
         if (saveUser) {
-          const message = `Welcome to Super Nigerians`;
+          const message = `Welcome to Super Nigerians \n kindly click this <a href="https://supernigerians.com">link to continue</a>`;
           sendEmail({
             email,
             subject: 'Welcome',
             message,
           });
-          console.log('hi');
           req.flash('success', 'Registration Succssful');
           req.session.user = user;
           req.session.createdAt = Date.now();
@@ -96,7 +94,6 @@ const postUserRegister = async(req, res) => {
           return res.redirect('/');
         }
       } catch (error) {
-        console.log(error);
         return errorUserRegister(req, res, userDetails,'Error Occoured')
       }
     }
@@ -110,6 +107,7 @@ const postUserLogin = async (req, res, next) => {
 
   await userCheck(email)
     .then(async (user) => {
+      console.log(user);
       if (!user) {
         return errorUserLogin(req, res, email, password, 'Invalid email or password.',);
       }
