@@ -1,19 +1,15 @@
 <!doctype html>
 <html lang="en">
-
 <head>
     <%- include('../templates/head') %>
-
     <link rel="stylesheet" href="/css/signup-signin.css">
-
     <title>Sign Up | Super Nigerians</title>
     <style>
-        form .invalid {
+        form .invalid{
             border: 2px solid palevioletred !important;
         }
     </style>
 </head>
-
 <body>
     <%- include('../templates/sidebar') %>
 
@@ -37,52 +33,61 @@
                                         </button> <%= success %></div>
                                     <% } %>
                                 <form name="signUpForm" action="/login" method="POST" class="bg-light p-5 contact-form">
+
                                     
+                                    
+                                    <div class="row">
+                                    <div class="form-group col">
+                                        <label for="email" class="prj-normal-text">Email address</label>
+                                        <input type="email" name="email"
+                                        value="<%= oldInput.email %>"
+                                        class="form-control prj-form-control <%= validationErrors.find(e => e.param === 'email') ? 'invalid' : '' %>"
+                                        id="email" placeholder="e.g. oluola@gmail.com" autocomplete="email" required />
+                                    </div>
+                                    </div>
                                     <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                                     <div class="row">
-                                        <div class="form-group col">
-                                            <label for="email" class="prj-normal-text">Email address</label>
-                                            <input type="email" name="email" class="form-control prj-form-control"
-                                                id="email" placeholder="e.g. oluola@gmail.com" autocomplete="email"
-                                                required />
-                                        </div>
+                                    <div class="form-group col">
+                                        <label for="password" class="prj-normal-text">Password</label>
+                                        <input type="password" name="password"
+                                        class="form-control prj-form-control <%= validationErrors.find(e => e.param === 'password') ? 'invalid' : '' %>"
+                                        id="password" placeholder="Password" autocomplete="new-password"
+                                        pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W]).{8,}" minlength="8" required />
+                                    </div>
                                     </div>
                                     <div class="row">
-                                        <div class="form-group col">
-                                            <label for="password" class="prj-normal-text">Password</label>
-                                            <input type="password" name="password" class="form-control prj-form-control"
-                                                id="password" placeholder="Password" autocomplete="new-password"
-                                                pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W]).{8,}" minlength="8"
-                                                required />
+                                    <div class="col">
+                                        <div class="d-flex ">
+                                            <a href="/recover/password" class="prj-link prj-green-text">Forgot Password?</a>
                                         </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="d-flex ">
-                                                <a href="#" class="prj-link prj-green-text">Forgot Password?</a>
+                                        <div class="row">
+                                            <div class="col mt-3 mb-0">
+                                                <div class="d-flex justify-content-center">
+                                                    <button type="submit" class="btn btn-lg prj-btn-primary br-5">
+                                                        Sign In
+                                                    </button>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col mt-3 mb-0">
-                                            <div class="d-flex justify-content-center">
-                                                <button type="submit" class="btn btn-lg prj-btn-primary br-5">
-                                                    Sign In
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <p class="prj-normal-text text-center p-0 mt-3">
-                                        Don't have an account?
-                                        <a href="signin.html" class="text-center prj-link">Sign Up</a>
-                                    </p>
-                                </form>
+                                        <p class="prj-normal-text text-center p-0 mt-3">
+                                            Don't have an account?
+                                            <a href="/register" class="text-center prj-link">Sign Up</a>
+                                        </p>
+                                    </form>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        </div>
     </main>
+    <!-- loader -->
+    <div id="ftco-loader" class="show fullscreen">
+        <svg class="circular" width="48px" height="48px">
+            <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
+            <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10"
+                stroke="#F96D00" />
+        </svg>
+    </div>
 </body>
-
 </html>
