@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Lora:wght@400;500;600;700&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/user-dashboard.css">
+
+
+  <!-- <#% if (title) { %>
+    <#%= title %>
+    <#% } %>
+    <#% } else { %>
+    User profile
+    <#% } %> -->
+  <title>
+    User dashboard
+  </title>
+</head>
+
+<body>
+
+  <main class="m-auto pt-5">
+    <div class="container-fluid main-container ">
+      <div class="row">
+        <div class="col-10 mx-auto">
+          <div class="profile-container my-3 d-flex flex-column justify-content-center align-items-center flex-sm-row">
+            <img src="https://picsum.photos/500" alt="my avatar" class="profile-img img-fluid rounded-circle mr-sm-4">
+            <div class="d-flex flex-column justify-content-center align-items-center ml-sm-4 mt-3 mt-sm-0">
+              <h1 class="h3">Username here</h1>
+              <p class="mb-0 lead prj-text-normal"> <span class="font-weight-normal d-inline-block">41</span> posts
+                <span class="font-weight-normal d-inline-block">20</span>
+                likes <span class="font-weight-normal d-inline-block">10</span> shares</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-11 mx-auto">
+          <ul class="nav nav-tabs justify-content-center my-3" role="tablist">
+            <li class="nav-item" role="presentation">
+              <a class="nav-link active" id="tabs-my-posts-tab" data-toggle="pill" href="#tabs-my-posts" role="tab"
+                aria-controls="tabs-my-posts" aria-selected="false">My posts</a>
+            </li>
+            <li class="nav-item" role="presentation">
+              <a class="nav-link" id="tabs-create-post-tab" data-toggle="pill" href="#tabs-create-post" role="tab"
+                aria-controls="tabs-create-post" aria-selected="true">Create a post</a>
+            </li>
+          </ul>
+          <div class="tab-content" id="tabs-tabContent">
+            <div class="tab-pane fade show active" id="tabs-my-posts" role="tabpanel"
+              aria-labelledby="tabs-my-posts-tab">
+              <!-- My posts -->
+              <div class="my-posts-container row row-cols-1 row-cols-sm-2 row-cols-lg-3">
+                <div class="my-post col px-1 py-3 position-relative my-2">
+                  <div
+                    class="default-post-content py-2 d-flex flex-column align-items-center justify-content-space-around">
+                    <img src="https://picsum.photos/500" class="img-fluid" alt="post header image">
+                    <p class="my-4 lead font-weight-normal text-center">Post title</p>
+                  </div>
+                  <div
+                    class="hover-post-content px-4 position-absolute d-flex flex-column align-items-center justify-content-center">
+                    <p class="lead text-center">No of shares, views likes and comments to appear here with icons</p>
+                    <a href="#" class="btn btn-outline-secondary btn-sm bg-white text-secondary">View post</a>
+                  </div>
+                </div>
+                <div class="my-post col px-1 py-3 position-relative my-2">
+                  <div
+                    class="default-post-content py-2 d-flex flex-column align-items-center justify-content-space-around">
+                    <img src="https://picsum.photos/500" class="img-fluid" alt="post header image">
+                    <p class="my-4 lead font-weight-normal text-center">Post title</p>
+                  </div>
+                  <div
+                    class="hover-post-content px-4 position-absolute d-flex flex-column align-items-center justify-content-center">
+                    <p class="lead text-center">No of shares, views likes and comments to appear here with icons</p>
+                    <a href="#" class="btn btn-outline-secondary btn-sm bg-white text-secondary">View post</a>
+                  </div>
+                </div>
+                <div class="my-post col px-1 py-3 position-relative my-2">
+                  <div
+                    class="default-post-content py-2 d-flex flex-column align-items-center justify-content-space-around">
+                    <img src="https://picsum.photos/500" class="img-fluid" alt="post header image">
+                    <p class="my-4 lead font-weight-normal text-center">Post title</p>
+                  </div>
+                  <div
+                    class="hover-post-content px-4 position-absolute d-flex flex-column align-items-center justify-content-center">
+                    <p class="lead text-center">No of shares, views likes and comments to appear here with icons</p>
+                    <a href="#" class="btn btn-outline-secondary btn-sm bg-white text-secondary">View post</a>
+                  </div>
+                </div>
+                <div class="my-post col px-1 py-3 position-relative my-2">
+                  <div
+                    class="default-post-content py-2 d-flex flex-column align-items-center justify-content-space-around">
+                    <img src="https://picsum.photos/500" class="img-fluid" alt="post header image">
+                    <p class="my-4 lead font-weight-normal text-center">Post title</p>
+                  </div>
+                  <div
+                    class="hover-post-content px-4 position-absolute d-flex flex-column align-items-center justify-content-center">
+                    <p class="lead text-center">No of shares, views likes and comments to appear here with icons</p>
+                    <a href="#" class="btn btn-outline-secondary btn-sm bg-white text-secondary">View post</a>
+                  </div>
+                </div>
+                <div class="my-post col px-1 py-3 position-relative my-2">
+                  <div
+                    class="default-post-content py-2 d-flex flex-column align-items-center justify-content-space-around">
+                    <img src="https://picsum.photos/500" class="img-fluid" alt="post header image">
+                    <p class="my-4 lead font-weight-normal text-center">Post title</p>
+                  </div>
+                  <div
+                    class="hover-post-content px-4 position-absolute d-flex flex-column align-items-center justify-content-center">
+                    <p class="lead text-center">No of shares, views likes and comments to appear here with icons</p>
+                    <a href="#" class="btn btn-outline-secondary btn-sm bg-white text-secondary">View post</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane fade" id="tabs-create-post" role="tabpanel" aria-labelledby="tabs-create-post-tab">
+              <!-- Create a post -->
+              <h2>@Afej is creating this form</h2>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <script src="/js/jquery.js"></script>
+  <script src="/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>
