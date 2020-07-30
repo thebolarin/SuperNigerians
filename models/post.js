@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+
 const Schema = mongoose.Schema;
 const marked = require('marked')
 const slugify = require('slugify')
@@ -7,6 +8,7 @@ const { JSDOM } = require('jsdom')
 const dompurify = createDomPurify(new JSDOM().window)
 // const slug = require('mongoose-slug-generator');
 // mongoose.plugin(slug);
+
 
 const postSchema = new Schema(
     {
