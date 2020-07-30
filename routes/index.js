@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const adminRoutes = require('./admin');
-const userRoutes = require('./user')
+const userRoutes = require('./userDashboard')
 
 const {
   home
@@ -9,6 +9,6 @@ const {
 
 router.get('/', home);
 router.use('/admin', adminRoutes);
-router.use('/user', userRoutes)
+router.use('/user/dashboard', userRoutes)
 
 module.exports = router;
