@@ -1,5 +1,5 @@
 body {
-  font-family: "Poppins", sans-serif;
+  font-family: 'Poppins', sans-serif;
   /* max-width: 1440px; */
   background-color: #fafafa;
 }
@@ -60,4 +60,12 @@ body {
 .profile-img {
   max-height: 200px;
   max-width: 200px;
+}
+
+.post-btn {
+  background-color: #00643c !important;
+}
+
+textarea {
+  min-height: 40vh;
 }
