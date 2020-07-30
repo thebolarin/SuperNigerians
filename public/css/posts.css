@@ -1,0 +1,45 @@
+body {
+  font-family: "Lora", sans-serif;
+}
+
+.meta {
+  padding: 10px;
+  position: relative;
+  word-spacing: 2px;
+}
+
+.meta .folder a {
+  color: black !important;
+}
+
+.meta .folder {
+  padding-right: 8px;
+}
+
+.meta .comment {
+  padding-right: 8px;
+}
+
+.meta .calender {
+  margin-left: -9px;
+  padding-right: 8px;
+}
+
+.profile-picture img {
+  height: 140px;
+  object-fit: contain;
+}
+
+.article-details .text-caption a {
+  color: black !important;
+  font-family: "Lora", sans-serif;
+}
+
+.article-details .text-caption a:hover {
+  color: black;
+  text-decoration: none;
+}
+
+.read-more {
+    color: #00643c !important;
+}
