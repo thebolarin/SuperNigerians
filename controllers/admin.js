@@ -1,7 +1,12 @@
 const User = require('../models/user');
-
+const { renderPage } = require('../utils/render-page');
 
 module.exports = {
+  dashboard: async(req,res) => {
+    const data = {};
+    renderPage(res, 'pages/adminDashboard', data, 'Admin | Dashboard', '/admin/dashboard');
+  },
+
   deletePost: async(req, res) => {
     try {
       const { postId } = req.params;
