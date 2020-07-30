@@ -39,6 +39,8 @@ const userSchema = new Schema({
     type: String,
     default: '0-000000000'
   },
+  resetToken: String,
+  resetTokenExpiration: Date,
   posts: [
     {
       type: Schema.Types.ObjectId,
