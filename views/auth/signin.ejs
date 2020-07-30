@@ -17,16 +17,28 @@
 <body>
     <%- include('../templates/sidebar') %>
 
-    <main id="main" style="padding-top: 0;">
-        <section>
-            <div class="container-fluid" style="margin-right: 0; margin-left: 0;">
-                <div class="row d-flex">
-                    <div class="col-md-6 d-none d-md-flex signin-img">
-                    </div>
-                    <div class="col-md-6 d-flex align-items-center justify-content-center">
-                        <div class="text px-4 pt-5 pt-md-0 px-md-4 pr-md-5 ftco-animate">
-                            <h3 class="my-4 text-center prj-green-text"><span>Sign In</span></h2>
-                                <form name="signUpForm" action="" method="POST" class="bg-light p-5 contact-form">
+    <main id="main">
+        <div id="colorlib-main">
+            <section class="ftco-about img ftco-section ftco-no-pt ftco-no-pb" id="about-section">
+                <div class="container-fluid px-0">
+                    <div class="row d-flex">
+                        <div class="col-md-6 d-flex align-self-stretch  js-fullheight signin-img">
+                        </div>
+                        <div class="col-md-6 d-flex align-items-center">
+                            <div class="text px-4 pt-5 pt-md-0 px-md-4 pr-md-5 ftco-animate">
+                                <h3 class="my-4 text-center prj-green-text"><span>Sign In</span></h2>
+                                    <% if (errorMessage) { %>
+                                        <div role="alert" class="alert alert-danger user-message user-message--error"> <button type="button" class="close" data-dismiss="alert">
+                                            &times;
+                                        </button> <%= errorMessage %></div>
+                                    <% }if (success && success.length > 0) { %>
+                                        <div role="alert" class="alert alert-success user-message"> <button type="button" class="close" data-dismiss="alert">
+                                            &times;
+                                        </button> <%= success %></div>
+                                    <% } %>
+                                <form name="signUpForm" action="/login" method="POST" class="bg-light p-5 contact-form">
+                                    
+                                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                                     <div class="row">
                                         <div class="form-group col">
                                             <label for="email" class="prj-normal-text">Email address</label>
