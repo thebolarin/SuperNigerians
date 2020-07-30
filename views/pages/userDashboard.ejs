@@ -11,52 +11,90 @@
 <body>
   <%- include('../templates/sidebar') %>
 
-  <main id="main" style="padding-top: 0;">
+  <!-- <main id="main" class="m-auto pt-5"> -->
+  <main id="main" class="pt-5">
+
+    <!-- Modal -->
+    <div class="modal fade" id="updateProfileModal" tabindex="-1" role="dialog"
+      aria-labelledby="updateProfileModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <header class="modal-header">
+            <h4 class="modal-title " id="updateProfileModalLabel">Update Profile</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </header>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-11 mx-auto py-3">
+                <form name="updateProfileForm">
+                  <div class="form-group">
+                    <label for="firstName">First name</label>
+                    <input type="text" class="form-control" id="firstName" name="firstname" placeholder="e.g Mark"
+                      autocomplete="given-name" autocapitalize="on" minlength="2">
+                  </div>
+                  <div class="form-group">
+                    <label for="lastName">Last name</label>
+                    <input type="text" class="form-control" id="lastName" name="lastname" placeholder="e.g Essien"
+                      autocomplete="family-name" autocapitalize="on" minlength="2">
+                  </div>
+                  <div class="form-group">
+                    <label for="userName">Username</label>
+                    <input type="text" class="form-control" id="userName" name="username" placeholder="e.g D'Marko"
+                      autocomplete="username">
+                  </div>
+                  <div class="form-group">
+                    <!-- TODO: Make sure URL ends in photo file extensions -->
+                    <label for="photo">Photo url</label>
+                    <input type="url" class="form-control" id="photo" name="photo" placeholder="e.g https://...">
+                    <small class="text-muted">You can use an image URL from Google Drive or <a
+                        href="https://imgur.com">Imgur</a></small>
+                  </div>
+                  <div class="form-group">
+                    <label for="phone">Phone</label>
+                    <input type="tel" class="form-control" id="phone" name="phone" autocomplete="url">
+                  </div>
+                  <div class="form-group">
+                    <!-- Set as select and iterate over -->
+                    <label for="country">Country</label>
+                    <input type="text" class="form-control" id="country" name="country" placeholder="Nigeria"
+                      autocomplete="country-name" autocapitalize="on">
+                  </div>
+                  <div class="form-group">
+                    <label for="state-city">State/City</label>
+                    <input type="text" class="form-control" id="state-city" name="stateOrCity" placeholder="Lagos">
+                  </div>
+                </form>
+                <div class="text-center">
+                  <button class="btn btn-lg btn-secondary" id="btnUpdateProfile">Update profile</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="container-fluid main-container ">
       <div class="row">
         <div class="col-12">
           <div class="profile-container my-3 d-flex flex-column justify-content-center align-items-center flex-sm-row">
             <img src="https://picsum.photos/500" alt="my avatar" class="profile-img img-fluid rounded-circle mr-sm-4">
             <div class="d-flex flex-column justify-content-center align-items-center ml-sm-4 mt-3 mt-sm-0">
-              <h1 class="h3"><%= result.username %></h1>
+              <h1 class="h3"></h1>
               <p class="mb-0 lead prj-text-normal">
-                <span class="font-weight-normal d-inline-block"><%= posts.length %></span>
+                <span class="font-weight-normal d-inline-block"></span>
                 posts
-                <span class="font-weight-normal d-inline-block"><%= numberOfLikes %></span>
+                <span class="font-weight-normal d-inline-block"></span>
                 likes <span class="font-weight-normal d-inline-block">10</span> shares</p>
+              <!-- Button trigger modal -->
+              <button type="button" class="btn btn-secondary mt-3" data-toggle="modal"
+                data-target="#updateProfileModal">
+                Update profile
+              </button>
             </div>
           </div>
-<<<<<<< HEAD
-        </div>
-        <div class="col-11 mx-auto">
-          <ul class="nav nav-tabs justify-content-center my-3" role="tablist">
-            <li class="nav-item" role="presentation">
-              <a class="nav-link active" id="tabs-my-posts-tab" data-toggle="pill" href="#tabs-my-posts" role="tab"
-                aria-controls="tabs-my-posts" aria-selected="false">My posts</a>
-            </li>
-            <li class="nav-item" role="presentation">
-              <a class="nav-link" id="tabs-create-post-tab" data-toggle="pill" href="#tabs-create-post" role="tab"
-                aria-controls="tabs-create-post" aria-selected="true">Create a post</a>
-            </li>
-          </ul>
-          <div class="tab-content" id="tabs-tabContent">
-            <div class="tab-pane fade show active" id="tabs-my-posts" role="tabpanel"
-              aria-labelledby="tabs-my-posts-tab">
-              <!-- My posts -->
-              <div class="my-posts-container row row-cols-1 row-cols-sm-2 row-cols-lg-3">
-                <% for(post of posts) { %>
-                <div class="my-post col px-1 py-3 position-relative my-2">
-                  <div
-                    class="default-post-content py-2 d-flex flex-column align-items-center justify-content-space-around">
-                    <img src="https://picsum.photos/500" class="img-fluid" alt="post header image">
-                    <p class="my-4 lead font-weight-normal text-center"><%= post.title %></p>
-                  </div>
-                  <div
-                    class="hover-post-content px-4 position-absolute d-flex flex-column align-items-center justify-content-center">
-                    <p class="lead text-center"><%= post.description %></p>
-                    <a href="#" class="btn btn-outline-secondary btn-sm bg-white text-secondary">View post</a>
-                  </div>
-=======
           <div class="col-11 mx-auto">
             <ul class="nav nav-tabs justify-content-center my-3" role="tablist">
               <li class="nav-item mr-2" role="presentation">
@@ -185,7 +223,6 @@
                       <button type="submit" class="btn text-white post-btn mb-4">Post</button>
                     </div>
                   </form>
->>>>>>> 3f167c0766eb45b4b421660d215856d250ed5f9e
                 </div>
                <% } %>
               </div>
@@ -194,6 +231,7 @@
         </div>
       </div>
   </main>
+  <script src="/js/user-dashboard.js"></script>
 
   <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
   <script>

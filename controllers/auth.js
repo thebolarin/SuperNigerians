@@ -70,7 +70,7 @@ const postUserRegister = async(req, res) => {
   }
   validateUserRegistration(req, res, userDetails);
   userCheck(email).then(async (user) => {
-    console.log(user)
+  
     if (!user) {
       const salt = await bcrypt.genSalt(10);
       const hashedPassword = bcrypt.hashSync(password, salt);
@@ -121,9 +121,9 @@ const postUserLogin = async (req, res, next) => {
             if (user && user.role === 'admin') {
               return res.redirect('/admin/dashboard');
             }
+
             return res.redirect('/');
           }
-          console.log(req.session.user._id)
           return errorUserLogin(req, res, email, password, 'Invalid email or password.',);
         })
         .catch(() => {
