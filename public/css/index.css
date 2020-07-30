@@ -1,0 +1,86 @@
+:root {
+  --primary-color: #333;
+  --secondary-color: #444;
+  --overlay-color: rgba(0, 0, 0, 0.7);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: #444;
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+img {
+  width: 100%;
+}
+
+.section-b {
+  position: relative;
+  background: url("/images/bg_1.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+}
+
+.section-b-inner {
+  color: #fff;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin: auto;
+}
+
+.section-b-inner .text-2 {
+  font-size: 4rem;
+  font-family: "Abril Fatface", cursive !important;
+}
+
+.section-b-inner .text-5 {
+  font-size: 3rem;
+  font-family: "Lora", sans-serif;
+}
+
+.section-b-inner .text-3 {
+  font-family: "Lora", sans-serif;
+  font-size: 1.5rem;
+}
+
+.btn:hover {
+  background: grey !important;
+}
+
+.overlay {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: var(--overlay-color);
+}
+
+.custom-btn {
+  padding: 15px 40px !important;
+  background: #00643c !important;
+  color: #ffffff !important;
+  font-weight: 500 !important;
+  font-size: 18px !important;
+}
+
+.custom-btn:hover,
+.custom-btn:active,
+.custom-btn:focus {
+  color: #00643c !important;
+  background: #ffffff !important;
+}
