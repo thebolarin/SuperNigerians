@@ -27,9 +27,7 @@ const postSchema = new Schema(
             enum : ['true', 'false'], 
             default: 'false'
         },
-        media: {
-            type: Array,
-        },
+        media: { type : Array , "default" : [] },
         creator: {
             type: Schema.Types.ObjectId,
             ref: 'User',
