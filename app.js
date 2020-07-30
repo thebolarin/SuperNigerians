@@ -49,9 +49,9 @@ app.use(express.static(path.join(__dirname, "public")));
 //   next();
 // });
 // ************ REGISTER ROUTES HERE ********** //
-app.get("/", (req, res) => {
-  res.send("Welcome to Express!");
-});
+// app.get("/", (req, res) => {
+//   res.send("Welcome to Express!");
+// });
 app.use(auth);
 app.use(indexRouter);
 // ************ END ROUTE REGISTRATION ********** //
@@ -62,15 +62,15 @@ app.use((req, res, next) => {
 });
 const MONGO_URI = process.env.MONGODB_URI;
 mongoose
-  .connect(MONGO_URI, {
-    useNewUrlParser: true,
-    useCreateIndex: true,
-    useUnifiedTopology: true,
-  })
-  .then(() => {
-    console.log("Database connected successfully");
-  })
-  .catch((err) => console.log("Connection to database failed =>", err));
+  // .connect(MONGO_URI, {
+  //   useNewUrlParser: true,
+  //   useCreateIndex: true,
+  //   useUnifiedTopology: true,
+  // })
+  // .then((db) => {
+  //   console.log("Database connected successfully");
+  // })
+  // .catch((err) => console.log("Connection to database failed =>", err));
 
 // error handler
 app.use((err, req, res, next) => {
