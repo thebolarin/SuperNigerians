@@ -1,0 +1,56 @@
+
+.prj-form-control {
+    border-radius: 5px;
+  }
+  
+  .prj-form-control:focus {
+    box-shadow: none;
+    border: 1px solid #000000;
+  }
+
+  .prj-green-text {
+      color: #00643C;
+  }
+  
+  .prj-link,
+    .prj-link:hover {
+        color: #00643C;
+  }
+  .prj-btn-primary {
+    color: #fff;
+    background-color: #00643C;
+    box-shadow: 0px 5px 25px rgba(77, 73, 255, 0.25);
+  }
+  .prj-btn-primary:hover {
+    color: #00643C;
+    background-color: #fff;
+    border: 1px solid #00643C;
+  }
+  .prj-btn-primary:focus {
+    color: #fff;
+    background-color: #00643C;
+    border: 1px solid var(--prim-colr);
+    box-shadow: none;
+  }
+  
+  .prj-input-invalid {
+    border: 1px solid #d16658;
+  }
+  .prj-input-valid {
+    border: 1px solid #4cbb88;
+  }
+  
+  .prj-checkbox {
+    width: 15px;
+    height: 15px;
+  }
+  
+  .br-5 {
+    border-radius: 5px;
+  }
+  
+  .btn-img {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+  
