@@ -5,7 +5,7 @@ module.exports.errorUserLogin = (
   password,
   errorMessage,
 ) =>
-  res.render('auth/login', {
+  res.render('auth/signin', {
     pageName: 'User Login',
     path: '/login',
     errorMessage,

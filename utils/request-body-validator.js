@@ -16,7 +16,7 @@ const validateUserRequest = (req, res, email, password) => {
       },
       validationErrors: errors.array(),
     }
-    renderPage(res ,'auth/login',data,'User Login','/login' )
+    renderPage(res ,'auth/signin',data,'User Login','/login' )
   }
 };
 

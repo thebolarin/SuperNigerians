@@ -57,7 +57,7 @@ const getUserLogin = (req, res) => {
     },
     validationErrors: [],
   };
-  renderPage(res, 'auth/login', data, 'login', '/login');
+  renderPage(res, 'auth/signin', data, 'login', '/login');
 
 };
 
