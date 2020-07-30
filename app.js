@@ -7,6 +7,7 @@ const flash = require("connect-flash");
 const dotenv = require("dotenv").config();
 const logger = require("morgan");
 const mongoose = require("mongoose");
+const indexRouter = require('./routes')
 const config = require("./config/database");
 const csrf = require('csurf');
 const multer = require('multer');
@@ -46,9 +47,7 @@ app.use((req, res, next) => {
   next();
 });
 // ************ REGISTER ROUTES HERE ********** //
-app.get("/", (req, res) => {
-  res.send("Welcome to Express!");
-});
+app.use(indexRouter);
 // ************ END ROUTE REGISTRATION ********** //
 
 // catch 404 and forward to error handler
