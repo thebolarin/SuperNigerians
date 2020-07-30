@@ -108,7 +108,7 @@ const postUserLogin = async (req, res, next) => {
 
   await userCheck(email)
     .then(async (user) => {
-      console.log(user);
+      // console.log(user);
       if (!user) {
         return errorUserLogin(req, res, email, password, 'Invalid email or password.',);
       }
@@ -123,6 +123,7 @@ const postUserLogin = async (req, res, next) => {
             }
             return res.redirect('/');
           }
+          console.log(req.session.user._id)
           return errorUserLogin(req, res, email, password, 'Invalid email or password.',);
         })
         .catch(() => {

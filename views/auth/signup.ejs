@@ -22,6 +22,7 @@
                         <div>
                             <h3 class="my-4 text-center prj-green-text"><span>Sign Up</span></h2>
                                 <form name="signUpForm" action="" method="POST" class="bg-light p-5 contact-form">
+                                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                                     <div class="row">
                                         <div class="form-group col-12 col-md">
                                             <label for="firstName" class="prj-normal-text">First name</label>

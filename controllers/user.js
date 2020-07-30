@@ -23,6 +23,7 @@ exports.createUser = async (req, res) => {
 }
 
 exports.getUser = async(req, res) => {
+    console.log(req.session._id)
     const result = await User.findOne({email: 'jgetitdonefast@gmail.com'})
     const posts = await Post.find({creator: '5f22f1d796a28131c01e3528'})
     const comments = await Comment.find({creator: '5f22f1d796a28131c01e3528'})
