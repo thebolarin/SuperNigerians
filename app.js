@@ -7,13 +7,12 @@ const flash = require("connect-flash");
 const dotenv = require("dotenv").config();
 const logger = require("morgan");
 const mongoose = require("mongoose");
+const indexRouter = require('./routes')
 const config = require("./config/database");
 const csrf = require('csurf');
 const multer = require('multer');
 const app = express();
 const csrfProtection = csrf();
-
-const indexRouter = require('./routes');
 
 app.use(
   cookieSession({
