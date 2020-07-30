@@ -1,16 +1,16 @@
-const model = require('../Models/index');
+const User = require('../models/user');
 
 exports.userCheck = (email) => {
-     return model.User.findOne({ where: { email } });
+     return User.findOne({ where: { email } });
 }
 
 exports.userCreate = (userSave) => {
-  return model.User.create(userSave);
+  return User.create(userSave);
   
 }
 
 exports.userUpdate =  (userEmail) => {
-    return model.User.update(
+    return User.update(
         { status: '1' },
         { where: { email:userEmail,}},
          
