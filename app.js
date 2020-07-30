@@ -13,6 +13,7 @@ const indexRouter = require('./routes')
 const config = require("./config/database");
 const auth = require('./routes/auth');
 const User = require('./models/user');
+const postRouter = require('./routes/post');
 
 const app = express();
 const csrfProtection = csrf();
@@ -39,6 +40,8 @@ app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 app.use(flash());
 
+//seed anonymous user
+require('./utils/seed');
 app.use(logger("dev"));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(csrfProtection);
@@ -46,7 +49,7 @@ app.use((req, res, next) => {
   const token = req.csrfToken();
   res.cookie('csrf-token', token);
   res.locals.csrfToken = req.csrfToken();
-  res.locals.currentUser = req.session.data;
+  res.locals.currentUser = req.session.user;
   next();
 });
 // ************ REGISTER ROUTES HERE ********** //
@@ -55,6 +58,7 @@ app.use((req, res, next) => {
 // });
 app.use(auth);
 app.use(indexRouter);
+app.use(postRouter);
 // ************ END ROUTE REGISTRATION ********** //
 
 // catch 404 and forward to error handler
@@ -72,7 +76,7 @@ mongoose
     useUnifiedTopology: true,
   })
   .then((db) => {
-   
+
     console.log("Database connected successfully");
   })
   .catch((err) => console.log("Connection to database failed =>", err));
