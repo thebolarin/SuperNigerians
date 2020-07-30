@@ -1,3 +1,11 @@
+.signin-img {
+  background-image:url(../images/signup.jpg);
+  background-repeat: no-repeat;
+  background-size: 100%;
+  height: 100vh;
+  margin-bottom: 0px !important;
+  padding-bottom: 0px !important;
+}
 
 .prj-form-control {
     border-radius: 5px;
