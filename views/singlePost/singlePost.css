@@ -19,21 +19,16 @@ a, a:hover {
 p {
     line-height: 1.9;
     word-spacing: 1;
-    font-size: 23px;
+    font-size: 22px;
 }
-/*article {
-    letter-spacing: 0.5px;
-    word-spacing: 1px;
-    line-height: 1.7;
-}*/
 
-/*#singlePostPix {
+#singlePostPix {
     height: 60vh;
     width: 100%
 }
 @media (min-width: 992px) { 
     #singlePostPix {
-    height: 65vh;
+    /*height: 65vh;*/
     width: 80%
     }
-}*/
+}
