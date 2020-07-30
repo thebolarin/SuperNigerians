@@ -6,6 +6,7 @@
 body {
     overflow-x: hidden;
     width: 100%;
+    /*margin-top: 10px;*/
     position: relative;
     font-family: font-family: 'Lora', poppins;
 }
@@ -15,8 +16,17 @@ a, a:hover {
     list-style-type: none;
     color: inherit;
 }
+p {
+    line-height: 1.8;
+    word-spacing: 0.7;
+}
+/*article {
+    letter-spacing: 0.5px;
+    word-spacing: 1px;
+    line-height: 1.7;
+}*/
 
-#singlePostPix {
+/*#singlePostPix {
     height: 60vh;
     width: 100%
 }
@@ -25,4 +35,4 @@ a, a:hover {
     height: 65vh;
     width: 80%
     }
-}
+}*/
