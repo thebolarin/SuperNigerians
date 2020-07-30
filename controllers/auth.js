@@ -70,7 +70,7 @@ const postUserRegister = async(req, res) => {
   }
   validateUserRegistration(req, res, userDetails);
   userCheck(email).then(async (user) => {
-    console.log(user)
+  
     if (!user) {
       const salt = await bcrypt.genSalt(10);
       const hashedPassword = bcrypt.hashSync(password, salt);
