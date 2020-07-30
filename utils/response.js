@@ -17,10 +17,4 @@ module.exports.errorUserLogin = (
     validationErrors: [],
   });
 
-  const employeeSignupRedirect = (req, res, error, userData) => {
-    req.flash('error', error);
-    req.flash('oldInput', userData);
-    return res.redirect('/employee/register');
-  }
-
-module.exports.employeeSignupRedirect = employeeSignupRedirect;
+ 
