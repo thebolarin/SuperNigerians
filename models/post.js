@@ -71,4 +71,6 @@ postSchema.pre('validate', function(next) {
   })
   
 
+
+
 module.exports = mongoose.model('Post', postSchema);

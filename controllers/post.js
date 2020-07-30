@@ -1,8 +1,11 @@
-const User = require('../Models/user')
-const Post = require('../Models/post')
 const cloud = require('cloudinary').v2;
 
-//cloudinary Configuration
+const User = require('../models/user')
+const Post = require('../models/post')
+
+
+
+// cloudinary Configuration
 cloud.config({
   cloud_name: process.env.SUPPER_NIGERIA_CLOUD_NAME,
   api_key: process.env.SUPPER_NIGERIA_CLOUD_API,
@@ -10,27 +13,19 @@ cloud.config({
 });
 
 module.exports = {
+  // eslint-disable-next-line consistent-return
   userPost: async (req, res) =>{
     const { title,body,description, userId } = req.body;
-    //look for the info for all the stuff
+    // look for the info for all the stuff
     const userfilter = { _id: userId }
     try {
-        //find user
+        // find user
         const findUser = await  User.findById(userfilter)
         if(!findUser) return res.send("user not found")
-        //check if a particular post has been created by a user
-       const  postObj= {
-          slug:title,
-          User:findUser
-        }
-        const postExist= await Post.findOne(postObj)
-        if(postExist){return res.status(400).json({
-          status:'error',
-          message:'Post Already Exist'
-        })}
+        // check if a particular post has been created by a user
   
+      // eslint-disable-next-line no-use-before-define
       const postUrl = await uploadPhoto(req, res,'image/png','image/jpeg',100000)
-     
       const postCreate=await Post.create({
           title,
           body,
