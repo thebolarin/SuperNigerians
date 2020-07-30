@@ -8,7 +8,6 @@ const dotenv = require("dotenv").config();
 const logger = require("morgan");
 const mongoose = require("mongoose");
 const indexRouter = require('./routes')
-const auth = require('./routes/auth')
 const config = require("./config/database");
 const auth = require('./routes/auth');
 const User = require('./models/user');
@@ -71,7 +70,7 @@ mongoose
     useUnifiedTopology: true,
   })
   .then((db) => {
-   
+
     console.log("Database connected successfully");
   })
   .catch((err) => console.log("Connection to database failed =>", err));
