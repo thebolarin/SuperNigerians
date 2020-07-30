@@ -61,3 +61,22 @@ body {
   max-height: 200px;
   max-width: 200px;
 }
+
+.post-btn {
+  background-color: #00643c !important;
+  padding: 10px 50px !important;
+  font-weight: 500 !important;
+  transition: all 0.3s ease;
+}
+
+.post-btn:hover,
+.post-btn:active,
+.post-btn:focus {
+  background-color: #ffffff !important;
+  border-color: #00643c !important;
+  color: #00643c !important;
+}
+
+textarea {
+  min-height: 40vh;
+}

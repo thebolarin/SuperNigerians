@@ -10,8 +10,9 @@ const mongoose = require("mongoose");
 const indexRouter = require('./routes')
 const auth = require('./routes/auth')
 const config = require("./config/database");
-const csrf = require('csurf');
-const multer = require('multer');
+const auth = require('./routes/auth');
+const User = require('./models/user');
+
 const app = express();
 const csrfProtection = csrf();
 
@@ -59,7 +60,10 @@ app.use(indexRouter);
 app.use((req, res, next) => {
   next(createError(404));
 });
+
+
 const MONGO_URI = process.env.MONGODB_URI;
+
 mongoose
   .connect(MONGO_URI, {
     useNewUrlParser: true,
@@ -67,6 +71,7 @@ mongoose
     useUnifiedTopology: true,
   })
   .then((db) => {
+   
     console.log("Database connected successfully");
   })
   .catch((err) => console.log("Connection to database failed =>", err));
