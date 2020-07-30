@@ -56,15 +56,15 @@ app.use((req, res, next) => {
 });
 const MONGO_URI = process.env.MONGODB_URI;
 mongoose
-  .connect(MONGO_URI, {
-    useNewUrlParser: true,
-    useCreateIndex: true,
-    useUnifiedTopology: true,
-  })
-  .then((db) => {
-    console.log("Database connected successfully");
-  })
-  .catch((err) => console.log("Connection to database failed =>", err));
+  // .connect(MONGO_URI, {
+  //   useNewUrlParser: true,
+  //   useCreateIndex: true,
+  //   useUnifiedTopology: true,
+  // })
+  // .then((db) => {
+  //   console.log("Database connected successfully");
+  // })
+  // .catch((err) => console.log("Connection to database failed =>", err));
 
 // error handler
 app.use((err, req, res, next) => {

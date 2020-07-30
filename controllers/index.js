@@ -10,7 +10,7 @@ const home = (req, res) => {
     pageName: 'Home',
   };
 
-  return renderPage(res, 'index', data, 'Demo Page');
+  return renderPage(res, 'pages/resetPassword', data, 'Demo Page');
 };
 
 module.exports = {
