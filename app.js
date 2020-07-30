@@ -3,10 +3,12 @@ const express = require("express");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const cookieSession = require('cookie-session');
+const fileupload = require('express-fileupload');
 const flash = require("connect-flash");
 const dotenv = require("dotenv").config();
 const logger = require("morgan");
 const mongoose = require("mongoose");
+const indexRouter = require('./routes')
 const config = require("./config/database");
 const csrf = require('csurf');
 const multer = require('multer');
@@ -36,18 +38,18 @@ app.use(flash());
 
 app.use(logger("dev"));
 app.use(express.static(path.join(__dirname, "public")));
-app.use(csrfProtection);
-app.use((req, res, next) => {
-  const token = req.csrfToken();
-  res.cookie('csrf-token', token);
-  res.locals.csrfToken = req.csrfToken();
-  res.locals.currentUser = req.session.data;
-  next();
-});
+// app.use(csrfProtection);
+// app.use((req, res, next) => {
+//   const token = req.csrfToken();
+//   res.cookie('csrf-token', token);
+//   res.locals.csrfToken = req.csrfToken();
+//   res.locals.currentUser = req.session.data;
+//   next();
+// });
+//express file upload
+app.use(fileupload({ useTempFiles: true }));
 // ************ REGISTER ROUTES HERE ********** //
-app.get("/", (req, res) => {
-  res.send("Welcome to Express!");
-});
+app.use(indexRouter);
 // ************ END ROUTE REGISTRATION ********** //
 
 // catch 404 and forward to error handler
@@ -77,5 +79,6 @@ app.use((err, req, res, next) => {
   res.render("error");
   next();
 });
+
 
 module.exports = app;

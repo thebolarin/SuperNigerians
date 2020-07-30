@@ -9,8 +9,9 @@ cloud.config({
   api_secret: process.env.SUPPER_NIGERIA_CLOUD_SECRET,
 });
 
+
 module.exports = {
-  userPost: async (req, res) =>{
+  updateUser: async (req, res, next) =>{
     const { title,body,description, userId } = req.body;
     //look for the info for all the stuff
     const userfilter = { _id: userId }
@@ -28,13 +29,13 @@ module.exports = {
           status:'error',
           message:'Post Already Exist'
         })}
-  
-      const postUrl = await uploadPhoto(req, res,'image/png','image/jpeg',100000)
-     
+        next()
+      const postUrl = saveMediaReturnUrl(mediaType)
+
       const postCreate=await Post.create({
-          title,
-          body,
-          description,
+          title:title,
+          body:body,
+          description:description,
           postPicture: postUrl,
           creator:findUser
         })
@@ -49,13 +50,9 @@ module.exports = {
         status: "success",
         message:"Post successfully saved"})
       } catch(err) {
-         res.status(500).send({
-           status:'error',
-           message:'An error ocuured, makesure you filled all input field and avoid duplicate post'
-         })
+        res.status(500).send(err)
       }
   },
-  
 }
 
 /**
@@ -63,16 +60,12 @@ module.exports = {
  * verify the image 
  * upload the image to cloudinary
  */
-const uploadPhoto = async (req, res, mediaType, sImage, size) => {
-    if (!req.files) {
-      return res.status(400).json({
-        status:'error',
-        message:'No files selected'
-      })
-     }
-    const imageFile = req.files.photo;
+
+function saveMediaReturnUrl(mediaType, sImage, size) {
+  return async (req, res) => {
+
     if (!(imageFile.mimetype === mediaType || imageFile.mimetype === sImage))
-   return  res.status(400).json({
+     return res.status(400).json({
        status:'error',
        message:'Invalid file format'
      })
@@ -84,16 +77,15 @@ const uploadPhoto = async (req, res, mediaType, sImage, size) => {
       })
     }
     try {
-      const employerLogoUpload = await cloud.uploader.upload(imageFile.tempFilePath);
+      const employerLogoUpload = await cloud.uploader.upload(file.tempFilePath);
       const { url } = employerLogoUpload;
-     // console.log(url)
       return url;
-    
     } catch (e) {
-      return res.status(500).json({
+      return res.status(400).json({
         status:'error',
         message:'Internal server error'
       })
  
     }
   }
+}
