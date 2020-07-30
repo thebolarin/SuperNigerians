@@ -8,9 +8,9 @@ exports.getUserDetails = async (req, res) => {
     const userComments = await Comment.find({creator: req.session.user._id})
     const userPosts = await Post.find({creator: req.session.user._id})
     const data = {
-        // user,
-        // userComments,
-        // userPosts
+        user,
+        userComments,
+        userPosts
     }
     renderPage(res, 'pages/userDashboard', data, 'User Dashboard')
 }
