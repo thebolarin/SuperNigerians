@@ -7,12 +7,10 @@ const flash = require("connect-flash");
 const dotenv = require("dotenv").config();
 const logger = require("morgan");
 const mongoose = require("mongoose");
-const csrf = require('csurf');
-const multer = require('multer');
 const indexRouter = require('./routes')
 const config = require("./config/database");
-const auth = require('./routes/auth');
-
+const csrf = require('csurf');
+const multer = require('multer');
 const app = express();
 const csrfProtection = csrf();
 
@@ -49,10 +47,6 @@ app.use((req, res, next) => {
   next();
 });
 // ************ REGISTER ROUTES HERE ********** //
-app.get("/", (req, res) => {
-  res.send("Welcome to Express!");
-});
-app.use(auth);
 app.use(indexRouter);
 // ************ END ROUTE REGISTRATION ********** //
 
@@ -67,7 +61,7 @@ mongoose
     useCreateIndex: true,
     useUnifiedTopology: true,
   })
-  .then(() => {
+  .then((db) => {
     console.log("Database connected successfully");
   })
   .catch((err) => console.log("Connection to database failed =>", err));
