@@ -5,17 +5,39 @@ const { renderPage } = require('../utils/render-page');
 const User = require('../models/user');
 const sendEmail = require('../utils/send-email');
 const asyncHandler = require('../middleware/async');
-const { validateUserRequest } = require('../utils/request-body-validator');
-const { userCheck } = require('../utils/user-check');
+const { validateUserRequest, validateUserRegistration } = require('../utils/request-body-validator');
+const { userCheck, userCreate } = require('../utils/user-check');
 const { passwordHash } = require('../utils/password-hash');
 const {
-  errorUserLogin,
+  errorUserLogin, errorUserRegister
 } = require('../utils/response');
 
 
 const URL = process.env.NODE_ENV === 'development'
   ? process.env.DEV_URL
   : process.env.FRONT_END_URL;
+
+  const getUserRegister = (req, res) => {
+    const success = req.flash('success');
+    let message = req.flash('error');
+    if (message.length > 0) {
+      [message] = message;
+    } else {
+      message = null;
+    }
+    const data = {
+      pageName: 'User Registration',
+      success,
+      errorMessage: message,
+      oldInput: {
+        email: '',
+        password: '',
+      },
+      validationErrors: [],
+    };
+    renderPage(res, 'auth/register', data, 'Register', '/register');
+  
+  };
 
 const getUserLogin = (req, res) => {
   const success = req.flash('success');
@@ -39,6 +61,49 @@ const getUserLogin = (req, res) => {
 
 };
 
+const postUserRegister = async(req, res) => {
+  const { firstname, lastname, phone, email, password, username } = req.body;
+  const userDetails = {
+    firstname, 
+    lastname,
+    email,
+    phone,
+    username
+  }
+  validateUserRegistration(req, res, userDetails);
+  userCheck(email).then(async (user) => {
+    console.log(user)
+    if (!user) {
+      console.log(user)
+      const hashedPassword = bcrypt.hashSync(password, 8);
+      try {
+        const saveUser = await userCreate({...userDetails, password: hashedPassword});
+        if (saveUser) {
+          const message = `Welcome to Super Nigerians`;
+          sendEmail({
+            email,
+            subject: 'Welcome',
+            message,
+          });
+          console.log('hi');
+          req.flash('success', 'Registration Succssful');
+          req.session.user = user;
+          req.session.createdAt = Date.now();
+          req.session.isLoggedIn = true;
+          if (user && user.role === 'admin') {
+            return res.redirect('/admin/dashboard');
+          }
+          return res.redirect('/');
+        }
+      } catch (error) {
+        console.log(error);
+        return errorUserRegister(req, res, userDetails,'Error Occoured')
+      }
+    }
+    return errorUserRegister(req, res, userDetails,'User already exists');
+  });  
+}
+
 const postUserLogin = async (req, res, next) => {
   const { email, password } = req.body;
   validateUserRequest(req, res, email, password);
@@ -58,7 +123,6 @@ const postUserLogin = async (req, res, next) => {
               return res.redirect('/admin/dashboard');
             }
             return res.redirect('/');
-
           }
           return errorUserLogin(req, res, email, password, 'Invalid email or password.',);
         })
@@ -170,7 +234,7 @@ const postReset = asyncHandler(async (req, res) => {
     sendEmail({
       email,
       subject: 'User Password Reset',
-      message: message(resetUrl),
+      message,
     });
 
 
@@ -233,7 +297,9 @@ const logout = (req, res) => {
 
 
 module.exports = {
+  getUserRegister,
   getUserLogin,
+  postUserRegister,
   postUserLogin,
   getReset,
   postReset,
