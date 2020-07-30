@@ -17,12 +17,12 @@ a, a:hover {
 }
 
 #singlePostPix {
-    height: 65vh;
+    height: 60vh;
     width: 100%
 }
 @media (min-width: 992px) { 
     #singlePostPix {
     height: 65vh;
-    width: 100%
+    width: 80%
     }
 }
