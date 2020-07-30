@@ -1,6 +1,4 @@
-const {
-  renderPage
-} = require('../utils/render-page');
+const { renderPage } = require('../utils/render-page');
 
 const home = (req, res) => {
   const data = {
@@ -14,5 +12,5 @@ const home = (req, res) => {
 };
 
 module.exports = {
-  home
-}
+  home,
+};

@@ -1,11 +1,8 @@
 <!doctype html>
 <html lang="en">
-
 <head>
     <%- include('../templates/head') %>
-
     <link rel="stylesheet" href="/css/signup-signin.css">
-
     <title>Sign Up | Super Nigerians</title>
     <style>
         form .invalid{
@@ -13,7 +10,6 @@
         }
     </style>
 </head>
-
 <body>
     <%- include('../templates/sidebar') %>
 
@@ -37,6 +33,9 @@
                                         </button> <%= success %></div>
                                     <% } %>
                                 <form name="signUpForm" action="/login" method="POST" class="bg-light p-5 contact-form">
+
+                                    
+                                    
                                     <div class="row">
                                     <div class="form-group col">
                                         <label for="email" class="prj-normal-text">Email address</label>
@@ -61,7 +60,6 @@
                                         <div class="d-flex ">
                                             <a href="/recover/password" class="prj-link prj-green-text">Forgot Password?</a>
                                         </div>
-                                       
                                         <div class="row">
                                             <div class="col mt-3 mb-0">
                                                 <div class="d-flex justify-content-center">
@@ -73,7 +71,7 @@
                                         </div>
                                         <p class="prj-normal-text text-center p-0 mt-3">
                                             Don't have an account?
-                                            <a href="signin.html" class="text-center prj-link">Sign Up</a>
+                                            <a href="/register" class="text-center prj-link">Sign Up</a>
                                         </p>
                                     </form>
                             </div>
@@ -83,7 +81,6 @@
             </section>
         </div>
     </main>
-
     <!-- loader -->
     <div id="ftco-loader" class="show fullscreen">
         <svg class="circular" width="48px" height="48px">
@@ -93,5 +90,4 @@
         </svg>
     </div>
 </body>
-
 </html>
