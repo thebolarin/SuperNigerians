@@ -17,4 +17,14 @@ module.exports.errorUserLogin = (
     validationErrors: [],
   });
 
+  module.exports.errorUserRegister = (req,res,oldInput,errorMessage) => {
+    res.render('auth/register', {
+      pageName: "User Registration",
+      path: '/register',
+      errorMessage,
+      success: req.flash('success'),
+      oldInput,
+    })
+  }
+
  

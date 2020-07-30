@@ -3,6 +3,8 @@ const { checkLoggedIn } = require('../middleware/auth');
 
 const {
     logout,
+    getUserRegister,
+    postUserRegister,
     getUserLogin,
     postUserLogin,
     getReset,
@@ -10,10 +12,12 @@ const {
     getNewPassword,
     postNewPassword
 } = require('../controllers/auth');
-const { validateLogin } = require('../utils/validators/auth-validator');
+const { validateLogin, validateSignup } = require('../utils/validators/auth-validator');
 
 const router = express.Router();
 
+router.get('/register', checkLoggedIn, getUserRegister);
+router.post('/register', checkLoggedIn, validateSignup, postUserRegister);
 router.get('/login', checkLoggedIn, getUserLogin);
 router.post('/login', checkLoggedIn, validateLogin, postUserLogin);
 

@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <%- include('../templates/head') %>
+
+    <link rel="stylesheet" href="/css/signup.css">
+
+    <title>Sign Up | Super Nigerians</title>
+</head>
+
+<body>
+    <%- include('../templates/sidebar') %>
+
+    <!-- <div class="row" style="margin: 0;">
+        <div class="col-md-6 col-lg-4 mx-auto p-4">
+            <h3 class="my-4 text-center prj green-text">Reset Password</h3>
+            <form class="p-5">
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" class="form-control prj-form-control py-4" id="password"
+                        placeholder="Password" autocomplete="new-password"
+                        pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W]).{8,}" minlength="8" required="">
+
+                </div>
+                <div class="form-group">
+                    <label for="password">Confirm Password</label>
+                    <input type="password" name="password" class="form-control prj-form-control py-4" id="password"
+                        placeholder="Password" autocomplete="new-password"
+                        pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W]).{8,}" minlength="8" required="">
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-success btn-lg my-3">Submit</button>
+                </div>
+                <p class="text-center">Don't have an account? <a href="#">Sign Up</a></p>
+            </form>
+        </div>
+    </div> -->
+        
+        <div id="colorlib-main">
+			<section class="ftco-about img ftco-section ftco-no-pt ftco-no-pb" id="about-section">
+                <div class="container-fluid px-0">
+                    <div class="row d-flex">
+                        <div class="col-md-6 d-flex">
+                            <div class="img d-flex align-self-stretch align-items-center js-fullheight" style="background-image:url(images/about.jpg);">
+                            </div>
+                        </div>
+                        <div class="col-md-6 d-flex align-items-center">
+                            <div class="text px-4 pt-5 pt-md-0 px-md-4 pr-md-5 ftco-animate">
+                                <h3 class="my-4 text-center prj-green-text"><span>Sign In</span></h2>
+                                <form name="signUpForm" action="" method="POST" class="bg-light p-5 contact-form">
+                                    <div class="row">
+                                    <div class="form-group col">
+                                        <label for="email" class="prj-normal-text">Email address</label>
+                                        <input type="email" name="email"
+                                        class="form-control prj-form-control"
+                                        id="email" placeholder="e.g. oluola@gmail.com" autocomplete="email" required />
+                                    </div>
+                                    </div>
+                                    <div class="row">
+                                    <div class="form-group col">
+                                        <label for="password" class="prj-normal-text">Password</label>
+                                        <input type="password" name="password"
+                                        class="form-control prj-form-control"
+                                        id="password" placeholder="Password" autocomplete="new-password"
+                                        pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W]).{8,}" minlength="8" required />
+                                    </div>
+                                    </div>
+                                    <div class="row">
+                                    <div class="col">
+                                        <div class="d-flex ">
+                                            <a href="#" class="prj-link prj-green-text">Forgot Password?</a>
+                                        </div>
+                                    </div>
+                                    </div>
+                                    <div class="row">
+                                    <div class="col mt-3 mb-0">
+                                        <div class="d-flex justify-content-center">
+                                        <button type="submit" class="btn btn-lg prj-btn-primary br-5">
+                                            Sign In
+                                        </button>
+                                        </div>
+                                    </div>
+                                    </div>
+                                    <p class="prj-normal-text text-center p-0 mt-3">
+                                    Don't have an account?
+                                    <a href="signin.html" class="text-center prj-link">Sign Up</a>
+                                    </p>
+                                </form>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            </section>
+	    </div>
+	    
+  <!-- loader -->
+  <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+
+
+  <script src="js/jquery.min.js"></script>
+  <script src="js/jquery-migrate-3.0.1.min.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/jquery.easing.1.3.js"></script>
+  <script src="js/jquery.waypoints.min.js"></script>
+  <script src="js/jquery.stellar.min.js"></script>
+  <script src="js/owl.carousel.min.js"></script>
+  <script src="js/jquery.magnific-popup.min.js"></script>
+  <script src="js/aos.js"></script>
+  <script src="js/jquery.animateNumber.min.js"></script>
+  <script src="js/scrollax.min.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+  <script src="js/google-map.js"></script>
+  <script src="js/main.js"></script>
+</body>
+
+</html>

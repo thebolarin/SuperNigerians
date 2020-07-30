@@ -20,6 +20,21 @@ const validateUserRequest = (req, res, email, password) => {
   }
 };
 
+const validateUserRegistration = (req, res, oldInput) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    const errorMessage = errors.array()[0].msg;
+    const data = {
+      pageName: 'User Registration',
+      success: req.flash('success'),
+      errorMessage,
+      oldInput,
+      validationErrors: errors.array(),
+    }
+    renderPage(res ,'auth/register', data, 'Register','/register' )
+  }
+};
 
 
-module.exports.validateUserRequest = validateUserRequest;
+
+module.exports = { validateUserRequest, validateUserRegistration };
