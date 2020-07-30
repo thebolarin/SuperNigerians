@@ -27,6 +27,7 @@ const Controller = {
         photo,
       } = Model.getFormData(document.forms.updateProfileForm);
       console.log(firstname, lastname, username, location, phone, photo);
+      $('#updateProfileModal').modal('hide')
     });
   },
 };
