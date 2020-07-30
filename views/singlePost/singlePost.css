@@ -17,8 +17,9 @@ a, a:hover {
     color: inherit;
 }
 p {
-    line-height: 1.8;
-    word-spacing: 0.7;
+    line-height: 1.9;
+    word-spacing: 1;
+    font-size: 23px;
 }
 /*article {
     letter-spacing: 0.5px;
