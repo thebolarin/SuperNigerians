@@ -2,16 +2,16 @@ const nodemailer = require('nodemailer');
 
 const sendEmail = async (options) => {
   const transporter = nodemailer.createTransport({
-    host: process.env.TALENT_POOL_SMTP_HOST,
-    port: process.env.TALENT_POOL_SMTP_PORT,
+    host: process.env.SMTP_HOST,
+    port: process.env.SMTP_PORT,
     auth: {
-      user: process.env.TALENT_POOL_SMTP_USER,
-      pass: process.env.TALENT_POOL_SMTP_PASSWORD,
+      user: process.env.SMTP_USER,
+      pass: process.env.SMTP_PASSWORD,
     },
   });
 
   const message = {
-    from: `${process.env.TALENT_POOL_EMAIL_FROM_NAME} <${process.env.TALENT_POOL_FROM_EMAIL}>`,
+    from: `${process.env.EMAIL_FROM_NAME} <${process.env.FROM_EMAIL}>`,
     to: options.email,
     subject: options.subject,
     html: options.message,

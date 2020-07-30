@@ -205,7 +205,7 @@ const postNewPassword = asyncHandler(async (req, res) => {
     return res.redirect('/recover/password');
   }
 
-  if (user.dataValues.resetTokenExpiration < Date.now()) {
+  if (user.resetTokenExpiration < Date.now()) {
     req.flash('error', 'Reset password token expired,please try again');
     return res.redirect('/recover/password');
   }
@@ -213,8 +213,8 @@ const postNewPassword = asyncHandler(async (req, res) => {
 
   // Set new password
   user.password = passwordHash(req.body.password);
-  user.reset_password_token = null;
-  user.reset_password_expire = null;
+  user.resetToken = null;
+  user.resetTokenExpiration = null;
   await user.save();
 
   req.flash('success', 'Password changed successfully');
