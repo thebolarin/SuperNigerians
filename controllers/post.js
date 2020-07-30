@@ -17,9 +17,10 @@ cloud.config({
 module.exports = {
   // eslint-disable-next-line consistent-return
   userPost: async (req, res) =>{
-    const { title,body,description, userId } = req.body;
+    const { title,body,description} = req.body;
     // look for the info for all the stuff
-    const userfilter = { _id: userId }
+    const {_id} = req.session.user
+    const userfilter = { _id }
     try {
         // find user
         const findUser = await  User.findById(userfilter)

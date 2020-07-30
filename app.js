@@ -5,7 +5,7 @@ const cookieParser = require("cookie-parser");
 const cookieSession = require('cookie-session');
 const fileupload = require('express-fileupload');
 const flash = require("connect-flash");
-// const dotenv = require("dotenv").config();
+const dotenv = require("dotenv").config();
 const logger = require("morgan");
 const mongoose = require("mongoose");
 const csrf = require('csurf');
@@ -71,9 +71,7 @@ app.use((req, res, next) => {
 
 
 const MONGO_URI = process.env.MONGODB_URI;
-
-mongoose
-  .connect(MONGO_URI, {
+mongoose.connect(MONGO_URI, {
     useNewUrlParser: true,
     useCreateIndex: true,
     useUnifiedTopology: true,

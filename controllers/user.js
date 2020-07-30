@@ -1,6 +1,7 @@
-const User = require('../models/user')
 const cloud = require('cloudinary').v2;
-//cloudinary Configuration
+const User = require('../models/user')
+
+// cloudinary Configuration
 cloud.config({
   cloud_name: process.env.SUPPER_NIGERIA_CLOUD_NAME,
   api_key: process.env.SUPPER_NIGERIA_CLOUD_API,
@@ -8,22 +9,23 @@ cloud.config({
 });
 
 module.exports = {
+  // eslint-disable-next-line consistent-return
   updateUser: async (req, res) =>{
     const { 
     firstname,
     lastname,
     location,
     phone } = req.body;
-    //look for the info for all the stuff
-    const userId = '5f22f30b15f0dec809af4a2a';
-    const userfilter = { _id: userId }
+    // look for the info for all the stuff
+    const {_id} = req.session.user
+    const userfilter = { _id}
     const updateUser = { 
       firstname,
       lastname,
       location,
       phone }
     try {
-        //find user and update
+        // find user and update
         const findUserUpdate = await User.findByIdAndUpdate(userfilter,updateUser)
         if(!findUserUpdate)return res.status(401).json("unable to update user profile")
         res.status(200).json({message:"Successfully updated"})
@@ -33,9 +35,10 @@ module.exports = {
 },
 
 userPhoto: async (req, res) =>{
-  const userId = '5f22f30b15f0dec809af4a2a';
+  const {_id} = req.session.user
+  // eslint-disable-next-line no-use-before-define
   const photo = await uploadPhoto(req, res,'image/png','image/jpeg',100000)
-  await User.findByIdAndUpdate({_id: userId},{photo})
+  await User.findByIdAndUpdate({_id},{photo})
 }
 
 }
@@ -45,6 +48,7 @@ userPhoto: async (req, res) =>{
  * upload the image to cloudinary
  */
 
+// eslint-disable-next-line consistent-return
 const uploadPhoto = async (req, res, mediaType, sImage, size) => {
   if (!req.files) {
     return res.status(400).json({
