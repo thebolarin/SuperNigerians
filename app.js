@@ -14,7 +14,7 @@ const config = require("./config/database");
 const auth = require('./routes/auth');
 
 const app = express();
-const csrfProtection = csrf();
+// const csrfProtection = csrf();
 
 app.use(
   cookieSession({
@@ -40,14 +40,14 @@ app.use(flash());
 
 app.use(logger("dev"));
 app.use(express.static(path.join(__dirname, "public")));
-app.use(csrfProtection);
-app.use((req, res, next) => {
-  const token = req.csrfToken();
-  res.cookie('csrf-token', token);
-  res.locals.csrfToken = req.csrfToken();
-  res.locals.currentUser = req.session.data;
-  next();
-});
+// app.use(csrfProtection);
+// app.use((req, res, next) => {
+//   const token = req.csrfToken();
+//   res.cookie('csrf-token', token);
+//   res.locals.csrfToken = req.csrfToken();
+//   res.locals.currentUser = req.session.data;
+//   next();
+// });
 // ************ REGISTER ROUTES HERE ********** //
 app.get("/", (req, res) => {
   res.send("Welcome to Express!");

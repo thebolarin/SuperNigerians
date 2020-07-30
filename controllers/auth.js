@@ -154,7 +154,7 @@ const getReset = (req, res) => {
     },
     validationErrors: [],
   };
-  renderPage(res, 'auth/recoverPassword', data, 'Recover Password', '/recover/password');
+  renderPage(res, 'pages/forgotPassword', data, 'Recover Password', '/recover/password');
 };
 
 const getNewPassword = (req, res) => {
@@ -175,7 +175,7 @@ const getNewPassword = (req, res) => {
     },
     validationErrors: [],
   };
-  renderPage(res, 'auth/resetPassword', data, 'Reset Password', '/reset/password');
+  renderPage(res, 'pages/resetPassword', data, 'Reset Password', '/reset/password');
 };
 
 const getResetPasswordToken = () => {
