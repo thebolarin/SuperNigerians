@@ -1,0 +1,64 @@
+.signin-img {
+  background-image: url(../images/signup.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+}
+
+.prj-form-control {
+  border-radius: 5px;
+}
+
+.prj-form-control:focus {
+  box-shadow: none;
+  border: 1px solid #000000;
+}
+
+.prj-green-text {
+  color: #00643c;
+}
+
+.prj-link,
+.prj-link:hover {
+  color: #00643c;
+}
+
+.prj-btn-primary {
+  color: #fff;
+  background-color: #00643c;
+}
+
+.prj-btn-primary:hover {
+  color: #00643c;
+  background-color: #fff;
+  border: 1px solid #00643c;
+}
+
+.prj-btn-primary:focus {
+  color: #fff;
+  background-color: #00643c;
+  border: 1px solid var(--prim-colr);
+  box-shadow: none;
+}
+
+.prj-input-invalid {
+  border: 1px solid #d16658;
+}
+
+.prj-input-valid {
+  border: 1px solid #4cbb88;
+}
+
+.prj-checkbox {
+  width: 15px;
+  height: 15px;
+}
+
+.br-5 {
+  border-radius: 5px;
+}
+
+.btn-img {
+  width: 1.5rem;
+  height: 1.5rem;
+}

@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <%- include('../templates/head') %>
+    <link rel="stylesheet" href="/css/signup-signin.css">
+
+
+    <title>Super Nigerians</title>
+</head>
+
+<body>
+    <%- include('../templates/sidebar') %>
+
+    <main id="main" style="padding-top: 0;">
+        <section>
+            <div class="container-fluid" style="margin-right: 0; margin-left: 0;">
+                <div class="row d-flex">
+                    <div class="col-md-6 d-none d-md-flex align-self-stretch signin-img">
+                    </div>
+                    <div class="col-md-6 d-flex align-items-center justify-content-center">
+                        <div>
+                            <h3 class="my-4 text-center prj-green-text"><span>Sign Up</span></h2>
+                                <form name="signUpForm" action="" method="POST" class="bg-light p-5 contact-form">
+                                    <div class="row">
+                                        <div class="form-group col-12 col-md">
+                                            <label for="firstName" class="prj-normal-text">First name</label>
+                                            <input type="text" name="firstName" class="form-control prj-form-control"
+                                                id="firstName" placeholder="e.g. Olu" autocapitalize="on"
+                                                autocomplete="name" required />
+                                        </div>
+                                        <div class="form-group col-12 col-md">
+                                            <label for="lastName" class="prj-normal-text">Last name</label>
+                                            <input type="text" name="lastName" class="form-control prj-form-control"
+                                                id="lastName" placeholder="e.g. Ola" autocapitalize="on"
+                                                autocomplete="family-name" minlength="2" required />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col">
+                                            <label for="email" class="prj-normal-text">Email address</label>
+                                            <input type="email" name="email" class="form-control prj-form-control"
+                                                id="email" placeholder="e.g. oluola@gmail.com" autocomplete="email"
+                                                required />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col">
+                                            <label for="password" class="prj-normal-text">Password</label>
+                                            <input type="password" name="password" class="form-control prj-form-control"
+                                                id="password" placeholder="Password" autocomplete="new-password"
+                                                pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W]).{8,}" minlength="8"
+                                                required />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="form-check d-flex ">
+                                                <input class="form-check-input prj-checkbox" type="checkbox"
+                                                    value="true" required />
+                                                <label class="form-check-label prj-normal-text" for="isTocChecked">By
+                                                    clicking, you agree to our
+                                                    <a href="#" class="prj-link prj-green-text">Terms and
+                                                        Conditions</a></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col mt-3 mb-0">
+                                            <div class="d-flex justify-content-center">
+                                                <button type="submit" class="btn btn-lg prj-btn-primary br-5">
+                                                    Create account
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p class="prj-normal-text text-center p-0 mt-3">
+                                        Already have an account?
+                                        <a href="sign-in.html" class="text-center prj-link">Sign In</a>
+                                    </p>
+                                </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>
