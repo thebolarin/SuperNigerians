@@ -48,7 +48,7 @@ app.use((req, res, next) => {
   const token = req.csrfToken();
   res.cookie('csrf-token', token);
   res.locals.csrfToken = req.csrfToken();
-  res.locals.currentUser = req.session.data;
+  res.locals.currentUser = req.session.user;
   next();
 });
 // ************ REGISTER ROUTES HERE ********** //
