@@ -8,6 +8,7 @@ const dotenv = require("dotenv").config();
 const logger = require("morgan");
 const mongoose = require("mongoose");
 const indexRouter = require('./routes')
+const auth = require('./routes/auth')
 const config = require("./config/database");
 const csrf = require('csurf');
 const multer = require('multer');
