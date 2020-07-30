@@ -1,29 +1,29 @@
 body {
-  font-family: Lora, sans-serif;
-  max-width: 1440px;
+  font-family: "Poppins", sans-serif;
+  /* max-width: 1440px; */
   background-color: #fafafa;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: "Abril Fatface";
+.nav-item {
+  font-size: 16px !important;
+  font-weight: 500 !important;
 }
 
-.nav-link,
-.nav-link:hover {
-  color: #28a745;
+.nav-tabs .nav-link.active,
+.nav-link:hover,
+.nav-link:focus {
+  color: #00643c !important;
+  border-left: none !important;
+  border-right: none !important;
+  border-top: none !important;
+  border-bottom: 2px solid #00643c !important;
 }
 .nav-tabs .nav-link {
   color: rgba(0, 0, 0, 0.8);
-}
-.nav-tabs .nav-link.prj-nav-link.active {
-  color: #28a745;
-  border: none;
-  border-bottom: 2px solid #28a745;
+  transition: all 0.3s ease;
+  border-left: none !important;
+  border-right: none !important;
+  border-top: none !important;
 }
 
 .hover-post-content {

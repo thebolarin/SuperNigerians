@@ -1,8 +1,8 @@
 const { body } = require('express-validator');
 
 const validateSignup = [
-  body('firstName', 'Firstname cannot be empty').notEmpty(),
-  body('lastName', 'Lastname cannot be empty').notEmpty(),
+  body('firstname', 'Firstname cannot be empty').notEmpty(),
+  body('lastname', 'Lastname cannot be empty').notEmpty(),
   body('email')
     .isEmail()
     .withMessage('Please enter a valid email address')
