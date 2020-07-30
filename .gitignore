@@ -136,3 +136,6 @@ tmp/
 .DS_Store
 yarn.lock
 migrations/
+
+
+index.html

@@ -1,25 +1,29 @@
 body {
-  font-family: Poppins, "sans-serif";
-  max-width: 1440px;
+  font-family: "Poppins", sans-serif;
+  /* max-width: 1440px; */
   background-color: #fafafa;
 }
 
-nav {
-  height: max-content;
-  background-color: rgba(44, 255, 55, 0.068);
+.nav-item {
+  font-size: 16px !important;
+  font-weight: 500 !important;
 }
 
-.nav-link,
-.nav-link:hover {
-  color: #28a745;
+.nav-tabs .nav-link.active,
+.nav-link:hover,
+.nav-link:focus {
+  color: #00643c !important;
+  border-left: none !important;
+  border-right: none !important;
+  border-top: none !important;
+  border-bottom: 2px solid #00643c !important;
 }
-.nav-tabs .nav-link{
-  color: rgba(0, 0, 0, 0.80);
-}
-.nav-tabs .nav-link.active {
-  color: #28a745;
-  border: none;
-  border-bottom: 2px solid #28a745;
+.nav-tabs .nav-link {
+  color: rgba(0, 0, 0, 0.8);
+  transition: all 0.3s ease;
+  border-left: none !important;
+  border-right: none !important;
+  border-top: none !important;
 }
 
 .hover-post-content {
@@ -39,21 +43,21 @@ nav {
 }
 .hover-post-content:hover {
   opacity: 1;
-  background-color: rgba(0,0,0,0.5);
+  background-color: rgba(0, 0, 0, 0.5);
   display: block;
 }
 
-.prj-text-small{
+.prj-text-small {
   font-size: 12px;
 }
-.prj-text-normal{
+.prj-text-normal {
   font-size: 14px;
 }
-.prj-text-large{
+.prj-text-large {
   font-size: 16px;
 }
 
-.profile-img{
+.profile-img {
   max-height: 200px;
   max-width: 200px;
 }
