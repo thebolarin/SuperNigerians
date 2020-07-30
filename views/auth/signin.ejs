@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <%- include('./templates/head') %>
+    <%- include('../templates/head') %>
 
     <link rel="stylesheet" href="/css/signup-signin.css">
 
@@ -15,7 +15,7 @@
 </head>
 
 <body>
-    <%- include('./templates/sidebar') %>
+    <%- include('../templates/sidebar') %>
 
     <main id="main">
         <div id="colorlib-main">
@@ -37,6 +37,8 @@
                                         </button> <%= success %></div>
                                     <% } %>
                                 <form name="signUpForm" action="/login" method="POST" class="bg-light p-5 contact-form">
+                                    
+                                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                                     <div class="row">
                                     <div class="form-group col">
                                         <label for="email" class="prj-normal-text">Email address</label>
