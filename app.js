@@ -13,6 +13,7 @@ const indexRouter = require('./routes')
 const config = require("./config/database");
 const auth = require('./routes/auth');
 const User = require('./models/user');
+const postRouter = require('./routes/post');
 
 const app = express();
 const csrfProtection = csrf();
@@ -55,6 +56,7 @@ app.use((req, res, next) => {
 // });
 app.use(auth);
 app.use(indexRouter);
+app.use(postRouter);
 // ************ END ROUTE REGISTRATION ********** //
 
 // catch 404 and forward to error handler
@@ -72,7 +74,7 @@ mongoose
     useUnifiedTopology: true,
   })
   .then((db) => {
-   
+
     console.log("Database connected successfully");
   })
   .catch((err) => console.log("Connection to database failed =>", err));
