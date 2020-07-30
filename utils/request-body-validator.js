@@ -16,7 +16,7 @@ const validateUserRequest = (req, res, email, password) => {
       },
       validationErrors: errors.array(),
     }
-    renderPage(res ,'auth/employerSignUp',data,'Employer Registration','/employer/register' )
+    renderPage(res ,'auth/login',data,'User Login','/login' )
   }
 };
 

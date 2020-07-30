@@ -15,8 +15,8 @@ const {
 
 
 const URL = process.env.NODE_ENV === 'development'
-  ? process.env.TALENT_POOL_DEV_URL
-  : process.env.TALENT_POOL_FRONT_END_URL;
+  ? process.env.DEV_URL
+  : process.env.FRONT_END_URL;
 
 const getUserLogin = (req, res) => {
   const success = req.flash('success');
@@ -55,7 +55,9 @@ const postUserLogin = async (req, res, next) => {
             req.session.user = user;
             req.session.createdAt = Date.now();
             req.session.isLoggedIn = true;
-
+            if (user && user.role === 'admin') {
+              return res.redirect('/admin/dashboard');
+            }
             return res.redirect('/');
 
           }
@@ -168,7 +170,7 @@ const postReset = asyncHandler(async (req, res) => {
   try {
     sendEmail({
       email,
-      subject: 'TalentPool User Email verification',
+      subject: 'User Password Reset',
       message: message(resetUrl),
     });
 
