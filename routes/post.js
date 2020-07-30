@@ -1,9 +1,15 @@
-const exp = require('express')
+const express = require('express');
 
-const appRoute=exp.Router()
+const router = express.Router();
+
 const {userPost} = require('../controllers/post')
+const {
+    postView
+} = require('../controllers/post');
 
-// register new user route
-appRoute.post('/new', userPost);
 
-module.exports=appRoute
+router.get('/posts', postView);
+router.post('/new', userPost);
+
+
+module.exports = router;

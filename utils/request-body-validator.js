@@ -16,7 +16,7 @@ const validateUserRequest = (req, res, email, password) => {
       },
       validationErrors: errors.array(),
     }
-    renderPage(res ,'auth/login',data,'User Login','/login' )
+    renderPage(res ,'auth/signin',data,'User Login','/login' )
   }
 };
 
@@ -31,7 +31,7 @@ const validateUserRegistration = (req, res, oldInput) => {
       oldInput,
       validationErrors: errors.array(),
     }
-    renderPage(res ,'auth/register', data, 'Register','/register' )
+    renderPage(res ,'auth/signup', data, 'Register','/register' )
   }
 };
 

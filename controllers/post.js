@@ -3,7 +3,9 @@ const cloud = require('cloudinary').v2;
 const User = require('../models/user')
 const Post = require('../models/post')
 
-
+const {
+  renderPage
+} = require('../utils/render-page');
 
 // cloudinary Configuration
 cloud.config({
@@ -50,7 +52,11 @@ module.exports = {
          })
       }
   },
-  
+  postView:async (req, res) => {
+
+    const posts = await Post.find({})
+    renderPage(res, 'pages/posts', posts, 'Posts', '/posts');
+}
 }
 
 /**
@@ -92,3 +98,5 @@ const uploadPhoto = async (req, res, mediaType, sImage, size) => {
  
     }
   }
+
+
