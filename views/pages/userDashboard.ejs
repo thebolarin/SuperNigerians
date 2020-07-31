@@ -310,7 +310,6 @@
     });
   </script>
 
-  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script>
     document.getElementById('postFormBtn').addEventListener('click', async function (event) {
 
@@ -385,70 +384,70 @@
     };
 
     // profile update
-    document.getElementById('btnUpdateProfile').addEventListener('click', async function (event) {
-      event.preventDefault();
-      const form = document.getElementById('updateProfileFormId');
-      const [firstName, lastName, userName, , phone, country, city] = form.querySelectorAll('input');
+    // document.getElementById('btnUpdateProfile').addEventListener('click', async function (event) {
+    //   event.preventDefault();
+    //   const form = document.getElementById('updateProfileFormId');
+    //   const [firstName, lastName, userName, , phone, country, city] = form.querySelectorAll('input');
 
-      let addValidation = true;
+    //   let addValidation = true;
 
-      if (form.checkValidity() === false) {
-        event.preventDefault();
-        event.stopPropagation();
-      } else if (form.checkValidity()) {
-        event.preventDefault();
+    //   if (form.checkValidity() === false) {
+    //     event.preventDefault();
+    //     event.stopPropagation();
+    //   } else if (form.checkValidity()) {
+    //     event.preventDefault();
 
-        const userData = {
-          firstname: firstName.value,
-          lastname: lastName.value,
-          username: userName.value,
-          location: `${city.value}, ${country.value}`,
-          phone: phone.value,
-        };
-        const response = await updateProfile(userData);
-        const redirect = () => {
-          window.location.href = '/user/dashboard';
-        };
-        if (response.status === 'success') {
-          toaster(response.message, 'success');
-          removeToaster(3000);
-          setTimeout(3100);
-        } else {
-          toaster(response.message, 'error');
-          removeToaster(3000);
-        }
-      }
-      if (addValidation) {
-        form.classList.add('was-validated');
-      }
-      event.preventDefault();
-      },
-    false,
-    );
+    //     const userData = {
+    //       firstname: firstName.value,
+    //       lastname: lastName.value,
+    //       username: userName.value,
+    //       location: `${city.value}, ${country.value}`,
+    //       phone: phone.value,
+    //     };
+    //     const response = await updateProfile(userData);
+    //     const redirect = () => {
+    //       window.location.href = '/user/dashboard';
+    //     };
+    //     if (response.status === 'success') {
+    //       toaster(response.message, 'success');
+    //       removeToaster(3000);
+    //       setTimeout(3100);
+    //     } else {
+    //       toaster(response.message, 'error');
+    //       removeToaster(3000);
+    //     }
+    //   }
+    //   if (addValidation) {
+    //     form.classList.add('was-validated');
+    //   }
+    //   event.preventDefault();
+    //   },
+    // false,
+    // );
 
-    const updateProfile = async (userData) => {
-      const profileUrl = '/user/update';
-      const [csrf] = document.getElementsByName('_csrf');
+    // const updateProfile = async (userData) => {
+    //   const profileUrl = '/user/update';
+    //   const [csrf] = document.getElementsByName('_csrf');
 
-      try {
-        axios.defaults.xsrfCookieName = 'csrftoken';
-        axios.defaults.xsrfHeaderName = 'X-CSRFTOKEN';
+    //   try {
+    //     axios.defaults.xsrfCookieName = 'csrftoken';
+    //     axios.defaults.xsrfHeaderName = 'X-CSRFTOKEN';
 
-        const { data } = await axios({
-          method: 'PUT',
-          url: profileUrl,
-          headers: {
-            'Content-Type': 'application/json; charset=UTF-8',
-            'csrf-token': csrf.value,
-          },
-          data: userData,
-        });
+    //     const { data } = await axios({
+    //       method: 'PUT',
+    //       url: profileUrl,
+    //       headers: {
+    //         'Content-Type': 'application/json; charset=UTF-8',
+    //         'csrf-token': csrf.value,
+    //       },
+    //       data: userData,
+    //     });
 
-        return data;
-      } catch (e) {
-        return e.response.data;
-      }
-    };
+    //     return data;
+    //   } catch (e) {
+    //     return e.response.data;
+    //   }
+    // };
   </script>
 </body>
 

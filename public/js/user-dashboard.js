@@ -25,33 +25,70 @@ const Controller = {
   initEventListeners() {
     document
       .getElementById("btnUpdateProfile")
-      .addEventListener("click", Controller.onSubmitForm);
+      .addEventListener("click", Controller.onSubmitForm, false);
   },
-  onSubmitForm(event) {
+ async onSubmitForm(event) {
+
     event.preventDefault();
-    let userData = Model.getFormData(document.forms.updateProfileForm);
-    try {
-      axios
-        .put("/user/update", JSON.stringify(userData), {
-          "content-type": "application/json",
-        })
-        .then((resp) => {
-          console.log(resp);
-          View.displayToastProfileUpdateNotif(
-            `Your profile has been successfully updated.`
-          );
-        })
-        .catch((err) => {
-          console.error(err);
-          View.displayToastProfileUpdateNotif(
-            `Sorry. An error occured while updating your profile`
-          );
-        });
-    } catch (err) {
-      console.error(err);
+    const form = document.getElementById('updateProfileFormId');
+    const [firstName, lastName, userName, , phone, country, city] = form.querySelectorAll('input');
+
+    let addValidation = true;
+
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopPropagation();
+    } else if (form.checkValidity()) {
+      event.preventDefault();
+
+      const userData = {
+        firstname: firstName.value,
+        lastname: lastName.value,
+        username: userName.value,
+        location: `${city.value}, ${country.value}`,
+        phone: phone.value,
+      };
+      const response = await Controller.updateProfile(userData);
+      const redirect = () => {
+        window.location.href = '/user/dashboard';
+      };
+      if (response.status === 'success') {
+        toaster(response.message, 'success');
+        removeToaster(3000);
+        setTimeout(3100);
+      } else {
+        toaster(response.message, 'error');
+        removeToaster(3000);
+      }
     }
-    $("#updateProfileModal").modal("hide");
+    if (addValidation) {
+      form.classList.add('was-validated');
+    }
+    event.preventDefault();
   },
+  updateProfile(userData){
+    const profileUrl = '/user/update';
+    const [csrf] = document.getElementsByName('_csrf');
+
+    try {
+      axios.defaults.xsrfCookieName = 'csrftoken';
+      axios.defaults.xsrfHeaderName = 'X-CSRFTOKEN';
+
+      const { data } = await axios({
+        method: 'PUT',
+        url: profileUrl,
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+          'csrf-token': csrf.value,
+        },
+        data: userData,
+      });
+
+      return data;
+    } catch (e) {
+      return e.response.data;
+    }
+  }
 };
 
 Controller.init();
