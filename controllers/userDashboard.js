@@ -8,24 +8,26 @@ exports.getUserDetails = async (req, res) => {
     res.redirect("/login");
   }
   const user = await User.findOne({ _id: req.session.user._id });
-  if(user.role !== 'user'){
-      res.redirect('/')
+  if (user.role !== "user") {
+    res.redirect("/");
   }
   const userComments = await Comment.find({ creator: user._id });
   const userPosts = await Post.find({ creator: user._id });
-  const likes = []
-   userComments.forEach((comment) => {
-       likes.push(comment.like)
-  })
-  const numberOfLikes = likes.reduce((a, b) => {
-        return a + b
-  })
-  console.log(numberOfLikes)
+  const likes = [];
+  let numberOfLikes = 0;
+  userComments.forEach((comment) => {
+    likes.push(comment.like);
+  });
+  if (likes.length !== 0) {
+    numberOfLikes = likes.reduce((a, b) => {
+      return a + b;
+    });
+  }
   const data = {
     user,
     userComments,
     userPosts,
-    numberOfLikes
+    numberOfLikes,
   };
   renderPage(res, "pages/userDashboard", data, "User Dashboard");
 };
