@@ -84,7 +84,7 @@ const postUserRegister = async (req, res) => {
             message,
           });
           req.flash('success', 'Registration Succssful');
-          req.session.user = user;
+          req.session.user = saveUser;
           req.session.createdAt = Date.now();
           req.session.isLoggedIn = true;
           if (user && user.role === 'admin') {

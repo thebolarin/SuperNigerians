@@ -17,4 +17,13 @@ const checkLoggedIn = (req, res, next) => {
     return next();
   }
 }
-module.exports = { checkLoggedIn, checkNotLoggedIn }
+
+const authorizeAdmin = (req, res, next) => {
+  const { user, isLoggedIn } = req.session;
+  if(user && isLoggedIn && user.role === 'admin') {
+    next();
+  }
+  return res.redirect('/posts');
+}
+
+module.exports = { checkLoggedIn, checkNotLoggedIn, authorizeAdmin }
