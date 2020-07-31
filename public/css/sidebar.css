@@ -3,7 +3,8 @@
   margin: 0;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
+  /* font-family: "Poppins", sans-serif; */
+  font-family: "Lora", sans-serif;
 }
 
 #aside {
@@ -20,6 +21,11 @@
   border-right: 1px solid #e6e6e6;
   -webkit-transition: all 0.5s ease;
   transition: all 0.5s ease;
+}
+
+#aside .welcome-text {
+  /* font-family: "Abril Fatface", cursive !important; */
+  font-family: "Lora", sans-serif !important;
 }
 
 #aside .aside-nav ul {
