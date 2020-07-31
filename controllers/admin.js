@@ -1,7 +1,7 @@
 const Post = require('../models/post');
 const User = require('../models/user');
 const { renderPage } = require('../utils/render-page');
-const sendMail = require('../utils/send-mail');
+const sendMail = require('../utils/send-email');
 
 module.exports = {
   dashboard: async (req, res) => {
@@ -77,7 +77,7 @@ module.exports = {
         res.flash('error', 'Creator not found');
       }
       const message = `Your post with the title: <b>${approvedPost.title}</b> has been published live.`;
-          sendEmail({
+          sendMail({
             email: postCreator.email,
             subject: 'Post Approval',
             message,
