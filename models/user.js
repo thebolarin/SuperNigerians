@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 
-const {Schema} = mongoose;
+const {
+  Schema
+} = mongoose;
 
 const userfSchema = new Schema({
   email: {
@@ -20,35 +22,33 @@ const userfSchema = new Schema({
     required: true
   },
   username: {
-    type:String,
-    default:'username',
+    type: String,
+    default: 'username',
   },
   photo: {
     type: String,
-    default: 'jhfs'
+    default: 'https://i.imgur.com/kyZfQzL.png'
   },
   role: {
     type: String,
-    enum : ['user', 'admin'], 
+    enum: ['user', 'admin'],
     default: 'user'
   },
   location: {
     type: String,
     default: 'Add your location'
   },
-   phone: {
+  phone: {
     type: String,
     default: '0-000000000'
   },
   resetToken: String,
   resetTokenExpiration: Date,
-  posts: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: 'Post'
-    }
-  ],
- 
+  posts: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Post'
+  }],
+
 });
 
 module.exports = mongoose.model('Users', userfSchema);
