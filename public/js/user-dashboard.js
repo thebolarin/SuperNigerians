@@ -28,7 +28,7 @@ const Controller = {
       .addEventListener("click", Controller.onSubmitForm, false);
   },
  async onSubmitForm(event) {
-
+console.log('Werk');
     event.preventDefault();
     const form = document.getElementById('updateProfileFormId');
     const [firstName, lastName, userName, , phone, country, city] = form.querySelectorAll('input');
@@ -41,13 +41,7 @@ const Controller = {
     } else if (form.checkValidity()) {
       event.preventDefault();
 
-      const userData = {
-        firstname: firstName.value,
-        lastname: lastName.value,
-        username: userName.value,
-        location: `${city.value}, ${country.value}`,
-        phone: phone.value,
-      };
+      const userData = Model.getFormData(document.forms.updateProfileForm)
       const response = await Controller.updateProfile(userData);
       const redirect = () => {
         window.location.href = '/user/dashboard';
@@ -66,7 +60,7 @@ const Controller = {
     }
     event.preventDefault();
   },
-  updateProfile(userData){
+  async updateProfile(userData){
     const profileUrl = '/user/update';
     const [csrf] = document.getElementsByName('_csrf');
 
