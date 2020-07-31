@@ -14,6 +14,9 @@
   <main id="main">
     <div class="container animate__animated animate__slideInLeft">
       <div class="row" style="margin-right: 0px; margin-left: 0px;">
+        <% if (posts.length === 0) { %>
+            <div class="my-post col px-1 py-3 position-relative my-2">No posts match the search title parameter.</div>
+        <% } %>
         <% if( posts &&  posts.length > 0){ %>
         <% for(var i=0; i <  posts.length; i++) { %>
         <div class="col-12 article d-flex flex-column flex-md-row mb-5">
@@ -28,7 +31,7 @@
               </a>
             </div>
             <p class="meta d-flex justify-content-center justify-content-md-start">
-              <span class="calender"><i class="fa fa-calendar mr-2"></i><%- posts[i].date.toGMTString() %></span>
+              <span class="calender"><i class="fa fa-calendar mr-2"></i><%- posts[i].date %></span>
               <span class="comment"><i class="fa fa-comment mr-2"></i><%- posts[i].comments.length + " comments" %></span>
             </p>
             <p class="article-highlight text-center text-md-left">
