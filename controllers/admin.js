@@ -102,7 +102,21 @@ module.exports = {
     }
   },
 
-  deleteUser: (req, res) => {},
+  deleteUser: async (req, res) => {
+    const { userId } = req.params;
+    try {
+      const users = await User.findOneAndDelete({ _id: userId });
+      if (!users) return req.flash("error", "No User found !");
+
+
+    } catch (err) {
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
+    }
+
+
+  },
 
   approvePost: async (req, res) => {
     try {
