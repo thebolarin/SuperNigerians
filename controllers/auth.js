@@ -17,27 +17,27 @@ const URL = process.env.NODE_ENV === 'development'
   ? process.env.DEV_URL
   : process.env.FRONT_END_URL;
 
-  const getUserRegister = (req, res) => {
-    const success = req.flash('success');
-    let message = req.flash('error');
-    if (message.length > 0) {
-      [message] = message;
-    } else {
-      message = null;
-    }
-    const data = {
-      pageName: 'User Registration',
-      success,
-      errorMessage: message,
-      oldInput: {
-        email: '',
-        password: '',
-      },
-      validationErrors: [],
-    };
-    renderPage(res, 'auth/signup', data, 'Register', '/register');
-  
+const getUserRegister = (req, res) => {
+  const success = req.flash('success');
+  let message = req.flash('error');
+  if (message.length > 0) {
+    [message] = message;
+  } else {
+    message = null;
+  }
+  const data = {
+    pageName: 'User Registration',
+    success,
+    errorMessage: message,
+    oldInput: {
+      email: '',
+      password: '',
+    },
+    validationErrors: [],
   };
+  renderPage(res, 'auth/signup', data, 'Register', '/register');
+
+};
 
 const getUserLogin = (req, res) => {
   const success = req.flash('success');
@@ -61,21 +61,21 @@ const getUserLogin = (req, res) => {
 
 };
 
-const postUserRegister = async(req, res) => {
+const postUserRegister = async (req, res) => {
   const { firstname, lastname, email, password } = req.body;
   const userDetails = {
-    firstname, 
+    firstname,
     lastname,
     email,
   }
   validateUserRegistration(req, res, userDetails);
   userCheck(email).then(async (user) => {
-  
+
     if (!user) {
       const salt = await bcrypt.genSalt(10);
       const hashedPassword = bcrypt.hashSync(password, salt);
       try {
-        const saveUser = await userCreate({...userDetails, password: hashedPassword});
+        const saveUser = await userCreate({ ...userDetails, password: hashedPassword });
         if (saveUser) {
           const message = `Welcome to Super Nigerians \n kindly click this <a href="https://supernigerians.com">link to continue</a>`;
           sendEmail({
@@ -84,7 +84,7 @@ const postUserRegister = async(req, res) => {
             message,
           });
           req.flash('success', 'Registration Succssful');
-          req.session.user = user;
+          req.session.user = saveUser;
           req.session.createdAt = Date.now();
           req.session.isLoggedIn = true;
           console.log(user)
@@ -95,11 +95,11 @@ const postUserRegister = async(req, res) => {
         }
       } catch (error) {
         console.log(error);
-        return errorUserRegister(req, res, userDetails,'Error Occoured')
+        return errorUserRegister(req, res, userDetails, 'Error Occoured')
       }
     }
-    return errorUserRegister(req, res, userDetails,'User already exists');
-  });  
+    return errorUserRegister(req, res, userDetails, 'User already exists');
+  });
 }
 
 const postUserLogin = async (req, res, next) => {
@@ -218,7 +218,7 @@ const postReset = asyncHandler(async (req, res) => {
 
   user.resetToken = resetToken;
   user.resetTokenExpiration = resetTokenExpiration;
-   user.save();
+  user.save();
 
   // Create reset url
   const resetUrl = `${URL}/password/reset/${token}`;
@@ -256,8 +256,8 @@ const postNewPassword = asyncHandler(async (req, res) => {
     .update(req.body.token, 'utf8')
     .digest('hex');
 
-  const user = await User.findOne({resetToken : token});
-   
+  const user = await User.findOne({ resetToken: token });
+
   if (!user) {
     req.flash('error', 'Invalid token');
     return res.redirect('/recover/password');
