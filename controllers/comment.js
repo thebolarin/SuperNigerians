@@ -3,7 +3,6 @@ const Post = require('../models/post');
 const User = require('../models/user')
 
 const postExist = async (postId) => {
-    console.log(postId);
     const post = await Post.findById({ _id: postId });
     return post;
 }
