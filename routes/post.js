@@ -7,13 +7,14 @@ const {
 } = require('../controllers/post')
 const {
     postView,
-    postSingleView
+    postSingleView,
+    postSearchByTitle,
 } = require('../controllers/post');
 
 
 router.get('/posts', postView);
 router.get('/:slug', postSingleView)
 router.post('/new', userPost);
-
+router.get('/posts/search/:title', postSearchByTitle);
 
 module.exports = router;
