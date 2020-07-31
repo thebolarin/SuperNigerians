@@ -20,6 +20,8 @@
 
         <% for(var i=0; i < posts.length; i++) { %>
 
+          <% if( posts[i].status === 'true'){ %>
+
         <div class="d-flex flex-column flex-md-row mb-5">
           <div class="col-12 col-md-3 d-md-flex justify-content-center align-items-center profile-picture mb-2 mb-md-0">
             <img src=<%- posts[i].postPicture %> alt="user-profile-picture" class="img-fluid" />
@@ -46,11 +48,9 @@
           </div>
         </div>
 
-        <% } %>
+        <% }}} %>
 
       </div>
-
-      <% } %>
 
     </div>
   </main>
