@@ -3,16 +3,17 @@ const express = require("express");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const cookieSession = require('cookie-session');
+const fileupload = require('express-fileupload');
 const flash = require("connect-flash");
 const dotenv = require("dotenv").config();
 const logger = require("morgan");
 const mongoose = require("mongoose");
 const csrf = require('csurf');
-const multer = require('multer');
+// const multer = require('multer');
 const indexRouter = require('./routes')
-const config = require("./config/database");
+// const config = require("./config/database");
 const auth = require('./routes/auth');
-const User = require('./models/user');
+// const User = require('./models/user');
 const postRouter = require('./routes/post');
 
 const app = express();
@@ -27,7 +28,6 @@ app.use(
 );
 // Cookie Parser
 app.use(cookieParser());
-app.use(express.json());
 app.use(
   express.urlencoded({
     extended: false,
@@ -40,8 +40,9 @@ app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 app.use(flash());
 
-//seed anonymous user
+// seed anonymous user
 require('./utils/seed');
+
 app.use(logger("dev"));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(csrfProtection);
@@ -52,6 +53,8 @@ app.use((req, res, next) => {
   res.locals.currentUser = req.session.user;
   next();
 });
+// express file upload
+app.use(fileupload({ useTempFiles: true }));
 // ************ REGISTER ROUTES HERE ********** //
 // app.get("/", (req, res) => {
 //   res.send("Welcome to Express!");
@@ -68,14 +71,13 @@ app.use((req, res, next) => {
 
 
 const MONGO_URI = process.env.MONGODB_URI;
-
-mongoose
-  .connect(MONGO_URI, {
+mongoose.connect(MONGO_URI, {
     useNewUrlParser: true,
     useCreateIndex: true,
     useUnifiedTopology: true,
+    useFindAndModify:false
   })
-  .then((db) => {
+  .then(() => {
 
     console.log("Database connected successfully");
   })
@@ -92,5 +94,6 @@ app.use((err, req, res, next) => {
   res.render("error");
   next();
 });
+
 
 module.exports = app;
