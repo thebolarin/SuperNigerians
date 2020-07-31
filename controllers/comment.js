@@ -1,10 +1,16 @@
 const Comment = require('../models/comment');
 const Post = require('../models/post');
-
+const User = require('../models/user')
 
 const postExist = async (postId) => {
-    const post = await Post.findById({ postId });
+    console.log(postId);
+    const post = await Post.findById({ _id: postId });
     return post;
+}
+
+const anonymousUser = async () => {
+    const user = await User.find({ email: "anonymous@exammple.com" });
+    return user;
 }
 
 const commentExist = async (commentId) => {
@@ -12,12 +18,13 @@ const commentExist = async (commentId) => {
     return comment;
 }
 
-const createComment = async (userId, body) => {
+const createComment = async (userId, body, name) => {
     const comment = await Comment.create({
-        coomment: body,
+        comment: body,
         dislike: 0,
         like: 0,
-        creator: userId
+        creator: userId,
+        name: name
     });
     return comment;
 }
@@ -28,22 +35,29 @@ module.exports = {
           //find campground
             const { postId } = req.params;
             const { body } = req.body;
-            const { userId } = req.session;
+            const user = req.session.user
             const post = await postExist(postId);
-
+            console.log(post)
             if(!post) {
                 return res.status(400).json({
                     message: "Post not found"
-                })
+                });
             }
-            const comment = await createComment(userId, body);
-            post.comment.push(comment);
-            await post.save()
+            let comment;
+            if(!user) {
+                const anonymous = await anonymousUser();
+                console.log(anonymous)
+                comment = await createComment(anonymous[0]._id, body, anonymous[0].firstname);
+            } else {
+                comment = await createComment(user._id, body, `${user.firstname} ${user.lastname}`);
+            }
+            console.log(comment);
+            post.comments.push(comment);
+            await post.save();
             
-            res.status(200).json({
-                message: "Comment made successfully"
-            });
+            res.redirect('back');
         } catch (err) {
+            console.log(err);
             res.status(500).json({err})
         }
     },
@@ -72,7 +86,7 @@ module.exports = {
                 message: "Dislked comment"
             })
         } catch (err) {
-            res.stats(400).json({err})
+            res.stats(400).json({err});
         }
     }
 }
