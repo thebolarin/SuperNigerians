@@ -6,16 +6,16 @@
                 <h4>Welcome, <%= currentUser.firstname %> <%= currentUser.lastname %></h4>  
             <% } %> 
         <ul>
-            <li class="nav-active"><a href="/">Home</a></li>
-            <li><a href="/posts">Posts</a></li>
+            <li class="<%= path === 'home' ? 'nav-active' : '' %>" ><a href="/">Home</a></li>
+            <li class="<%= path === 'post' ? 'nav-active' : '' %>" ><a href="/posts">Posts</a></li>
 
             <% if(currentUser) { %>
-                <li><a href="/user/dashboard">Profile</a></li>
+                <li class="<%= path === 'profile' ? 'nav-active' : '' %>"><a href="/profile">Profile</a></li>
                 <li><a href="/logout">Sign out</a></li>
             <% } %> 
             <% if(!currentUser) { %>
-                <li><a href="/login">Sign In</a></li>
-                <li><a href="/register">Sign Up</a></li>
+                <li class="<%= path === 'signin' ? 'nav-active' : '' %>" ><a href="/login">Sign In</a></li>
+                <li class="<%= path === 'signup' ? 'nav-active' : '' %>" ><a href="/register">Sign Up</a></li>
             <% } %> 
            
 

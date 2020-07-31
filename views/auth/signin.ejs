@@ -19,10 +19,10 @@
         <section>
             <div class="container-fluid" style="margin-right: 0; margin-left: 0;">
                 <div class="row d-flex">
-                    <div class="col-md-6 d-none d-md-flex align-self-stretch signin-img">
+                    <div class="col-md-7 d-none d-md-flex align-self-stretch signin-img">
                     </div>
-                    <div class="col-md-6 d-flex align-items-center justify-content-center">
-                        <div class="text px-4 pt-5 pt-md-0 px-md-4 pr-md-5 ftco-animate">
+                    <div class="col-md-5 d-flex align-items-center justify-content-center">
+                        <div class="text">
                             <h3 class="my-4 text-center prj-green-text"><span>Sign In</span></h3>
                             <% if (errorMessage) { %>
                             <div role="alert" class="alert alert-danger user-message user-message--error">
@@ -43,7 +43,7 @@
                                         <label for="email" class="prj-normal-text">Email address</label>
                                         <input type="email" name="email" value="<%= oldInput.email %>"
                                             class="form-control prj-form-control <%= validationErrors.find(e => e.param === 'email') ? 'invalid' : '' %>"
-                                            id="email" placeholder="e.g. oluola@gmail.com" autocomplete="email"
+                                            id="email" placeholder="johndoe@example.com" autocomplete="email"
                                             required />
                                     </div>
                                 </div>
