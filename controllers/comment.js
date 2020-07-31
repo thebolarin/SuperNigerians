@@ -36,7 +36,6 @@ module.exports = {
             const { body } = req.body;
             const user = req.session.user
             const post = await postExist(postId);
-            console.log(post)
             if(!post) {
                 return res.status(400).json({
                     message: "Post not found"
@@ -45,12 +44,10 @@ module.exports = {
             let comment;
             if(!user) {
                 const anonymous = await anonymousUser();
-                console.log(anonymous)
                 comment = await createComment(anonymous[0]._id, body, anonymous[0].firstname);
             } else {
                 comment = await createComment(user._id, body, `${user.firstname} ${user.lastname}`);
             }
-            console.log(comment);
             post.comments.push(comment);
             await post.save();
             
