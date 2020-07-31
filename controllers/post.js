@@ -6,7 +6,9 @@ const Post = require('../models/post')
 const {
     renderPage
 } = require('../utils/render-page');
-const { populate } = require('../models/post');
+const {
+    populate
+} = require('../models/post');
 
 // cloudinary Configuration
 cloud.config({
@@ -78,9 +80,20 @@ module.exports = {
 
     postSingleView: async (req, res) => {
         let slug = req.params.slug;
-        const post = await Post.find({slug}).populate('comments');
+        const post = await Post.find({
+            slug
+        }).populate('comments');
+
+        console.log(post[0]['creator'])
+        const user = await User.find({
+            _id: post[0]['creator']
+        })
+
+        console.log(user);
+
         const data = {
             post,
+            user,
             path: 'post'
         };
         renderPage(res, 'pages/post', data, 'Post', '/post');
