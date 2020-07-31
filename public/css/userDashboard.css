@@ -1,5 +1,5 @@
 body {
-  font-family: "Poppins", sans-serif;
+  font-family: 'Poppins', sans-serif;
   /* max-width: 1440px; */
   background-color: #fafafa;
 }
@@ -75,7 +75,6 @@ button.btn.prj-btn-primary:focus {
   box-shadow: none;
 }
 
-
 .profile-img {
   max-height: 200px;
   max-width: 200px;
@@ -89,11 +88,14 @@ button.btn.prj-btn-primary:focus {
 }
 
 .post-btn:hover,
-.post-btn:active,
 .post-btn:focus {
   background-color: #ffffff !important;
   border-color: #00643c !important;
   color: #00643c !important;
+}
+
+.post-btn:active {
+  background-color: red !important;
 }
 
 textarea {
