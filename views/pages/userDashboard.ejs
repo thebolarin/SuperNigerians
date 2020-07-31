@@ -2,75 +2,84 @@
 <html lang="en">
 
 <head>
-  <link rel="stylesheet" href="css/userDashboard.css" />
+  <link rel="stylesheet" href="/css/userDashboard.css" />
   <%- include('../templates/head') %>
 
   <title>User dashboard</title>
 
   <style>
-  .was-validated .form-control:invalid {
+    .was-validated .form-control:invalid {
       border: 1px solid #dc3545 !important;
       padding-right: calc(1.5em + 0.75rem);
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23d31919' width='36px' height='36px'%3E%3Cpath d='M0 0h24v24H0V0z' fill='none'/%3E%3Cpath d='M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z'/%3E%3C/svg%3E");
       background-repeat: no-repeat;
       background-position: right calc(0.375em + 0.1875rem) center;
       background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
-  }
-  .form-control.is-valid, .was-validated .form-control:valid {
+    }
+
+    .form-control.is-valid,
+    .was-validated .form-control:valid {
       border: 1px solid #28a745 !important;
       padding-right: calc(1.5em + 0.75rem);
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2300cc33' width='36px' height='36px'%3E%3Cpath d='M0 0h24v24H0V0z' fill='none'/%3E%3Cpath d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z'/%3E%3C/svg%3E");
       background-repeat: no-repeat;
       background-position: right calc(0.375em + 0.1875rem) center;
       background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
-  }
-  /***** CSS ANIMATION BEGINS ********/
-  .dashboard-settings-container-pt .slide-in {
-      z-index: 10; /* to position it in front of the other content */
+    }
+
+    /***** CSS ANIMATION BEGINS ********/
+    .dashboard-settings-container-pt .slide-in {
+      z-index: 10;
+      /* to position it in front of the other content */
       margin-top: -1.5em;
       position: fixed;
-      overflow: hidden; /* to prevent scrollbar appearing */
-  }
+      overflow: hidden;
+      /* to prevent scrollbar appearing */
+    }
 
-  .dashboard-settings-container-pt .slide-in.from-right {
+    .dashboard-settings-container-pt .slide-in.from-right {
       right: 0;
       max-width: 280px;
       min-width: 240px;
       font-size: 14px;
-  }
+    }
 
-  .dashboard-settings-container-pt .slide-in-content {
-      transition: transform .5s ease; /* our nice transition */
-  }
-  .dashboard-settings-container-pt .slide-in .success {
+    .dashboard-settings-container-pt .slide-in-content {
+      transition: transform .5s ease;
+      /* our nice transition */
+    }
+
+    .dashboard-settings-container-pt .slide-in .success {
       border-left: 3px solid #00CC00;
       padding: 5px 20px;
       background: #bfeaff;
-  }
-  .dashboard-settings-container-pt .slide-in .error {
-      border-left: 3px solid rgb(248,0,0);
+    }
+
+    .dashboard-settings-container-pt .slide-in .error {
+      border-left: 3px solid rgb(248, 0, 0);
       padding: 5px 20px;
       background: #f7cecb;
-  }
+    }
 
-  .dashboard-settings-container-pt .slide-in.from-right .slide-in-content {
+    .dashboard-settings-container-pt .slide-in.from-right .slide-in-content {
       transform: translateX(100%);
       -webkit-transform: translateX(100%);
-  }
+    }
 
-  .dashboard-settings-container-pt .slide-in.show .slide-in-content {
+    .dashboard-settings-container-pt .slide-in.show .slide-in-content {
       transform: translateX(0);
       -webkit-transform: translateX(0);
-  }
+    }
 
-  /*LOADER*/
-  .lds-hourglass {
+    /*LOADER*/
+    .lds-hourglass {
       display: inline-block;
       position: relative;
       max-width: 30px;
       max-height: 30px;
-  }
-  .lds-hourglass:after {
+    }
+
+    .lds-hourglass:after {
       content: " ";
       display: block;
       border-radius: 50%;
@@ -80,21 +89,23 @@
       border: 12px solid #fff;
       border-color: #fff transparent #fff transparent;
       animation: lds-hourglass 1.2s infinite;
-  }
+    }
 
-  @keyframes lds-hourglass {
+    @keyframes lds-hourglass {
       0% {
-          transform: rotate(0);
-          animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+        transform: rotate(0);
+        animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
       }
+
       50% {
-          transform: rotate(900deg);
-          animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+        transform: rotate(900deg);
+        animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
       }
+
       100% {
-          transform: rotate(1800deg);
+        transform: rotate(1800deg);
       }
-  }
+    }
   </style>
 </head>
 
@@ -135,13 +146,6 @@
                     <input type="text" class="form-control" id="userName" name="username" placeholder="e.g D'Marko"
                       autocomplete="username">
                   </div>
-                  <div class="form-group" style="display:none">
-                    <!-- TODO: Make sure URL ends in photo file extensions -->
-                    <label for="photo">Photo url</label>
-                    <input type="url" class="form-control" id="photo" name="photo" placeholder="e.g https://...">
-                    <small class="text-muted">You can use an image URL from Google Drive or <a
-                        href="https://imgur.com">Imgur</a></small>
-                  </div>
                   <div class="form-group">
                     <label for="phone">Phone</label>
                     <input type="tel" class="form-control" id="phone" name="phone" autocomplete="url">
@@ -158,7 +162,7 @@
                   </div>
                 </form>
                 <div class="text-center">
-                  <button class="btn btn-lg btn-secondary" id="btnUpdateProfile">Update profile</button>
+                  <button class="btn btn-lg prj-btn-primary " id="btnUpdateProfile">Update profile</button>
                 </div>
               </div>
             </div>
@@ -167,37 +171,44 @@
       </div>
     </div>
 
+    <!-- Profile Update Success Toast -->
+    <div class="toast" id="tstProfileUpdate" role="alert" aria-live="assertive" aria-atomic="true"
+      style="position: absolute; top: 5%; right: 2%; z-index: 1000;" data-autohide="false">
+      <div class="toast-header">
+        <strong class="mr-auto">Profile update</strong>
+        <button type="button" class="mb-1 close" data-dismiss="toast" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="toast-body">
+      </div>
+    </div>
     <!--NOTIFICATION TOAST-->
     <div class="dashboard-settings-container-pt">
-        <div class="slide-in from-right">
-            <div class="slide-in-content">
-            <div class="row">
-                <span class="col-10" style="padding-top: 3px;"
-                >Success Message oei
-                </span>
-                <span class="col-2" style="padding-top: 2px;"
-                ><span class="lds-hourglass"></span
-                ></span>
-            </div>
-            </div>
+      <div class="slide-in from-right">
+        <div class="slide-in-content">
+          <div class="row">
+            <span class="col-10" style="padding-top: 3px;">Success Message oei
+            </span>
+            <span class="col-2" style="padding-top: 2px;"><span class="lds-hourglass"></span></span>
+          </div>
         </div>
+      </div>
     </div>
 
     <div class="container-fluid main-container ">
       <div class="row">
         <div class="col-12">
           <div class="profile-container my-3 d-flex flex-column justify-content-center align-items-center flex-sm-row">
-            <img style="height: 200px;" src="https://picsum.photos/500" alt="my avatar"
-              class="profile-img img-fluid rounded-circle mr-sm-4">
+            <img src="<%= user.photo %>" alt="my avatar" class="profile-img img-fluid rounded-circle mr-sm-4">
             <div class="d-flex flex-column justify-content-center align-items-center ml-sm-4 mt-3 mt-sm-0">
-              <h1 class="h3"><%= user.username %></h1>
+              <h1 clss="h3"><%= user.firstname %></h1>
               <p class="mb-0 lead prj-text-normal">
                 <span class="font-weight-normal d-inline-block"><%= userPosts.length %></span>
                 posts
                 <span class="font-weight-normal d-inline-block"><%= numberOfLikes %></span>
-                likes <span class="font-weight-normal d-inline-block">10</span> shares</p>
-              <!-- Button trigger modal -->
-              <button role="button" type="button" class="btn btn-secondary mt-3" data-toggle="modal"
+                likes</p>
+              <button type="button" class="btn btn-sm prj-btn-primary mt-3" data-toggle="modal"
                 data-target="#updateProfileModal">
                 Update profile
               </button>
@@ -207,11 +218,11 @@
             <ul class="nav nav-tabs justify-content-center my-3" role="tablist">
               <li class="nav-item mr-2" role="presentation">
                 <a class="nav-link active" id="tabs-my-posts-tab" data-toggle="pill" href="#tabs-my-posts" role="tab"
-                  aria-controls="tabs-my-posts" aria-selected="false">My posts</a>
+                  aria-controls="tabs-my-posts" aria-selected="true">My posts</a>
               </li>
               <li class="nav-item" role="presentation">
                 <a class="nav-link" id="tabs-create-post-tab" data-toggle="pill" href="#tabs-create-post" role="tab"
-                  aria-controls="tabs-create-post" aria-selected="true">Create a post</a>
+                  aria-controls="tabs-create-post" aria-selected="false">Create a post</a>
               </li>
             </ul>
             <div class="tab-content" id="tabs-tabContent">
@@ -220,13 +231,17 @@
                 <!-- My posts -->
                 <div class="my-posts-container row row-cols-1 row-cols-sm-2 row-cols-lg-3">
                   <% if (userPosts.length === 0) { %>
-                  <div class="my-post col px-1 py-3 position-relative my-2">You don't have any posts yet</div>
+                  <div class="my-post col px-1 py-3 mx-auto my-2">
+                    <img class="img-fluid" src="/images/no-posts.svg" alt="No posts">
+                    <p class="small text-center">You have not created a post yet</p>
+                    <p class="small text-center">Click on the 'Create a post' tab to create a post</p>
+                  </div>
                   <% } %>
                   <% for( post in userPosts) { %>
                   <div class="my-post col px-1 py-3 position-relative my-2">
                     <div
                       class="default-post-content py-2 d-flex flex-column align-items-center justify-content-space-around">
-                      <img src="https://picsum.photos/500" class="img-fluid" alt="post header image" />
+                      <img src="<%= post.postPicture %>  class=" img-fluid" alt="post header image" />
                       <p class="my-4 lead font-weight-normal text-center">
                         <%= post.title %>
                       </p>
@@ -281,8 +296,10 @@
           </div>
         </div>
       </div>
+      </div>
   </main>
   <script src="/js/user-dashboard.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script src="/js/toast.js"></script>
 
   <script src="https://cdn.tiny.cloud/1/zmeht2ue8lcu1icuo458dfkh7rkyf6fuwgfr6je2hq2nuimv/tinymce/5/tinymce.min.js"
@@ -293,7 +310,6 @@
     });
   </script>
 
-  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script>
     document.getElementById('postFormBtn').addEventListener('click', async function (event) {
 
@@ -328,29 +344,29 @@
         form.classList.add('was-validated');
       }
       event.preventDefault();
-      },
-    false,
+    },
+      false,
     );
 
     const getFormData = (title, subject, fileData, textarea) => {
 
-        const fileUploadData = new FormData();
-        fileUploadData.append('title', title,);
-        fileUploadData.append('description', subject,);
-        fileUploadData.append('photo', fileData);
-        fileUploadData.append('body', textarea);
-      
-        return fileUploadData;
+      const fileUploadData = new FormData();
+      fileUploadData.append('title', title,);
+      fileUploadData.append('description', subject,);
+      fileUploadData.append('photo', fileData);
+      fileUploadData.append('body', textarea);
+
+      return fileUploadData;
     };
 
     const createPost = async (userData) => {
       const profileUrl = '/post/new';
       const [csrf] = document.getElementsByName('_csrf');
-    
+
       try {
         axios.defaults.xsrfCookieName = 'csrftoken';
         axios.defaults.xsrfHeaderName = 'X-CSRFTOKEN';
-    
+
         const { data } = await axios({
           method: 'POST',
           url: profileUrl,
@@ -360,7 +376,7 @@
           },
           data: userData,
         });
-    
+
         return data;
       } catch (e) {
         return e.response.data;
@@ -368,70 +384,70 @@
     };
 
     // profile update
-    document.getElementById('btnUpdateProfile').addEventListener('click', async function (event) {
-      event.preventDefault();
-      const form = document.getElementById('updateProfileFormId');
-      const [firstName, lastName, userName, , phone, country, city] = form.querySelectorAll('input');
+    // document.getElementById('btnUpdateProfile').addEventListener('click', async function (event) {
+    //   event.preventDefault();
+    //   const form = document.getElementById('updateProfileFormId');
+    //   const [firstName, lastName, userName, , phone, country, city] = form.querySelectorAll('input');
 
-      let addValidation = true;
+    //   let addValidation = true;
 
-      if (form.checkValidity() === false) {
-        event.preventDefault();
-        event.stopPropagation();
-      } else if (form.checkValidity()) {
-        event.preventDefault();
+    //   if (form.checkValidity() === false) {
+    //     event.preventDefault();
+    //     event.stopPropagation();
+    //   } else if (form.checkValidity()) {
+    //     event.preventDefault();
 
-        const userData = {
-          firstname: firstName.value,
-          lastname: lastName.value,
-          username: userName.value,
-          location: `${city.value}, ${country.value}`,
-          phone: phone.value,
-        };
-        const response = await updateProfile(userData);
-        const redirect = () => {
-          window.location.href = '/user/dashboard';
-        };
-        if (response.status === 'success') {
-          toaster(response.message, 'success');
-          removeToaster(3000);
-          setTimeout(3100);
-        } else {
-          toaster(response.message, 'error');
-          removeToaster(3000);
-        }
-      }
-      if (addValidation) {
-        form.classList.add('was-validated');
-      }
-      event.preventDefault();
-      },
-    false,
-    );
+    //     const userData = {
+    //       firstname: firstName.value,
+    //       lastname: lastName.value,
+    //       username: userName.value,
+    //       location: `${city.value}, ${country.value}`,
+    //       phone: phone.value,
+    //     };
+    //     const response = await updateProfile(userData);
+    //     const redirect = () => {
+    //       window.location.href = '/user/dashboard';
+    //     };
+    //     if (response.status === 'success') {
+    //       toaster(response.message, 'success');
+    //       removeToaster(3000);
+    //       setTimeout(3100);
+    //     } else {
+    //       toaster(response.message, 'error');
+    //       removeToaster(3000);
+    //     }
+    //   }
+    //   if (addValidation) {
+    //     form.classList.add('was-validated');
+    //   }
+    //   event.preventDefault();
+    //   },
+    // false,
+    // );
 
-    const updateProfile = async (userData) => {
-      const profileUrl = '/user/update';
-      const [csrf] = document.getElementsByName('_csrf');
-    
-      try {
-        axios.defaults.xsrfCookieName = 'csrftoken';
-        axios.defaults.xsrfHeaderName = 'X-CSRFTOKEN';
-    
-        const { data } = await axios({
-          method: 'PUT',
-          url: profileUrl,
-          headers: {
-            'Content-Type': 'application/json; charset=UTF-8',
-            'csrf-token': csrf.value,
-          },
-          data: userData,
-        });
-    
-        return data;
-      } catch (e) {
-        return e.response.data;
-      }
-    };
+    // const updateProfile = async (userData) => {
+    //   const profileUrl = '/user/update';
+    //   const [csrf] = document.getElementsByName('_csrf');
+
+    //   try {
+    //     axios.defaults.xsrfCookieName = 'csrftoken';
+    //     axios.defaults.xsrfHeaderName = 'X-CSRFTOKEN';
+
+    //     const { data } = await axios({
+    //       method: 'PUT',
+    //       url: profileUrl,
+    //       headers: {
+    //         'Content-Type': 'application/json; charset=UTF-8',
+    //         'csrf-token': csrf.value,
+    //       },
+    //       data: userData,
+    //     });
+
+    //     return data;
+    //   } catch (e) {
+    //     return e.response.data;
+    //   }
+    // };
   </script>
 </body>
 
