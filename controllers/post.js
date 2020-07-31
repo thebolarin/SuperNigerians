@@ -67,6 +67,7 @@ module.exports = {
     postView: async (req, res) => {
 
         const posts = await Post.find({});
+        
         const data = {
             posts,
             path: 'post'
