@@ -3,243 +3,236 @@
 
 <head>
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
 
-    <title>Admin Dashboard</title>
+  <title>Admin Dashboard</title>
 
-    <!-- Custom fonts for this template-->
-    <!-- <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css"> -->
-    <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700;800;900&display=swap"
-        rel="stylesheet">
+  <!-- Custom fonts for this template-->
+  <!-- <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css"> -->
+  <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700;800;900&display=swap"
+    rel="stylesheet">
 
-    <!-- Datatable CSS -->
-    <link rel="stylesheet" href="  //cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
+  <!-- Datatable CSS -->
+  <link rel="stylesheet" href="  //cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
 
-    <!-- Custom styles for this template-->
-    <!-- <link href="css/sb-admin-2.min.css" rel="stylesheet"> -->
-    <link href="/css/adminDashboard.css" rel="stylesheet">
-    <style>
-        #postsTable {
-            counter-reset: serial-number;
-            /* Set the serial number counter to 0 */
-        }
+  <!-- Custom styles for this template-->
+  <!-- <link href="css/sb-admin-2.min.css" rel="stylesheet"> -->
+  <link href="/css/adminDashboard.css" rel="stylesheet">
+  <style>
+    #postsTable {
+      counter-reset: serial-number;
+      /* Set the serial number counter to 0 */
+    }
 
-        #postsTable td:first-child:before {
-            counter-increment: serial-number;
-            /* Increment the serial number counter */
-            content: counter(serial-number);
-            /* Display the counter */
-        }
-    </style>
+    #postsTable td:first-child:before {
+      counter-increment: serial-number;
+      /* Increment the serial number counter */
+      content: counter(serial-number);
+      /* Display the counter */
+    }
+  </style>
 
 </head>
 
 <body id="page-top">
 
-    <!-- Page Wrapper -->
-    <div id="wrapper">
+  <!-- Page Wrapper -->
+  <div id="wrapper">
 
-        <!-- Sidebar -->
+    <!-- Sidebar -->
     <ul class="navbar-nav bg-gradient-primar sidebar sidebar-dark accordion" id="accordionSidebar">
 
-        <!-- Sidebar - Brand -->
-        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
-          <div class="sidebar-brand-icon rotate-n-15">
-            <i class="fas fa-laugh-wink"></i>
-          </div>
-          <div class="sidebar-brand-text mx-3">Admin</div>
-        </a>
-  
-        <!-- Divider -->
-        <hr class="sidebar-divider my-0">
-  
-        <!-- Nav Item - Dashboard -->
-        <li class="nav-item active">
-          <a class="nav-link" href="/admin/dashboard">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Dashboard</span></a>
-        </li>
-  
-        <!-- Nav Item - Posts -->
-        <li class="nav-item active">
-          <a class="nav-link" href="/admin/dashboard/posts">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Posts</span></a>
-        </li>
-  
-        <!-- Divider -->
-        <hr class="sidebar-divider">
-        <!-- Nav Item - Users -->
-        <li class="nav-item active">
-          <a class="nav-link" href="/admin/dashboard/users">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Users</span></a>
-        </li>
-  
-        <!-- Divider -->
-        <hr class="sidebar-divider">
-        <!-- Nav Item - Users -->
-        <li class="nav-item active">
-          <a class="nav-link" href="/admin/dashboard/profile">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Admin Profile</span></a>
-        </li>
-  
-        <!-- Sidebar Toggler (Sidebar) -->
-        <div class="text-center d-none d-md-inline">
-          <button role="button" class="rounded-circle border-0" id="sidebarToggle"></button>
+      <!-- Sidebar - Brand -->
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
+        <div class="sidebar-brand-icon rotate-n-15">
+          <i class="fas fa-laugh-wink"></i>
         </div>
-  
-      </ul>
-        <!-- End of Sidebar -->
+        <div class="sidebar-brand-text mx-3">Admin</div>
+      </a>
 
-        <!-- Content Wrapper -->
-        <div class="container-fluid main-container ">
-            <div class="row">
-              <div class="col-12">
-                <div class="profile-container my-3 d-flex flex-column justify-content-center align-items-center flex-sm-row">
-                  <img style="height: 200px;" src="https://picsum.photos/500" alt="my avatar"
-                    class="profile-img img-fluid rounded-circle mr-sm-4">
-                  <div class="d-flex flex-column justify-content-center align-items-center ml-sm-4 mt-3 mt-sm-0">
-                    <h1 class="h3"></h1>
-                    <p class="mb-0 lead prj-text-normal">
-                      <span class="font-weight-normal d-inline-block"></span>
-                      posts
-                      <span class="font-weight-normal d-inline-block"></span>
-                      likes <span class="font-weight-normal d-inline-block">10</span> shares</p>
-                    <!-- Button trigger modal -->
-                    <button role="button" type="button" class="btn btn-secondary mt-3" data-toggle="modal"
-                      data-target="#updateProfileModal">
-                      Update profile
-                    </button>
-                  </div>
-                </div>
-                <div class="col-11 mx-auto">
-                  <ul class="nav nav-tabs justify-content-center my-3" role="tablist">
-                    <li class="nav-item mr-2" role="presentation">
-                      <a class="nav-link active" id="tabs-my-posts-tab" data-toggle="pill" href="#tabs-my-posts" role="tab"
-                        aria-controls="tabs-my-posts" aria-selected="false">My posts</a>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                      <a class="nav-link" id="tabs-create-post-tab" data-toggle="pill" href="#tabs-create-post" role="tab"
-                        aria-controls="tabs-create-post" aria-selected="true">Create a post</a>
-                    </li>
-                  </ul>
-                  <div class="tab-content" id="tabs-tabContent">
-                    <div class="tab-pane fade show active" id="tabs-my-posts" role="tabpanel"
-                      aria-labelledby="tabs-my-posts-tab">
-                      <!-- My posts -->
-                      <div class="my-posts-container row row-cols-1 row-cols-sm-2 row-cols-lg-3">
-                        <div class="my-post col px-1 py-3 position-relative my-2">
-                          <div
-                            class="default-post-content py-2 d-flex flex-column align-items-center justify-content-space-around">
-                            <img src="https://picsum.photos/500" class="img-fluid" alt="post header image" />
-                            <p class="my-4 lead font-weight-normal text-center">
-                            </p>
-                          </div>
-                          <div
-                            class="hover-post-content px-4 position-absolute d-flex flex-column align-items-center justify-content-center">
-                            <p class="text-center">
-                            </p>
-                            <a href="#" class="btn bg-white text-secondary">View post</a>
-                          </div>
-                        </div>
-                      </div>
+      <!-- Divider -->
+      <hr class="sidebar-divider my-0">
+
+      <!-- Nav Item - Dashboard -->
+      <li class="nav-item active">
+        <a class="nav-link" href="/admin/dashboard">
+          <i class="fas fa-fw fa-tachometer-alt"></i>
+          <span>Dashboard</span></a>
+      </li>
+
+      <!-- Divider -->
+      <hr class="sidebar-divider">
+      <!-- Nav Item - Users -->
+      <li class="nav-item active">
+        <a class="nav-link" href="/admin/dashboard/users">
+          <i class="fas fa-fw fa-tachometer-alt"></i>
+          <span>Users</span></a>
+      </li>
+
+      <!-- Divider -->
+      <hr class="sidebar-divider">
+      <!-- Nav Item - Users -->
+      <li class="nav-item active">
+        <a class="nav-link" href="/admin/dashboard/profile">
+          <i class="fas fa-fw fa-tachometer-alt"></i>
+          <span>Admin Profile</span></a>
+      </li>
+
+      <!-- Sidebar Toggler (Sidebar) -->
+      <div class="text-center d-none d-md-inline">
+        <button role="button" class="rounded-circle border-0" id="sidebarToggle"></button>
+      </div>
+
+    </ul>
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div class="container-fluid main-container ">
+      <div class="row">
+        <div class="col-12">
+          <div class="profile-container my-3 d-flex flex-column justify-content-center align-items-center flex-sm-row">
+            <img style="height: 200px;" src="https://picsum.photos/500" alt="my avatar"
+              class="profile-img img-fluid rounded-circle mr-sm-4">
+            <div class="d-flex flex-column justify-content-center align-items-center ml-sm-4 mt-3 mt-sm-0">
+              <h1 class="h3"></h1>
+              <p class="mb-0 lead prj-text-normal">
+                <span class="font-weight-normal d-inline-block"></span>
+                posts
+                <span class="font-weight-normal d-inline-block"></span>
+                likes <span class="font-weight-normal d-inline-block">10</span> shares</p>
+              <!-- Button trigger modal -->
+              <button role="button" type="button" class="btn btn-secondary mt-3" data-toggle="modal"
+                data-target="#updateProfileModal">
+                Update profile
+              </button>
+            </div>
+          </div>
+          <div class="col-11 mx-auto">
+            <ul class="nav nav-tabs justify-content-center my-3" role="tablist">
+              <li class="nav-item mr-2" role="presentation">
+                <a class="nav-link active" id="tabs-my-posts-tab" data-toggle="pill" href="#tabs-my-posts" role="tab"
+                  aria-controls="tabs-my-posts" aria-selected="false">My posts</a>
+              </li>
+              <li class="nav-item" role="presentation">
+                <a class="nav-link" id="tabs-create-post-tab" data-toggle="pill" href="#tabs-create-post" role="tab"
+                  aria-controls="tabs-create-post" aria-selected="true">Create a post</a>
+              </li>
+            </ul>
+            <div class="tab-content" id="tabs-tabContent">
+              <div class="tab-pane fade show active" id="tabs-my-posts" role="tabpanel"
+                aria-labelledby="tabs-my-posts-tab">
+                <!-- My posts -->
+                <div class="my-posts-container row row-cols-1 row-cols-sm-2 row-cols-lg-3">
+                  <div class="my-post col px-1 py-3 position-relative my-2">
+                    <div
+                      class="default-post-content py-2 d-flex flex-column align-items-center justify-content-space-around">
+                      <img src="https://picsum.photos/500" class="img-fluid" alt="post header image" />
+                      <p class="my-4 lead font-weight-normal text-center">
+                      </p>
                     </div>
-                    <div class="tab-pane fade" id="tabs-create-post" role="tabpanel" aria-labelledby="tabs-create-post-tab">
-                      <!-- Create a post -->
-                      <div class="col-12">
-                        <form id="postFormId" action="#" class="needs-validation">
-                          <div class="form-group">
-                            <label for="title">Title</label>
-                            <input type="text" name="title" class="form-control" id="title"
-                              placeholder="Enter your post title" required="required" />
-                          </div>
-      
-                          <div class="form-group">
-                            <label for="subject">Subject</label>
-                            <input type="text" name="title" class="form-control" id="subject"
-                              placeholder="Enter your post title" required="required" />
-                          </div>
-      
-                          <div class="form-group mt-3">
-                            <label class="mr-2">Post Photo:</label>
-                            <input type="file" name="file" />
-                          </div>
-                          <hr />
-      
-                          <div class="form-group">
-                            <label for="postContent">Content</label>
-                            <textarea class="form-control" id="postContent"></textarea>
-                          </div>
-      
-                          <div class="d-flex justify-content-center justify-content-md-start">
-                            <button role="button" id="postFormBtn" type="submit" class="btn btn-secondary">Post</button>
-                          </div>
-                        </form>
-                        <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
-                        <br>
-                      </div>
+                    <div
+                      class="hover-post-content px-4 position-absolute d-flex flex-column align-items-center justify-content-center">
+                      <p class="text-center">
+                      </p>
+                      <a href="#" class="btn bg-white text-secondary">View post</a>
                     </div>
                   </div>
                 </div>
               </div>
+              <div class="tab-pane fade" id="tabs-create-post" role="tabpanel" aria-labelledby="tabs-create-post-tab">
+                <!-- Create a post -->
+                <div class="col-12">
+                  <form id="postFormId" action="#" class="needs-validation">
+                    <div class="form-group">
+                      <label for="title">Title</label>
+                      <input type="text" name="title" class="form-control" id="title"
+                        placeholder="Enter your post title" required="required" />
+                    </div>
+
+                    <div class="form-group">
+                      <label for="subject">Subject</label>
+                      <input type="text" name="title" class="form-control" id="subject"
+                        placeholder="Enter your post title" required="required" />
+                    </div>
+
+                    <div class="form-group mt-3">
+                      <label class="mr-2">Post Photo:</label>
+                      <input type="file" name="file" />
+                    </div>
+                    <hr />
+
+                    <div class="form-group">
+                      <label for="postContent">Content</label>
+                      <textarea class="form-control" id="postContent"></textarea>
+                    </div>
+
+                    <div class="d-flex justify-content-center justify-content-md-start">
+                      <button role="button" id="postFormBtn" type="submit" class="btn btn-secondary">Post</button>
+                    </div>
+                  </form>
+                  <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+                  <br>
+                </div>
+              </div>
             </div>
           </div>
-        <!-- End of Content Wrapper -->
-
-    </div>
-    <!-- End of Page Wrapper -->
-
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
-
-    <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="/logout">Logout</a>
-                </div>
-            </div>
         </div>
+      </div>
     </div>
+    <!-- End of Content Wrapper -->
 
-    <!-- Boilerplate JS -->
-    <script src="/js/jquery.js"></script>
-    <script src="/js/bootstrap.js"></script>
-    <script src="/js/popper.js"></script>
+  </div>
+  <!-- End of Page Wrapper -->
 
-    <!-- Datatables JS -->
-    <script src="//cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
 
-    <script>
-        $(document).ready(function () {
-            $('#postsTable').DataTable();
-        });
-    </script>
+  <!-- Logout Modal-->
+  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+          <a class="btn btn-primary" href="/logout">Logout</a>
+        </div>
+      </div>
+    </div>
+  </div>
 
-    <!-- Core plugin JavaScript-->
-    <script src="/js/jquery.easing.min.js"></script>
+  <!-- Boilerplate JS -->
+  <script src="/js/jquery.js"></script>
+  <script src="/js/bootstrap.js"></script>
+  <script src="/js/popper.js"></script>
 
-    <!-- Custom scripts for all pages-->
-    <script src="/js/sb-admin-2.min.js"></script>
+  <!-- Datatables JS -->
+  <script src="//cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+
+  <script>
+    $(document).ready(function () {
+      $('#postsTable').DataTable();
+    });
+  </script>
+
+  <!-- Core plugin JavaScript-->
+  <script src="/js/jquery.easing.min.js"></script>
+
+  <!-- Custom scripts for all pages-->
+  <script src="/js/sb-admin-2.min.js"></script>
 
 
 
