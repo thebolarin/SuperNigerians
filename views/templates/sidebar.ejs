@@ -23,11 +23,11 @@
     </nav>
 
     <div class="search mb-3">
-        <h3>Search by Author</h3>
-        <form action="#">
+        <h3>Search by Title</h3>
+        <form action="<%= `/posts/search/{title}` %>">
             <div class="form-group d-flex">
                 <div class="icon"><span class="icon-paper-plane"></span></div>
-                <input type="text" class="form-control" placeholder="eg. Tobi Osimosu">
+                <input type="text" name="title" class="form-control" placeholder="eg. post title here">
             </div>
         </form>
     </div>

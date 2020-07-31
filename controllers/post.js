@@ -84,6 +84,19 @@ module.exports = {
             path: 'post'
         };
         renderPage(res, 'pages/post', data, 'Post', '/post');
+    }, 
+
+    postSearchPosts: async (req, res) => {
+      const { slug } = req.params;
+      const searchResults = await Post.find({
+        $and: [
+          {
+            $text: {
+              $search
+            }
+          }
+        ]
+      })
     }
 }
 
