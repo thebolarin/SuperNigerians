@@ -108,7 +108,7 @@ const postUserLogin = async (req, res, next) => {
 
   await userCheck(email)
     .then(async (user) => {
-      console.log(user);
+      // console.log(user);
       if (!user) {
         return errorUserLogin(req, res, email, password, 'Invalid email or password.',);
       }
@@ -121,6 +121,7 @@ const postUserLogin = async (req, res, next) => {
             if (user && user.role === 'admin') {
               return res.redirect('/admin/dashboard');
             }
+
             return res.redirect('/');
           }
           return errorUserLogin(req, res, email, password, 'Invalid email or password.',);
