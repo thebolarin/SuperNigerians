@@ -156,17 +156,16 @@
       <div class="row">
         <div class="col-12">
           <div class="profile-container my-3 d-flex flex-column justify-content-center align-items-center flex-sm-row">
-            <img src="https://imgur.com/kyZfQzL.png" alt="my avatar" class="profile-img img-fluid rounded-circle mr-sm-4">
+            <img src="<%= user.photo %>  alt=" my avatar" class="profile-img img-fluid rounded-circle mr-sm-4">
             <div class="d-flex flex-column justify-content-center align-items-center ml-sm-4 mt-3 mt-sm-0">
-              <!-- <h1 clss="h3"><%#= user.username || user.firstname %> </h1> -->
-              <h1 clss="h3">Username </h1>
+              <h1> clss="h3"><%= user.username || user.firstname %> </h1>
               <p class="mb-0 lead prj-text-normal ">
                 <span class="font-weight-normal d-inline-block ">
-                  <%#= userPosts.length %>10
+                  <%= userPosts.length %>
                 </span>
                 posts
                 <span class="font-weight-normal d-inline-block ">
-                  <%#= numberOfLikes %> 20
+                  <%= numberOfLikes %>
                 </span>
                 likes</p>
               <button type="button" class="btn btn-sm prj-btn-primary mt-3" data-toggle="modal"
@@ -190,164 +189,32 @@
               <div class="tab-pane fade show active" id="tabs-my-posts" role="tabpanel"
                 aria-labelledby="tabs-my-posts-tab">
                 <!-- My posts -->
-                <!-- <div class="my-posts-container row row-cols-1 row-cols-sm-2 row-cols-lg-3"> -->
-                  <%# if (userPosts.length === 0) { %>
-                  <!-- <div class="my-post col px-1 py-3 mx-auto my-2">
+                <div class="my-posts-container row row-cols-1 row-cols-sm-2 row-cols-lg-3">
+                  <% if (userPosts.length === 0) { %>
+                  <div class="my-post col px-1 py-3 mx-auto my-2">
                     <img class="img-fluid" src="/images/no-posts.svg" alt="No posts">
                     <p class="small text-center">You have not created a post yet</p>
                     <p class="small text-center">Click on the 'Create a post' tab to create a post</p>
-                  </div> -->
-                  <%# } %>
-                  <%# for( post in userPosts) { %>
-                  <!-- <div class="my-post col px-1 py-3 position-relative my-2">
-                    <div
-                      class="default-post-content py-2 d-flex flex-column align-items-center justify-content-space-around"> -->
-                      <!-- <img src="<%#= post.postPicture %>  class=" img-fluid" alt="post header image" /> -->
-                      <!-- <p class="my-4 lead font-weight-normal text-center"> -->
-                        <%#= post.title %>
-                      <!-- </p>
-                    </div>
-                    <div
-                      class="hover-post-content px-4 position-absolute d-flex flex-column align-items-center justify-content-center">
-                      <p class="text-center"> -->
-                        <%#= post.description %>
-                      <!-- </p>
-                      <a href="#" class="btn bg-white text-secondary">View post</a>
-                    </div>
-                  </div> -->
-                  <%# } %>
-                <!-- </div> -->
-
-                <div class="my-posts-container row row-cols-1 row-cols-sm-2 row-cols-lg-3">
-
+                  </div>
+                  <% } %>
+                  <% for( post in userPosts) { %>
                   <div class="my-post col px-1 py-3 position-relative my-2">
                     <div
                       class="default-post-content py-2 d-flex flex-column align-items-center justify-content-space-around">
-                      <img src="https://i.imgur.com/kyZfQzL.png"  class=" img-fluid" alt="post header image" />
+                      <img src="<%= post.postPicture %>  class=" img-fluid" alt="post header image" />
                       <p class="my-4 lead font-weight-normal text-center">
-                       Post Title
+                        <%= post.title %>
                       </p>
                     </div>
                     <div
                       class="hover-post-content px-4 position-absolute d-flex flex-column align-items-center justify-content-center">
                       <p class="text-center">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        <%= post.description %>
                       </p>
                       <a href="#" class="btn bg-white text-secondary">View post</a>
                     </div>
                   </div>
-                  <div class="my-post col px-1 py-3 position-relative my-2">
-                    <div
-                      class="default-post-content py-2 d-flex flex-column align-items-center justify-content-space-around">
-                      <img src="https://i.imgur.com/kyZfQzL.png"  class=" img-fluid" alt="post header image" />
-                      <p class="my-4 lead font-weight-normal text-center">
-                       Post Title
-                      </p>
-                    </div>
-                    <div
-                      class="hover-post-content px-4 position-absolute d-flex flex-column align-items-center justify-content-center">
-                      <p class="text-center">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      </p>
-                      <a href="#" class="btn bg-white text-secondary">View post</a>
-                    </div>
-                  </div>
-                  <div class="my-post col px-1 py-3 position-relative my-2">
-                    <div
-                      class="default-post-content py-2 d-flex flex-column align-items-center justify-content-space-around">
-                      <img src="https://i.imgur.com/kyZfQzL.png"  class=" img-fluid" alt="post header image" />
-                      <p class="my-4 lead font-weight-normal text-center">
-                       Post Title
-                      </p>
-                    </div>
-                    <div
-                      class="hover-post-content px-4 position-absolute d-flex flex-column align-items-center justify-content-center">
-                      <p class="text-center">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      </p>
-                      <a href="#" class="btn bg-white text-secondary">View post</a>
-                    </div>
-                  </div>
-                  <div class="my-post col px-1 py-3 position-relative my-2">
-                    <div
-                      class="default-post-content py-2 d-flex flex-column align-items-center justify-content-space-around">
-                      <img src="https://i.imgur.com/kyZfQzL.png"  class=" img-fluid" alt="post header image" />
-                      <p class="my-4 lead font-weight-normal text-center">
-                       Post Title
-                      </p>
-                    </div>
-                    <div
-                      class="hover-post-content px-4 position-absolute d-flex flex-column align-items-center justify-content-center">
-                      <p class="text-center">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      </p>
-                      <a href="#" class="btn bg-white text-secondary">View post</a>
-                    </div>
-                  </div>
-                  <div class="my-post col px-1 py-3 position-relative my-2">
-                    <div
-                      class="default-post-content py-2 d-flex flex-column align-items-center justify-content-space-around">
-                      <img src="https://i.imgur.com/kyZfQzL.png"  class=" img-fluid" alt="post header image" />
-                      <p class="my-4 lead font-weight-normal text-center">
-                       Post Title
-                      </p>
-                    </div>
-                    <div
-                      class="hover-post-content px-4 position-absolute d-flex flex-column align-items-center justify-content-center">
-                      <p class="text-center">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      </p>
-                      <a href="#" class="btn bg-white text-secondary">View post</a>
-                    </div>
-                  </div>
-                  <div class="my-post col px-1 py-3 position-relative my-2">
-                    <div
-                      class="default-post-content py-2 d-flex flex-column align-items-center justify-content-space-around">
-                      <img src="https://i.imgur.com/kyZfQzL.png"  class=" img-fluid" alt="post header image" />
-                      <p class="my-4 lead font-weight-normal text-center">
-                       Post Title
-                      </p>
-                    </div>
-                    <div
-                      class="hover-post-content px-4 position-absolute d-flex flex-column align-items-center justify-content-center">
-                      <p class="text-center">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      </p>
-                      <a href="#" class="btn bg-white text-secondary">View post</a>
-                    </div>
-                  </div>
-                  <div class="my-post col px-1 py-3 position-relative my-2">
-                    <div
-                      class="default-post-content py-2 d-flex flex-column align-items-center justify-content-space-around">
-                      <img src="https://i.imgur.com/kyZfQzL.png"  class=" img-fluid" alt="post header image" />
-                      <p class="my-4 lead font-weight-normal text-center">
-                       Post Title
-                      </p>
-                    </div>
-                    <div
-                      class="hover-post-content px-4 position-absolute d-flex flex-column align-items-center justify-content-center">
-                      <p class="text-center">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      </p>
-                      <a href="#" class="btn bg-white text-secondary">View post</a>
-                    </div>
-                  </div>
-                  <div class="my-post col px-1 py-3 position-relative my-2">
-                    <div
-                      class="default-post-content py-2 d-flex flex-column align-items-center justify-content-space-around">
-                      <img src="https://i.imgur.com/kyZfQzL.png"  class=" img-fluid" alt="post header image" />
-                      <p class="my-4 lead font-weight-normal text-center">
-                       Post Title
-                      </p>
-                    </div>
-                    <div
-                      class="hover-post-content px-4 position-absolute d-flex flex-column align-items-center justify-content-center">
-                      <p class="text-center">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      </p>
-                      <a href="#" class="btn bg-white text-secondary">View post</a>
-                    </div>
-                    </div>
+                  <% } %>
                 </div>
               </div>
               <div class="tab-pane fade" id="tabs-create-post" role="tabpanel" aria-labelledby="tabs-create-post-tab">
