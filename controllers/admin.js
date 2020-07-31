@@ -1,33 +1,45 @@
 const Post = require("../models/post");
 const User = require("../models/user");
-const { renderPage } = require("../utils/render-page");
+const {
+  renderPage
+} = require("../utils/render-page");
 const sendMail = require("../utils/send-email");
 
 
 const getAllPosts = async () => {
-  const allPosts = await Post.find().sort({date: 'desc'});
+  const allPosts = await Post.find().sort({
+    date: 'desc'
+  });
+  console.log(allPosts);
   return allPosts;
 };
 
 const getUnverifiedPosts = async () => {
-  const verify = await Post.find({ status: 'false'}).populate('creator').sort({date: 'desc'});
+  const verify = await Post.find({
+    status: 'false'
+  }).populate('creator').sort({
+    date: 'desc'
+  });
   return verify;
 };
 
 const filterData = async (data, key) => {
   let filteredData;
-  if(key === 'false') { filteredData = data.filter( (myData) => {
+  if (key === 'false') {
+    filteredData = data.filter((myData) => {
       return myData.status === key;
     });
   }
-  if(key === 'true'){ filteredData = data.filter( (myData) => {
+  if (key === 'true') {
+    filteredData = data.filter((myData) => {
       return myData.status === key;
     });
   }
-  if(key === 'admin'){ filteredData = data.filter( (myData) => {
-    return myData.role === key;
-  });
-}
+  if (key === 'admin') {
+    filteredData = data.filter((myData) => {
+      return myData.role === key;
+    });
+  }
   return filteredData;
 };
 
@@ -64,16 +76,44 @@ module.exports = {
 
   deletePost: async (req, res, next) => {
     try {
-      const { postId } = req.params;
+      const {
+        postId
+      } = req.params;
 
-      const userPost = await Post.findById({ _id: postId });
+      const userPost = await Post.findById({
+        id: postId
+      });
+      if (!userPost) {
+        res
+          .status(400)
+          .json({
+            status: "error",
+            message: "Post does not exist"
+          });
+      }
+
+      const deletePost = await Post.findByIdAndRemove({
+        id: postId
+      });
+      if (!deletePost) {
+        res.flash("error", "An error occured while deleting post");
+      }
+      const userPost = await Post.findById({
+        _id: postId
+      });
       if (!userPost) {
         req.flash("error", "Post does not exist");
       }
 
+<<<<<<< HEAD
       Post.findByIdAndDelete(postId,(err) => {
         if(err) req.flash("error", "An error occured while deleting post");
         req.flash("Post deleted sucessfully");  
+=======
+      Post.findByIdAndDelete(postId, (err) => {
+        if (err) req.flash("error", "An error occured while deleting post");
+        console.log("Successful deletion");
+>>>>>>> 965baad934f1340d817e1f58ef9df7d0611a2611
       });
 
       res.redirect('back');
@@ -102,9 +142,13 @@ module.exports = {
   },
 
   deleteUser: async (req, res) => {
-    const { userId } = req.params;
+    const {
+      userId
+    } = req.params;
     try {
-      const users = await User.findOneAndDelete({ _id: userId });
+      const users = await User.findOneAndDelete({
+        _id: userId
+      });
       if (!users) return req.flash("error", "No User found !");
 
 
@@ -119,7 +163,9 @@ module.exports = {
 
   approvePost: async (req, res) => {
     try {
-      const { postId } = req.params;
+      const {
+        postId
+      } = req.params;
       const approvedPost = await Post.findByIdAndUpdate(postId, {
         $set: {
           status: "true",
@@ -154,7 +200,9 @@ module.exports = {
 
   disApprovePost: async (req, res) => {
     try {
-      const { postId } = req.params;
+      const {
+        postId
+      } = req.params;
       const approvedPost = await Post.findByIdAndUpdate(postId, {
         $set: {
           status: "false",
@@ -176,4 +224,26 @@ module.exports = {
       return next(error);
     }
   },
+
+  verified: async (req, res) => {
+    try {
+      const verifidPosts = await Post.find({
+        status: 'true'
+      }).populate('creator').sort({
+        date: 'desc'
+      });
+      const unverifiedPosts = await Post.find({
+        status: 'false'
+      })
+      const data = {
+        verifidPosts,
+        unverifiedPosts,
+      }
+      return renderPage(res, 'pages/adminDashboard', data, 'Admin | Dashboard', '/admin/dashboard/posts/verified');
+    } catch (error) {
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
+    }
+  }
 };

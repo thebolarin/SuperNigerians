@@ -4,7 +4,6 @@
 <head>
 	<%- include('../templates/head') %>
 	<link rel="stylesheet" type="text/css" href="css/post.css" />
-	<title>Post</title>
 </head>
 
 <body>
@@ -16,7 +15,7 @@
 			<% if( post &&  post.length > 0){ %>
 			<div class="container mt-2 mt-md-3">
 				<div class="">
-					<img src="<%- post[0].postPicture %>"  alt="single post picture" style='align-items: center;' class="img-fluid" id="singlePostPix">
+					<img src="<%- post[0].postPicture %>"  alt="post's image" style='align-items: center;' class="img-fluid" id="singlePostPix">
 				</div>
 				<div class="row" style="margin: 0;">
 					<div class="text-left  px-3 px-md-0">
@@ -28,7 +27,7 @@
 					<div class="col-12 mt-4 mb-4 py-0 py-md-4">
 						<div class="d-flex">
 							<div class="pr-3 pr-md-5">
-								<img src=<%- user[0].photo %> class="rounded-circle" alt="Image" height="80px">
+								<img src=<%- user[0].photo %> class="rounded-circle" alt="post writer's image" height="80px">
 							</div>
 							<div class="text-dark pt-2 text-left">
 								<span class="text-secondary">Written by</span>

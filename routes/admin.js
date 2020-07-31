@@ -8,11 +8,13 @@ const {
     approvePost,
     disApprovePost,
     profile,
+    verified,
     deleteUser
 } = require('../controllers/admin');
 
 
 router.get('/dashboard', authorizeAdmin, dashboard);
+router.get('/dashboard/posts/verified', authorizeAdmin, verified);
 router.get('/dashboard/profile',authorizeAdmin, profile )
 router.get('/dashboard/users', getAllUsers);
 router.delete('/delete/:userId', authorizeAdmin, deleteUser);
