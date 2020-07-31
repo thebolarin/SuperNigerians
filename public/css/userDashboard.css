@@ -88,14 +88,11 @@ button.btn.prj-btn-primary:focus {
 }
 
 .post-btn:hover,
+.post-btn:active,
 .post-btn:focus {
   background-color: #ffffff !important;
   border-color: #00643c !important;
   color: #00643c !important;
-}
-
-.post-btn:active {
-  background-color: red !important;
 }
 
 textarea {
