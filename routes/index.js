@@ -5,7 +5,7 @@ const user = require('./user')
 const userDashboard = require('./userDashboard')
 
 const {
-  home,
+  home, terms
 } = require('../controllers/index');
 
 
@@ -15,5 +15,6 @@ router.use('/post', post);
 router.use('/admin', adminRoutes);
 router.get('/', home);
 router.use('/profile', userDashboard)
+router.use('/terms', terms);
 
 module.exports = router;
