@@ -44,10 +44,16 @@ body
     #form_container{
         width: 400px;
     }
+    .btn-lg{
+        margin-left: 140px;
+    }
 }
 @media only screen and (max-width: 600px) {
     #form_container{
         width: 100%;
         margin-left: -4px;
+    }
+    .btn-lg{
+        margin-left: 74px;
     }
 }
