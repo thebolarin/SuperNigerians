@@ -1,6 +1,7 @@
 const Post = require('../models/post');
 const User = require('../models/user');
 const { renderPage } = require('../utils/render-page');
+const sendMail = require('../utils/send-email');
 
 module.exports = {
   dashboard: async (req, res) => {
@@ -40,7 +41,7 @@ module.exports = {
         users
       };
 
-      renderPage(res, 'admin/allUsers', data, 'All Users', '/');
+      renderPage(res, 'pages/adminUserList', data, 'All Users', '/users');
     } catch (err) {
       const error = new Error(err);
       error.httpStatusCode = 500;
@@ -49,6 +50,73 @@ module.exports = {
   },
 
   deleteUser: (req, res) => {
+
+  },
+
+  approvePost: async (req, res) => {
+    try {
+      const { postId } = req.params;
+      const approvedPost = await Post.findByIdAndUpdate(
+        postId,
+        {
+          $set: {
+            status: 'true',
+          }
+        }
+      );
+      const postCreator = await User.findById(approvedPost.creator);
+
+      if (!approvedPost) {
+        req.flash('error', 'An error occured while approving post');
+      }
+
+      if (approvedPost.status === 'true') {
+        req.flash('error', 'Post has already been approved');
+      }
+      if (!postCreator) {
+        req.flash('error', 'Creator not found');
+      }
+      const message = `Your post with the title: <b>${approvedPost.title}</b> has been published live.`;
+          sendMail({
+            email: postCreator.email,
+            subject: 'Post Approval',
+            message,
+          });
+      req.flash('Post Approved sucessfully');
+    } catch (err) {
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
+    }
+
+  },
+
+  disApprovePost: async (req, res) => {
+    try {
+      const { postId } = req.params;
+      const approvedPost = await Post.findByIdAndUpdate(
+        postId,
+        {
+          $set: {
+            status: 'false',
+          }
+        }
+      );
+
+      if (!approvedPost) {
+        req.flash('error', 'An error occured while approving post');
+      }
+
+      if (approvedPost.status === 'false') {
+        req.flash('error', 'Post has already been disapproved');
+      }
+
+      req.flash('Post Disapproved sucessfully');
+    } catch (err) {
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
+    }
 
   }
 };

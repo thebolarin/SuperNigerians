@@ -33,6 +33,7 @@ const getUserRegister = (req, res) => {
       email: '',
       password: '',
     },
+    path: 'signup',
     validationErrors: [],
   };
   renderPage(res, 'auth/signup', data, 'Register', '/register');
@@ -55,6 +56,7 @@ const getUserLogin = (req, res) => {
       email: '',
       password: '',
     },
+    path: 'signin',
     validationErrors: [],
   };
   renderPage(res, 'auth/signin', data, 'login', '/login');
