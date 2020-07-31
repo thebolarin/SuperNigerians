@@ -6,16 +6,14 @@ const userDashboard = require('./userDashboard')
 
 const {
   home,
-  profile
 } = require('../controllers/index');
 
 
 router.get('/', home);
-router.get('/profile', profile);
 router.use('/user', user);
 router.use('/post', post);
 router.use('/admin', adminRoutes);
 router.get('/', home);
-router.use('/user/dashboard', userDashboard)
+router.use('/profile', userDashboard)
 
 module.exports = router;
