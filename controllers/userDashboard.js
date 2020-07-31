@@ -5,7 +5,7 @@ const Post = require("../models/post");
 
 exports.getUserDetails = async (req, res) => {
   if (!req.session.user) {
-    res.redirect("/");
+    res.redirect("/login");
   }
   const user = await User.findOne({ _id: req.session.user._id });
   const userComments = await Comment.find({ creator: user._id });
