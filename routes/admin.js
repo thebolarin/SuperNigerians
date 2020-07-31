@@ -9,7 +9,7 @@ const {
 
 
 router.get('/dashboard', authorizeAdmin, dashboard);
-router.get('/dashboard/users', getAllUsers);
+router.get('/dashboard/users', authorizeAdmin, getAllUsers);
 router.delete('/delete/:postId', authorizeAdmin, deletePost);
 
 
