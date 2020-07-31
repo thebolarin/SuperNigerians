@@ -234,7 +234,7 @@ module.exports = {
         verifidPosts,
         unverifiedPosts,
       }
-      return renderPage(res, 'pages/adminDashboard', data, 'Admin | Dashboard', '/admin/dashboard/post/verified');
+      return renderPage(res, 'pages/adminDashboard', data, 'Admin | Dashboard', '/admin/dashboard/posts/verified');
     } catch (error) {
       const error = new Error(err);
       error.httpStatusCode = 500;
