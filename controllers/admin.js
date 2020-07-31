@@ -73,10 +73,9 @@ module.exports = {
 
       Post.findByIdAndDelete(postId,(err) => {
         if(err) req.flash("error", "An error occured while deleting post");
-        console.log("Successful deletion");
+        req.flash("Post deleted sucessfully");  
       });
 
-      req.flash("Post deleted sucessfully");
       res.redirect('back');
     } catch (err) {
       const error = new Error(err);
