@@ -11229,21 +11229,21 @@
   }
 
 
-  .nav-item {
+  .nav-item.prj-nav-item {
     font-size: 16px !important;
     font-weight: 500 !important;
   }
 
-  .nav-tabs .nav-link.active,
-  .nav-link:hover,
-  .nav-link:focus {
+  .nav-tabs .nav-link.prj-nav-link.active,
+  .nav-link.prj-nav-link:hover,
+  .nav-link.prj-nav-link:focus {
     color: #00643c !important;
     border-left: none !important;
     border-right: none !important;
     border-top: none !important;
     border-bottom: 2px solid #00643c !important;
   }
-  .nav-tabs .nav-link {
+  .nav-tabs .nav-link.prj-nav-link {
     color: rgba(0, 0, 0, 0.8);
     transition: all 0.3s ease;
     border-left: none !important;
