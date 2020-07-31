@@ -36,7 +36,7 @@ module.exports = {
             // check if a particular post has been created by a user
 
             // eslint-disable-next-line no-use-before-define
-            const postUrl = await uploadPhoto(req, res, 'image/png', 'image/jpeg', 100000)
+            const postUrl = await uploadPhoto(req, res, 'image/png', 'image/jpeg', 500000000)
             const postCreate = await Post.create({
                 title,
                 body,
