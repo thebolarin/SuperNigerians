@@ -98,9 +98,6 @@ module.exports = {
       if (!deletePost) {
         res.flash("error", "An error occured while deleting post");
       }
-      const userPost = await Post.findById({
-        _id: postId
-      });
       if (!userPost) {
         req.flash("error", "Post does not exist");
       }
@@ -235,7 +232,7 @@ module.exports = {
         unverifiedPosts,
       }
       return renderPage(res, 'pages/adminDashboard', data, 'Admin | Dashboard', '/admin/dashboard/posts/verified');
-    } catch (error) {
+    } catch (err) {
       const error = new Error(err);
       error.httpStatusCode = 500;
       return next(error);
