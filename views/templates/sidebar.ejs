@@ -10,7 +10,7 @@
             <li class="<%= path === 'post' ? 'nav-active' : '' %>" ><a href="/posts">Posts</a></li>
 
             <% if(currentUser) { %>
-                <li class="<%= path === 'profile' ? 'nav-active' : '' %>" ><a href="/user/dashboard">Profile</a></li>
+                <li class="<%= path === 'profile' ? 'nav-active' : '' %>"><a href="/profile">Profile</a></li>
                 <li><a href="/logout">Sign out</a></li>
             <% } %> 
             <% if(!currentUser) { %>
