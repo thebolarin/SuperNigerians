@@ -222,7 +222,19 @@ module.exports = {
 
   verified: async (req, res) => {
     try {
-
+      const verifidPosts = await Post.find({
+        status: 'true'
+      }).populate('creator').sort({
+        date: 'desc'
+      });
+      const unverifiedPosts = await Post.find({
+        status: 'false'
+      })
+      const data = {
+        verifidPosts,
+        unverifiedPosts,
+      }
+      return renderPage(res, 'pages/adminDashboard', data, 'Admin | Dashboard', '/admin/dashboard/post/verified');
     } catch (error) {
       const error = new Error(err);
       error.httpStatusCode = 500;
