@@ -26,9 +26,14 @@ const profile = (req, res) => {
   }, 'Demo Page', '/profile');
 };
 
+const terms = (req, res) => {
+  return renderPage(res, 'pages/terms-conditions', {} , 'Terms and Condition', '/terms');
+}
+
 
 
 module.exports = {
   home,
-  profile
+  profile,
+  terms
 };
