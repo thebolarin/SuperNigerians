@@ -1,14 +1,15 @@
 const router = require('express').Router();
+const { authorizeAdmin } = require('../middleware/auth')
+
 const {
     dashboard, 
     deletePost,
-    updatePost,
 } = require('../controllers/admin');
 
 
-router.get('/dashboard', dashboard);
-router.delete('/delete/:postId', deletePost);
-router.patch('update/:postId', updatePost);
+router.get('/dashboard', authorizeAdmin, dashboard);
+router.delete('/delete/:postId', authorizeAdmin, deletePost);
+
 
 
 module.exports = router;
