@@ -80,7 +80,8 @@
       <div class="row">
         <div class="col-12">
           <div class="profile-container my-3 d-flex flex-column justify-content-center align-items-center flex-sm-row">
-            <img style="height: 200px;" src="https://picsum.photos/500" alt="my avatar" class="profile-img img-fluid rounded-circle mr-sm-4">
+            <img style="height: 200px;" src="https://picsum.photos/500" alt="my avatar"
+              class="profile-img img-fluid rounded-circle mr-sm-4">
             <div class="d-flex flex-column justify-content-center align-items-center ml-sm-4 mt-3 mt-sm-0">
               <h1 class="h3"><%= user.username %></h1>
               <p class="mb-0 lead prj-text-normal">
@@ -111,6 +112,9 @@
                 aria-labelledby="tabs-my-posts-tab">
                 <!-- My posts -->
                 <div class="my-posts-container row row-cols-1 row-cols-sm-2 row-cols-lg-3">
+                  <% if (userPosts.length === 0) { %>
+                  <div class="my-post col px-1 py-3 position-relative my-2">You don't have any posts yet</div>
+                  <% } %>
                   <% for( post in userPosts) { %>
                   <div class="my-post col px-1 py-3 position-relative my-2">
                     <div
