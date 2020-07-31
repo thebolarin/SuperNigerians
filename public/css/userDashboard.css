@@ -57,6 +57,25 @@ body {
   font-size: 16px;
 }
 
+button.btn.prj-btn-primary {
+  color: #fff;
+  background-color: #00643c;
+}
+
+button.btn.prj-btn-primary:hover {
+  color: #00643c;
+  background-color: #fff;
+  border: 1px solid #00643c;
+}
+
+button.btn.prj-btn-primary:focus {
+  color: #fff;
+  background-color: #00643c;
+  border: 1px solid var(--prim-colr);
+  box-shadow: none;
+}
+
+
 .profile-img {
   max-height: 200px;
   max-width: 200px;
