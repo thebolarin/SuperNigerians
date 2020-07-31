@@ -5,10 +5,13 @@ const user = require('./user')
 const userDashboard = require('./userDashboard')
 
 const {
-  home
+  home,
+  profile
 } = require('../controllers/index');
 
 
+router.get('/', home);
+router.get('/profile', profile);
 router.use('/user', user);
 router.use('/post', post);
 router.use('/admin', adminRoutes);
