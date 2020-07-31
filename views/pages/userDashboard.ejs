@@ -6,6 +6,96 @@
   <%- include('../templates/head') %>
 
   <title>User dashboard</title>
+
+  <style>
+  .was-validated .form-control:invalid {
+      border: 1px solid #dc3545 !important;
+      padding-right: calc(1.5em + 0.75rem);
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23d31919' width='36px' height='36px'%3E%3Cpath d='M0 0h24v24H0V0z' fill='none'/%3E%3Cpath d='M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right calc(0.375em + 0.1875rem) center;
+      background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+  }
+  .form-control.is-valid, .was-validated .form-control:valid {
+      border: 1px solid #28a745 !important;
+      padding-right: calc(1.5em + 0.75rem);
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2300cc33' width='36px' height='36px'%3E%3Cpath d='M0 0h24v24H0V0z' fill='none'/%3E%3Cpath d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right calc(0.375em + 0.1875rem) center;
+      background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+  }
+  /***** CSS ANIMATION BEGINS ********/
+  .dashboard-settings-container-pt .slide-in {
+      z-index: 10; /* to position it in front of the other content */
+      margin-top: -1.5em;
+      position: fixed;
+      overflow: hidden; /* to prevent scrollbar appearing */
+  }
+
+  .dashboard-settings-container-pt .slide-in.from-right {
+      right: 0;
+      max-width: 280px;
+      min-width: 240px;
+      font-size: 14px;
+  }
+
+  .dashboard-settings-container-pt .slide-in-content {
+      transition: transform .5s ease; /* our nice transition */
+  }
+  .dashboard-settings-container-pt .slide-in .success {
+      border-left: 3px solid #00CC00;
+      padding: 5px 20px;
+      background: #bfeaff;
+  }
+  .dashboard-settings-container-pt .slide-in .error {
+      border-left: 3px solid rgb(248,0,0);
+      padding: 5px 20px;
+      background: #f7cecb;
+  }
+
+  .dashboard-settings-container-pt .slide-in.from-right .slide-in-content {
+      transform: translateX(100%);
+      -webkit-transform: translateX(100%);
+  }
+
+  .dashboard-settings-container-pt .slide-in.show .slide-in-content {
+      transform: translateX(0);
+      -webkit-transform: translateX(0);
+  }
+
+  /*LOADER*/
+  .lds-hourglass {
+      display: inline-block;
+      position: relative;
+      max-width: 30px;
+      max-height: 30px;
+  }
+  .lds-hourglass:after {
+      content: " ";
+      display: block;
+      border-radius: 50%;
+      width: 0;
+      height: 0;
+      box-sizing: border-box;
+      border: 12px solid #fff;
+      border-color: #fff transparent #fff transparent;
+      animation: lds-hourglass 1.2s infinite;
+  }
+
+  @keyframes lds-hourglass {
+      0% {
+          transform: rotate(0);
+          animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+      }
+      50% {
+          transform: rotate(900deg);
+          animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+      }
+      100% {
+          transform: rotate(1800deg);
+      }
+  }
+  </style>
 </head>
 
 <body>
@@ -21,14 +111,14 @@
         <div class="modal-content">
           <header class="modal-header">
             <h4 class="modal-title " id="updateProfileModalLabel">Update Profile</h4>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <button role="button" type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </header>
           <div class="modal-body">
             <div class="row">
               <div class="col-11 mx-auto py-3">
-                <form name="updateProfileForm">
+                <form id="updateProfileFormId" name="updateProfileForm">
                   <div class="form-group">
                     <label for="firstName">First name</label>
                     <input type="text" class="form-control" id="firstName" name="firstname" placeholder="e.g Mark"
@@ -67,13 +157,29 @@
                   </div>
                 </form>
                 <div class="text-center">
-                  <button class="btn btn-lg btn-secondary" id="btnUpdateProfile">Update profile</button>
+                  <button role="button" class="btn btn-lg btn-secondary" type="submit" id="btnUpdateProfile">Update profile</button>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+    </div>
+
+    <!--NOTIFICATION TOAST-->
+    <div class="dashboard-settings-container-pt">
+        <div class="slide-in from-right">
+            <div class="slide-in-content">
+            <div class="row">
+                <span class="col-10" style="padding-top: 3px;"
+                >Success Message oei
+                </span>
+                <span class="col-2" style="padding-top: 2px;"
+                ><span class="lds-hourglass"></span
+                ></span>
+            </div>
+            </div>
+        </div>
     </div>
 
     <div class="container-fluid main-container ">
@@ -90,7 +196,7 @@
                 <span class="font-weight-normal d-inline-block"><%= numberOfLikes %></span>
                 likes <span class="font-weight-normal d-inline-block">10</span> shares</p>
               <!-- Button trigger modal -->
-              <button type="button" class="btn btn-secondary mt-3" data-toggle="modal"
+              <button role="button" type="button" class="btn btn-secondary mt-3" data-toggle="modal"
                 data-target="#updateProfileModal">
                 Update profile
               </button>
@@ -138,10 +244,16 @@
               <div class="tab-pane fade" id="tabs-create-post" role="tabpanel" aria-labelledby="tabs-create-post-tab">
                 <!-- Create a post -->
                 <div class="col-12">
-                  <form accept-charset="UTF-8" action="" method="POST">
+                  <form id="postFormId" action="#" class="needs-validation">
                     <div class="form-group">
                       <label for="title">Title</label>
                       <input type="text" name="title" class="form-control" id="title"
+                        placeholder="Enter your post title" required="required" />
+                    </div>
+
+                    <div class="form-group">
+                      <label for="subject">Subject</label>
+                      <input type="text" name="title" class="form-control" id="subject"
                         placeholder="Enter your post title" required="required" />
                     </div>
 
@@ -157,9 +269,11 @@
                     </div>
 
                     <div class="d-flex justify-content-center justify-content-md-start">
-                      <button type="submit" class="btn text-white post-btn mb-4">Post</button>
+                      <button role="button" id="postFormBtn" type="submit" class="btn btn-secondary">Post</button>
                     </div>
                   </form>
+                  <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+                  <br>
                 </div>
               </div>
             </div>
@@ -168,12 +282,90 @@
       </div>
   </main>
   <script src="/js/user-dashboard.js"></script>
+  <script src="/js/toast.js"></script>
 
   <script src="https://cdn.tiny.cloud/1/zmeht2ue8lcu1icuo458dfkh7rkyf6fuwgfr6je2hq2nuimv/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
   <script>
     tinymce.init({
       selector: 'textarea'
     });
+  </script>
+
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script>
+    document.getElementById('postFormBtn').addEventListener('click', async function (event) {
+
+      const form = document.getElementById('postFormId');
+      const [title, subject, fileData] = form.querySelectorAll('input');
+      const textarea = tinyMCE.get('postContent').getContent();
+
+      let addValidation = true;
+
+      if (form.checkValidity() === false) {
+        event.preventDefault();
+        event.stopPropagation();
+      } else if (form.checkValidity()) {
+        event.preventDefault();
+
+        const getData = await getFormData(title.value, subject.value, fileData.files[0], textarea);
+        const response = await createPost(getData);
+        console.log(response);
+        const redirect = () => {
+          window.location.href = '/posts';
+        };
+        if (response.status === 'success') {
+          toaster(response.message, 'success');
+          removeToaster(3000);
+          setTimeout(redirect, 3100);
+        } else {
+          toaster(response.message, 'error');
+          removeToaster(3000);
+        }
+      }
+      if (addValidation) {
+        form.classList.add('was-validated');
+      }
+      event.preventDefault();
+      },
+    false,
+    );
+
+    const getFormData = (title, subject, fileData, textarea) => {
+
+        const fileUploadData = new FormData();
+        fileUploadData.append('title', title,);
+        fileUploadData.append('description', subject,);
+        fileUploadData.append('photo', fileData);
+        fileUploadData.append('body', textarea);
+      
+        return fileUploadData;
+    };
+
+    const createPost = async (userData) => {
+      const profileUrl = '/post/new';
+      const [csrf] = document.getElementsByName('_csrf');
+    
+      try {
+        axios.defaults.xsrfCookieName = 'csrftoken';
+        axios.defaults.xsrfHeaderName = 'X-CSRFTOKEN';
+    
+        const { data } = await axios({
+          method: 'POST',
+          url: profileUrl,
+          headers: {
+            'Content-Type': 'application/json; charset=UTF-8',
+            'csrf-token': csrf.value,
+          },
+          data: userData,
+        });
+    
+        return data;
+      } catch (e) {
+        return e.response.data;
+      }
+    };
+
+    btnUpdateProfile
   </script>
 </body>
 

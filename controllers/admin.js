@@ -41,7 +41,7 @@ module.exports = {
         users
       };
 
-      renderPage(res, 'admin/allUsers', data, 'All Users', '/');
+      renderPage(res, 'pages/adminUserList', data, 'All Users', '/users');
     } catch (err) {
       const error = new Error(err);
       error.httpStatusCode = 500;
@@ -67,14 +67,14 @@ module.exports = {
       const postCreator = await User.findById(approvedPost.creator);
 
       if (!approvedPost) {
-        res.flash('error', 'An error occured while approving post');
+        req.flash('error', 'An error occured while approving post');
       }
 
       if (approvedPost.status === 'true') {
-        res.flash('error', 'Post has already been approved');
+        req.flash('error', 'Post has already been approved');
       }
       if (!postCreator) {
-        res.flash('error', 'Creator not found');
+        req.flash('error', 'Creator not found');
       }
       const message = `Your post with the title: <b>${approvedPost.title}</b> has been published live.`;
           sendMail({
@@ -82,7 +82,7 @@ module.exports = {
             subject: 'Post Approval',
             message,
           });
-      res.flash('Post Approved sucessfully');
+      req.flash('Post Approved sucessfully');
     } catch (err) {
       const error = new Error(err);
       error.httpStatusCode = 500;
@@ -104,14 +104,14 @@ module.exports = {
       );
 
       if (!approvedPost) {
-        res.flash('error', 'An error occured while approving post');
+        req.flash('error', 'An error occured while approving post');
       }
 
       if (approvedPost.status === 'false') {
-        res.flash('error', 'Post has already been disapproved');
+        req.flash('error', 'Post has already been disapproved');
       }
 
-      res.flash('Post Disapproved sucessfully');
+      req.flash('Post Disapproved sucessfully');
     } catch (err) {
       const error = new Error(err);
       error.httpStatusCode = 500;

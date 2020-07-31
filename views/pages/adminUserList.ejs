@@ -23,6 +23,19 @@
     <!-- Custom styles for this template-->
     <!-- <link href="css/sb-admin-2.min.css" rel="stylesheet"> -->
     <link href="/css/adminDashboard.css" rel="stylesheet">
+    <style>
+        #postsTable {
+            counter-reset: serial-number;
+            /* Set the serial number counter to 0 */
+        }
+
+        #postsTable td:first-child:before {
+            counter-increment: serial-number;
+            /* Increment the serial number counter */
+            content: counter(serial-number);
+            /* Display the counter */
+        }
+    </style>
 
 </head>
 
@@ -35,7 +48,7 @@
         <ul class="navbar-nav bg-gradient-primar sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
@@ -47,7 +60,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="/admin/dashboard">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -66,7 +79,7 @@
             <hr class="sidebar-divider">
             <!-- Nav Item - Users -->
             <li class="nav-item active">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="/admin/dashboard/users">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Users</span></a>
             </li>
@@ -214,16 +227,32 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <% if (users.length > 0 ) { %>
+
+                                        <% users.forEach(u => { %>
+                                        <% if (u.role === "user" ) { %>
                                         <tr>
-                                            <th scope="row">1</th>
-                                            <td>Tobi</td>
-                                            <td>Osimosu</td>
-                                            <td>osimosutobi@gmail.com</td>
-                                            <td>08085508712</td>
+                                            <!-- <th scope="row">1</th> -->
+                                            <td>&nbsp;</td>
+                                            <td><%= u.firstname %></td>
+                                            <td><%= u.lastname %></td>
+                                            <td><%= u.email %></td>
+                                            <td><%= u.phone %></td>
                                             <td>
-                                                <a href="#" class="btn btn-danger">Delete</a>
+                                                <a href="<%= /delete/u._id %>" class="btn btn-danger">Delete</a>
                                             </td>
                                         </tr>
+                                        <% } %>
+                                        <% }) %>
+
+                                        <% } else { %>
+                                        <tr>
+
+                                            <td class="centered">No user found</td>
+
+                                        </tr>
+
+                                        <% } %>
                                     </tbody>
                                 </table>
                             </div>
