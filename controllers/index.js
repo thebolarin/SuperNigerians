@@ -1,4 +1,6 @@
-const { renderPage } = require('../utils/render-page');
+const {
+  renderPage
+} = require('../utils/render-page');
 
 const home = (req, res) => {
   const data = {
@@ -11,6 +13,21 @@ const home = (req, res) => {
   return renderPage(res, 'index', data, 'Demo Page');
 };
 
+const profile = (req, res) => {
+
+  const user = req.session.user;
+  const userPosts = []
+  console.log(user)
+
+  return renderPage(res, 'pages/userDashboard', {
+    user,
+    userPosts
+  }, 'Demo Page', '/profile');
+};
+
+
+
 module.exports = {
   home,
+  profile
 };
