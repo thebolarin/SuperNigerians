@@ -12,7 +12,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  padding-top: 3.5em;
+  padding-top: 2.5em;
   padding-left: 20px;
   padding-right: 20px;
   width: 320px;
@@ -151,6 +151,7 @@
   font-size: 14px;
   font-weight: 400;
   color: rgba(0, 0, 0, 0.6);
+  margin-bottom: 20px;
 }
 
 .sidebar-toggle {
