@@ -8,6 +8,7 @@ const home = (req, res) => {
     firstName: 'John',
     lastName: 'Doe',
     pageName: 'Home',
+    path: 'home'
   };
 
   return renderPage(res, 'index', data, 'Demo Page');
