@@ -53,7 +53,7 @@ module.exports = {
   },
 
   profile: async (req, res) => {
-    const data = {};
+    const data = req.session.user;
     renderPage(
       res,
       "pages/adminProfile",
