@@ -79,7 +79,6 @@ module.exports = {
         const post = await Post.find({
             slug
         })
-        console.log(post);
         const data = {
             post,
             path: 'post'

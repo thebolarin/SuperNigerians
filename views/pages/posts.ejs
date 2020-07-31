@@ -4,6 +4,7 @@
 <head>
   <%- include('../templates/head') %>
   <link rel="stylesheet" href="/css/posts.css" />
+  <link rel="stylesheet" href="/css/animate.css"/>
   <title>Articles</title>
 </head>
 
@@ -11,7 +12,7 @@
   <%- include('../templates/sidebar') %>
 
   <main id="main">
-    <div class="container">
+    <div class="container animate__animated animate__slideInLeft">
       <div class="row" style="margin-right: 0px; margin-left: 0px;">
         <% if( posts &&  posts.length > 0){ %>
         <% for(var i=0; i <  posts.length; i++) { %>
