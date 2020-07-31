@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <link rel="stylesheet" href="/css/userDashboard.css" />
+  <link rel="stylesheet" href="css/userDashboard.css" />
   <%- include('../templates/head') %>
 
   <title>User dashboard</title>
@@ -135,6 +135,13 @@
                       autocomplete="username">
                   </div>
                   <div class="form-group">
+                    <!-- TODO: Make sure URL ends in photo file extensions -->
+                    <label for="photo">Photo url</label>
+                    <input type="url" class="form-control" id="photo" name="photo" placeholder="e.g https://...">
+                    <small class="text-muted">You can use an image URL from Google Drive or <a
+                        href="https://imgur.com">Imgur</a></small>
+                  </div>
+                  <div class="form-group">
                     <label for="phone">Phone</label>
                     <input type="tel" class="form-control" id="phone" name="phone" autocomplete="url">
                   </div>
@@ -150,7 +157,7 @@
                   </div>
                 </form>
                 <div class="text-center">
-                  <button class="btn btn-lg prj-btn-primary " id="btnUpdateProfile">Update profile</button>
+                  <button role="button" class="btn btn-lg btn-secondary" type="submit" id="btnUpdateProfile">Update profile</button>
                 </div>
               </div>
             </div>
@@ -159,17 +166,6 @@
       </div>
     </div>
 
-    <!-- Profile Update Success Toast -->
-    <div class="toast" id="tstProfileUpdate" role="alert" aria-live="assertive" aria-atomic="true"
-      style="position: absolute; top: 5%; right: 2%; z-index: 1000;" data-autohide="false">
-      <div class="toast-header">
-        <strong class="mr-auto">Profile update</strong>
-        <button type="button" class="mb-1 close" data-dismiss="toast" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="toast-body">
-      </div>
     <!--NOTIFICATION TOAST-->
     <div class="dashboard-settings-container-pt">
         <div class="slide-in from-right">
@@ -190,15 +186,17 @@
       <div class="row">
         <div class="col-12">
           <div class="profile-container my-3 d-flex flex-column justify-content-center align-items-center flex-sm-row">
-            <img src="<%= user.photo %>" alt="my avatar" class="profile-img img-fluid rounded-circle mr-sm-4">
+            <img style="height: 200px;" src="https://picsum.photos/500" alt="my avatar"
+              class="profile-img img-fluid rounded-circle mr-sm-4">
             <div class="d-flex flex-column justify-content-center align-items-center ml-sm-4 mt-3 mt-sm-0">
-              <h1 clss="h3"><%= user.firstname %></h1>
+              <h1 class="h3"><%= user.username %></h1>
               <p class="mb-0 lead prj-text-normal">
                 <span class="font-weight-normal d-inline-block"><%= userPosts.length %></span>
                 posts
                 <span class="font-weight-normal d-inline-block"><%= numberOfLikes %></span>
-                likes</p>
-              <button type="button" class="btn btn-sm prj-btn-primary mt-3" data-toggle="modal"
+                likes <span class="font-weight-normal d-inline-block">10</span> shares</p>
+              <!-- Button trigger modal -->
+              <button role="button" type="button" class="btn btn-secondary mt-3" data-toggle="modal"
                 data-target="#updateProfileModal">
                 Update profile
               </button>
@@ -208,11 +206,11 @@
             <ul class="nav nav-tabs justify-content-center my-3" role="tablist">
               <li class="nav-item mr-2" role="presentation">
                 <a class="nav-link active" id="tabs-my-posts-tab" data-toggle="pill" href="#tabs-my-posts" role="tab"
-                  aria-controls="tabs-my-posts" aria-selected="true">My posts</a>
+                  aria-controls="tabs-my-posts" aria-selected="false">My posts</a>
               </li>
               <li class="nav-item" role="presentation">
                 <a class="nav-link" id="tabs-create-post-tab" data-toggle="pill" href="#tabs-create-post" role="tab"
-                  aria-controls="tabs-create-post" aria-selected="false">Create a post</a>
+                  aria-controls="tabs-create-post" aria-selected="true">Create a post</a>
               </li>
             </ul>
             <div class="tab-content" id="tabs-tabContent">
@@ -221,17 +219,13 @@
                 <!-- My posts -->
                 <div class="my-posts-container row row-cols-1 row-cols-sm-2 row-cols-lg-3">
                   <% if (userPosts.length === 0) { %>
-                  <div class="my-post col px-1 py-3 mx-auto my-2">
-                    <img class="img-fluid" src="/images/no-posts.svg" alt="No posts">
-                    <p class="small text-center">You have not created a post yet</p>
-                    <p class="small text-center">Click on the 'Create a post' tab to create a post</p>
-                  </div>
+                  <div class="my-post col px-1 py-3 position-relative my-2">You don't have any posts yet</div>
                   <% } %>
                   <% for( post in userPosts) { %>
                   <div class="my-post col px-1 py-3 position-relative my-2">
                     <div
                       class="default-post-content py-2 d-flex flex-column align-items-center justify-content-space-around">
-                      <img src="<%= post.postPicture %>  class="img-fluid" alt="post header image" />
+                      <img src="https://picsum.photos/500" class="img-fluid" alt="post header image" />
                       <p class="my-4 lead font-weight-normal text-center">
                         <%= post.title %>
                       </p>
@@ -288,7 +282,6 @@
       </div>
   </main>
   <script src="/js/user-dashboard.js"></script>
-  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script src="/js/toast.js"></script>
 
   <script src="https://cdn.tiny.cloud/1/zmeht2ue8lcu1icuo458dfkh7rkyf6fuwgfr6je2hq2nuimv/tinymce/5/tinymce.min.js"
@@ -345,18 +338,18 @@
         fileUploadData.append('description', subject,);
         fileUploadData.append('photo', fileData);
         fileUploadData.append('body', textarea);
-
+      
         return fileUploadData;
     };
 
     const createPost = async (userData) => {
       const profileUrl = '/post/new';
       const [csrf] = document.getElementsByName('_csrf');
-
+    
       try {
         axios.defaults.xsrfCookieName = 'csrftoken';
         axios.defaults.xsrfHeaderName = 'X-CSRFTOKEN';
-
+    
         const { data } = await axios({
           method: 'POST',
           url: profileUrl,
@@ -366,12 +359,14 @@
           },
           data: userData,
         });
-
+    
         return data;
       } catch (e) {
         return e.response.data;
       }
     };
+
+    btnUpdateProfile
   </script>
 </body>
 
