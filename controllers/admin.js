@@ -40,7 +40,7 @@ module.exports = {
         users
       };
 
-      renderPage(res, 'admin/allUsers', data, 'All Users', '/');
+      renderPage(res, 'pages/adminUserList', data, 'All Users', '/users');
     } catch (err) {
       const error = new Error(err);
       error.httpStatusCode = 500;
