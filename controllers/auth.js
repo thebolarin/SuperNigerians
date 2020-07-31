@@ -87,7 +87,6 @@ const postUserRegister = async (req, res) => {
           req.session.user = user;
           req.session.createdAt = Date.now();
           req.session.isLoggedIn = true;
-          console.log(user)
           if (user && user.role === 'admin') {
             return res.redirect('/admin/dashboard');
           }
@@ -108,7 +107,6 @@ const postUserLogin = async (req, res, next) => {
 
   await userCheck(email)
     .then(async (user) => {
-      console.log(user);
       if (!user) {
         return errorUserLogin(req, res, email, password, 'Invalid email or password.',);
       }
