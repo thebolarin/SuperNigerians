@@ -6,11 +6,10 @@ const sendMail = require("../utils/send-email");
 
 const getAllPosts = async () => {
   const allPosts = await Post.find().sort({date: 'desc'});
-  console.log(allPosts);
   return allPosts;
 };
 
-const getVerifiedPosts = async () => {
+const getUnverifiedPosts = async () => {
   const verify = await Post.find({ status: 'false'}).populate('creator').sort({date: 'desc'});
   return verify;
 };
@@ -38,7 +37,7 @@ module.exports = {
     const totalUsers = await User.find();
     const totalUnverifiedPosts = await filterData(allPosts, 'false');
     const totalVerifiedPosts = await filterData(allPosts, 'true');
-    const unverifiedPosts = await getVerifiedPosts();
+    const unverifiedPosts = await getUnverifiedPosts();
     const allAdmins = await filterData(totalUsers, 'admin')
 
     const data = {
