@@ -118,10 +118,11 @@
           <div class="modal-body">
             <div class="row">
               <div class="col-11 mx-auto py-3">
-                <form id="updateProfileFormId" name="updateProfileForm">
+                <form id="updateProfileFormId" name="updateProfileForm" class="needs-validation">
                   <div class="form-group">
                     <label for="firstName">First name</label>
-                    <input type="text" class="form-control" id="firstName" name="firstname" placeholder="e.g Mark"
+                    <input type="text" class="form-control" id="firstName"
+                     name="firstname" placeholder="e.g Mark"
                       autocomplete="given-name" autocapitalize="on" minlength="2">
                   </div>
                   <div class="form-group">
@@ -134,7 +135,7 @@
                     <input type="text" class="form-control" id="userName" name="username" placeholder="e.g D'Marko"
                       autocomplete="username">
                   </div>
-                  <div class="form-group">
+                  <div class="form-group" style="display:none">
                     <!-- TODO: Make sure URL ends in photo file extensions -->
                     <label for="photo">Photo url</label>
                     <input type="url" class="form-control" id="photo" name="photo" placeholder="e.g https://...">
@@ -157,7 +158,7 @@
                   </div>
                 </form>
                 <div class="text-center">
-                  <button role="button" class="btn btn-lg btn-secondary" type="submit" id="btnUpdateProfile">Update profile</button>
+                  <button class="btn btn-lg btn-secondary" id="btnUpdateProfile">Update profile</button>
                 </div>
               </div>
             </div>
@@ -252,7 +253,7 @@
                     </div>
 
                     <div class="form-group">
-                      <label for="subject">Subject</label>
+                      <label for="subject">Brief Description</label>
                       <input type="text" name="title" class="form-control" id="subject"
                         placeholder="Enter your post title" required="required" />
                     </div>
@@ -269,7 +270,7 @@
                     </div>
 
                     <div class="d-flex justify-content-center justify-content-md-start">
-                      <button role="button" id="postFormBtn" type="submit" class="btn btn-secondary">Post</button>
+                      <button id="postFormBtn" type="submit" class="btn btn-secondary">Post</button>
                     </div>
                   </form>
                   <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
@@ -310,7 +311,7 @@
 
         const getData = await getFormData(title.value, subject.value, fileData.files[0], textarea);
         const response = await createPost(getData);
-        console.log(response);
+        // console.log(response);
         const redirect = () => {
           window.location.href = '/posts';
         };
@@ -366,7 +367,71 @@
       }
     };
 
-    btnUpdateProfile
+    // profile update
+    document.getElementById('btnUpdateProfile').addEventListener('click', async function (event) {
+      event.preventDefault();
+      const form = document.getElementById('updateProfileFormId');
+      const [firstName, lastName, userName, , phone, country, city] = form.querySelectorAll('input');
+
+      let addValidation = true;
+
+      if (form.checkValidity() === false) {
+        event.preventDefault();
+        event.stopPropagation();
+      } else if (form.checkValidity()) {
+        event.preventDefault();
+
+        const userData = {
+          firstname: firstName.value,
+          lastname: lastName.value,
+          username: userName.value,
+          location: `${city.value}, ${country.value}`,
+          phone: phone.value,
+        };
+        const response = await updateProfile(userData);
+        const redirect = () => {
+          window.location.href = '/user/dashboard';
+        };
+        if (response.status === 'success') {
+          toaster(response.message, 'success');
+          removeToaster(3000);
+          setTimeout(3100);
+        } else {
+          toaster(response.message, 'error');
+          removeToaster(3000);
+        }
+      }
+      if (addValidation) {
+        form.classList.add('was-validated');
+      }
+      event.preventDefault();
+      },
+    false,
+    );
+
+    const updateProfile = async (userData) => {
+      const profileUrl = '/user/update';
+      const [csrf] = document.getElementsByName('_csrf');
+    
+      try {
+        axios.defaults.xsrfCookieName = 'csrftoken';
+        axios.defaults.xsrfHeaderName = 'X-CSRFTOKEN';
+    
+        const { data } = await axios({
+          method: 'PUT',
+          url: profileUrl,
+          headers: {
+            'Content-Type': 'application/json; charset=UTF-8',
+            'csrf-token': csrf.value,
+          },
+          data: userData,
+        });
+    
+        return data;
+      } catch (e) {
+        return e.response.data;
+      }
+    };
   </script>
 </body>
 

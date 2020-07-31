@@ -28,9 +28,13 @@ module.exports = {
         // find user and update
         const findUserUpdate = await User.findByIdAndUpdate(userfilter,updateUser)
         if(!findUserUpdate)return res.status(401).json("unable to update user profile")
-        res.status(200).json({message:"Successfully updated"})
+        res.status(200).json({
+          status:'success',
+          message:"Successfully updated"})
       } catch(err) {
-       // res.status(500).send(err) 
+        res.status(400).json({
+          status:'error',
+          message:"An error occured"})
   }
 },
 
