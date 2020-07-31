@@ -84,7 +84,28 @@ module.exports = {
             path: 'post'
         };
         renderPage(res, 'pages/post', data, 'Post', '/post');
-    }
+    }, 
+
+    postSearchByTitle: async (req, res) => {
+      const { title } = req.query; 
+      console.log('t', req.query);
+      const posts = await Post.find({
+        $and: [
+          {
+            slug: { 
+              $regex: title, 
+              $options: 'i' 
+            }, 
+          },
+          { status: 'false' } // for now it can search unapproved posts     
+        ]
+      });
+      const data = {
+        posts,
+        path: 'post'
+      }
+      renderPage(res, "pages/searchedPosts", data, "Searched Posts Results", '/posts/search');
+  }
 }
 
 /**
