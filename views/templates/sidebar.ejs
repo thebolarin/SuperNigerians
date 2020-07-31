@@ -8,8 +8,12 @@
         <ul>
             <li class="<%= path === 'home' ? 'nav-active' : '' %>"><a href="/">Home</a></li>
             <li class="<%= path === 'post' ? 'nav-active' : '' %>"><a href="/posts">Posts</a></li>
+            <% if(currentUser && currentUser.role === 'admin') { %>
+            <li class="<%= path === 'profile' ? 'nav-active' : '' %>"><a href="/admin/dashboard/profile">Profile</a></li>
+            <li><a href="/logout">Sign out</a></li>
+            <% } %>
 
-            <% if(currentUser) { %>
+            <% if (currentUser && currentUser.role === "user") { %>
             <li class="<%= path === 'profile' ? 'nav-active' : '' %>"><a href="/profile">Profile</a></li>
             <li><a href="/logout">Sign out</a></li>
             <% } %>
@@ -27,7 +31,7 @@
         <form action="<%= `/posts/search/{title}` %>">
             <div class="form-group d-flex">
                 <div class="icon"><span class="icon-paper-plane"></span></div>
-                <input type="text" name="title" class="form-control" placeholder="e.g.post title here">
+                <input type="text" name="title" class="form-control" placeholder="Title">
             </div>
         </form>
     </div>

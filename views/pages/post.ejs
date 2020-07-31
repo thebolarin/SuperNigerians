@@ -12,11 +12,11 @@
 	<%- include('../templates/sidebar') %>
 
 	<main id="main">
-		<section class="text-center px-2 px-md-0">
+		<section class="px-2 px-md-0">
 			<% if( post &&  post.length > 0){ %>
 			<div class="container mt-2 mt-md-3">
 				<div class="">
-					<img src=<%- post[0].postPicture %> alt="single post picture" class="img-fluid" id="singlePostPix">
+					<img src="<%- post[0].postPicture %>"  alt="single post picture" style='align-items: center;' class="img-fluid" id="singlePostPix">
 				</div>
 				<div class="row" style="margin: 0;">
 					<div class="text-left  px-3 px-md-0">
@@ -29,129 +29,45 @@
 					<div class="col-12 mt-4 mb-4 py-0 py-md-4">
 						<div class="d-flex">
 							<div class="pr-3 pr-md-5">
-								<img src="/images/person_1.jpg" class="rounded-circle" alt="" height="80px">
+								<img src=<%- post[0].creator.photo %> class="rounded-circle" alt="Image" height="80px">
 							</div>
 
 							<div class="text-dark pt-2 text-left">
 								<span class="text-secondary">Written by</span>
-								<h6 class="text-black pt-2"><a href="#">Dave Lewis </a><span><%- post[0].date %></span>
+								<h6 class="text-black pt-2"><a href="#"><%- post[0].creator.username %>
+									</a><span><%- post[0].date.toGMTString() %></span>
 								</h6>
 							</div>
 						</div>
 					</div>
 					<!-- comment session -->
 
-					<div class="row mx-3 mx-md-0 justify-content-between">
-						<div class="col-12">
-							<h6>Comments</h6>
-						</div>
-						<div class="border border-dark col-12 col-md-6 rounded my-2 my-md-3">
-							<div class="row p-3 p-md-4">
-								<div class="col-12">
-									<div class="col-12">
-										<h6>Marco</h6>
-										<h6>Thanks for this wonderful article</h6>
-									</div>
-									<button role="button" class="btn btn-info px-4">
-										Reply
-									</button>
-									<button role="button" class="btn btn-dark">
-										Comment
-									</button>
+					<div class="row " style="width: 100%;">
+						<div class="col-md-12">
+							<h5>Comments</h5>
+						<% post[0].comments.forEach((comment) => { %>
+							<hr>
+							<span class="float-right"><%=  moment(comment.createdAt).startOf('hour').fromNow() %></span>
+							<div>
+					
+								<div class="">
+									<p class="align-left"><%= comment.comment %></>
+									<h6><%= comment.name %></h6>
+									
 								</div>
 							</div>
+						<% }) %>
+							
 						</div>
-						<div class="border border-dark col-12 col-md-6 rounded my-2 my-md-3">
-							<div class="row p-3 p-md-4">
-								<div class="col-12">
-									<div class="col-12">
-										<h6>Marco</h6>
-										<h6>Thanks for this wonderful article</h6>
-									</div>
-									<button role="button" class="btn btn-info px-4">
-										Reply
-									</button>
-									<button role="button" class="btn btn-dark">
-										Comment
-									</button>
-								</div>
-							</div>
-						</div>
-						<div class="border border-dark col-12 col-md-6 rounded my-2 my-md-3">
-							<div class="row p-3 p-md-4">
-								<div class="col-12">
-									<div class="col-12">
-										<h6>Marco</h6>
-										<h6>Thanks for this wonderful article</h6>
-									</div>
-									<button role="button" class="btn btn-info px-4">
-										Reply
-									</button>
-									<button role="button" class="btn btn-dark">
-										Comment
-									</button>
-								</div>
-							</div>
-						</div>
-						<div class="border border-dark col-12 col-md-6 rounded my-2 my-md-3">
-							<div class="row p-3 p-md-4">
-								<div class="col-12">
-									<div class="col-12">
-										<h6>Marco</h6>
-										<h6>Thanks for this wonderful article</h6>
-									</div>
-									<button role="button" class="btn btn-info px-4">
-										Reply
-									</button>
-									<button role="button" class="btn btn-dark">
-										Comment
-									</button>
-								</div>
-							</div>
-						</div>
-						<div class="border border-dark col-12 col-md-6 rounded my-2 my-md-3">
-							<div class="row p-3 p-md-4">
-								<div class="col-12">
-									<div class="col-12">
-										<h6>Marco</h6>
-										<h6>Thanks for this wonderful article</h6>
-									</div>
-									<button role="button" class="btn btn-info px-4">
-										Reply
-									</button>
-									<button role="button" class="btn btn-dark">
-										Comment
-									</button>
-								</div>
-							</div>
-						</div>
-						<div class="border border-dark col-12 col-md-6 rounded my-2 my-md-3">
-							<div class="row p-3 p-md-4">
-								<div class="col-12">
-									<div class="col-12">
-										<h6>Marco</h6>
-										<h6>Thanks for this a wonderful article</h6>
-									</div>
-									<button role="button" class="btn btn-info px-4">
-										reply
-									</button>
-									<button role="button" class="btn btn-dark">
-										comment
-									</button>
-								</div>
-							</div>
-						</div>
-					</div>
+						
 					<div class="col-12 p-4 p-md-5 bg-light">
 						<h6 class="pb-2 pb-md-4">Add your comment</h6>
-						<form action="" onclick="submit" class="text-left px-0 px-md-3">
-							<div class="form-group">
-								<input type="text" name="" placeholder="Your name here" class="form-control col-12">
-							</div>
+						<form action="/post/<%- post[0]._id %>/comment" method="POST" class="text-left px-0 px-md-3">
+							<input type="hidden" name="_csrf" value="<%= csrfToken %>">
 							<div>
-								<textarea class="form-control col-12" placeholder="Your comment here"></textarea>
+								<textarea class="form-control col-12" name="body" placeholder="Your comment here"></textarea>
 							</div>
-							<button role="button" class="btn btn-dark px-4 px-md-5 mt-3 mt-md-4">
+							<button type="submit" class="btn btn-dark px-4 px-md-5 mt-3 mt-md-4">
 								Submit
 							</button>
 						</form>

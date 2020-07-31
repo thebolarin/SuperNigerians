@@ -6,6 +6,7 @@ const Post = require('../models/post')
 const {
     renderPage
 } = require('../utils/render-page');
+const { populate } = require('../models/post');
 
 // cloudinary Configuration
 cloud.config({
@@ -36,7 +37,7 @@ module.exports = {
             // check if a particular post has been created by a user
 
             // eslint-disable-next-line no-use-before-define
-            const postUrl = await uploadPhoto(req, res, 'image/png', 'image/jpeg', 100000)
+            const postUrl = await uploadPhoto(req, res, 'image/png', 'image/jpeg', 500000000)
             const postCreate = await Post.create({
                 title,
                 body,
@@ -67,6 +68,7 @@ module.exports = {
     postView: async (req, res) => {
 
         const posts = await Post.find({});
+
         const data = {
             posts,
             path: 'post'
@@ -76,36 +78,32 @@ module.exports = {
 
     postSingleView: async (req, res) => {
         let slug = req.params.slug;
-        const post = await Post.find({
-            slug
-        })
+        const post = await Post.find({slug}).populate('comments');
         const data = {
             post,
             path: 'post'
         };
         renderPage(res, 'pages/post', data, 'Post', '/post');
-    }, 
+    },
 
     postSearchByTitle: async (req, res) => {
-      const { title } = req.query; 
-      console.log('t', req.query);
-      const posts = await Post.find({
-        $and: [
-          {
-            slug: { 
-              $regex: title, 
-              $options: 'i' 
-            }, 
-          },
-          { status: 'false' } // for now it can search unapproved posts     
-        ]
-      });
-      const data = {
-        posts,
-        path: 'post'
-      }
-      renderPage(res, "pages/searchedPosts", data, "Searched Posts Results", '/posts/search');
-  }
+        const {
+            title
+        } = req.query;
+        const posts = await Post.find({
+            $and: [{
+                slug: {
+                    $regex: title,
+                    $options: 'i'
+                },
+            }, ]
+        });
+        const data = {
+            posts,
+            path: 'post'
+        }
+        renderPage(res, "pages/searchedPosts", data, "Searched Posts Results", '/posts/search');
+    }
 }
 
 /**
