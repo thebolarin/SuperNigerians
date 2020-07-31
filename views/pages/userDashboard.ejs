@@ -133,22 +133,22 @@
                   <div class="form-group">
                     <label for="firstName">First name</label>
                     <input type="text" class="form-control" id="firstName"
-                     name="firstname" placeholder="e.g Mark"
+                     name="firstname" value="<%= user.firstname %>" placeholder="John"
                       autocomplete="given-name" autocapitalize="on" minlength="2">
                   </div>
                   <div class="form-group">
                     <label for="lastName">Last name</label>
-                    <input type="text" class="form-control" id="lastName" name="lastname" placeholder="e.g Essien"
-                      autocomplete="family-name" autocapitalize="on" minlength="2">
+                    <input type="text" class="form-control" id="lastName" name="lastname" placeholder="Doe"
+                      autocomplete="family-name" value="<%=user.lastname %>" autocapitalize="on" minlength="2">
                   </div>
                   <div class="form-group">
                     <label for="userName">Username</label>
-                    <input type="text" class="form-control" id="userName" name="username" placeholder="e.g D'Marko"
+                    <input type="text" class="form-control" value="<%=user.username %>" id="userName" name="username" placeholder="johnDoe"
                       autocomplete="username">
                   </div>
                   <div class="form-group">
                     <label for="phone">Phone</label>
-                    <input type="tel" class="form-control" id="phone" name="phone" autocomplete="url">
+                    <input type="tel" class="form-control" value="<%=user.phone %>" id="phone" name="phone" autocomplete="url">
                   </div>
                   <div class="form-group">
                     <!-- Set as select and iterate over -->
@@ -162,7 +162,7 @@
                   </div>
                 </form>
                 <div class="text-center">
-                  <button class="btn btn-lg prj-btn-primary " id="btnUpdateProfile">Update profile</button>
+                  <button class="btn btn-lg prj-btn-primary " id="btnUpdateProfile">Submit</button>
                 </div>
               </div>
             </div>
