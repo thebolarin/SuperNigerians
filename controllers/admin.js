@@ -1,6 +1,8 @@
 const Post = require("../models/post");
 const User = require("../models/user");
-const { renderPage } = require("../utils/render-page");
+const {
+  renderPage
+} = require("../utils/render-page");
 const sendMail = require("../utils/send-email");
 
 module.exports = {
@@ -28,16 +30,25 @@ module.exports = {
 
   deletePost: async (req, res, next) => {
     try {
-      const { postId } = req.params;
+      const {
+        postId
+      } = req.params;
 
-      const userPost = await Post.findById({ id: postId });
+      const userPost = await Post.findById({
+        id: postId
+      });
       if (!userPost) {
         res
           .status(400)
-          .json({ status: "error", message: "Post does not exist" });
+          .json({
+            status: "error",
+            message: "Post does not exist"
+          });
       }
 
-      const deletePost = await Post.findByIdAndRemove({ id: postId });
+      const deletePost = await Post.findByIdAndRemove({
+        id: postId
+      });
       if (!deletePost) {
         res.flash("error", "An error occured while deleting post");
       }
@@ -71,7 +82,9 @@ module.exports = {
 
   approvePost: async (req, res) => {
     try {
-      const { postId } = req.params;
+      const {
+        postId
+      } = req.params;
       const approvedPost = await Post.findByIdAndUpdate(postId, {
         $set: {
           status: "true",
@@ -105,7 +118,9 @@ module.exports = {
 
   disApprovePost: async (req, res) => {
     try {
-      const { postId } = req.params;
+      const {
+        postId
+      } = req.params;
       const approvedPost = await Post.findByIdAndUpdate(postId, {
         $set: {
           status: "false",
@@ -127,4 +142,14 @@ module.exports = {
       return next(error);
     }
   },
+
+  verified: async (req, res) => {
+    try {
+
+    } catch (error) {
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
+    }
+  }
 };
