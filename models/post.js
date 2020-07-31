@@ -49,7 +49,7 @@ const postSchema = new Schema(
         media: { type : Array , "default" : [] },
         creator: {
             type: Schema.Types.ObjectId,
-            ref: 'User',
+            ref: 'Users',
             required: true
         },
         comments: [

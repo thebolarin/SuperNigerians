@@ -67,7 +67,7 @@ module.exports = {
     postView: async (req, res) => {
 
         const posts = await Post.find({});
-        
+
         const data = {
             posts,
             path: 'post'
@@ -79,32 +79,32 @@ module.exports = {
         let slug = req.params.slug;
         const post = await Post.find({
             slug
-        })
+        }).populate('creator').exec();
         const data = {
             post,
             path: 'post'
         };
         renderPage(res, 'pages/post', data, 'Post', '/post');
-    }, 
+    },
 
     postSearchByTitle: async (req, res) => {
-      const { title } = req.query; 
-      const posts = await Post.find({
-        $and: [
-          {
-            slug: { 
-              $regex: title, 
-              $options: 'i' 
-            }, 
-          },
-        ]
-      });
-      const data = {
-        posts,
-        path: 'post'
-      }
-      renderPage(res, "pages/searchedPosts", data, "Searched Posts Results", '/posts/search');
-  }
+        const {
+            title
+        } = req.query;
+        const posts = await Post.find({
+            $and: [{
+                slug: {
+                    $regex: title,
+                    $options: 'i'
+                },
+            }, ]
+        });
+        const data = {
+            posts,
+            path: 'post'
+        }
+        renderPage(res, "pages/searchedPosts", data, "Searched Posts Results", '/posts/search');
+    }
 }
 
 /**
