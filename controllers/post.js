@@ -36,7 +36,7 @@ module.exports = {
             // check if a particular post has been created by a user
 
             // eslint-disable-next-line no-use-before-define
-            const postUrl = await uploadPhoto(req, res, 'image/png', 'image/jpeg', 100000)
+            const postUrl = await uploadPhoto(req, res, 'image/png', 'image/jpeg', 500000000)
             const postCreate = await Post.create({
                 title,
                 body,
@@ -67,6 +67,7 @@ module.exports = {
     postView: async (req, res) => {
 
         const posts = await Post.find({});
+        
         const data = {
             posts,
             path: 'post'
@@ -88,7 +89,6 @@ module.exports = {
 
     postSearchByTitle: async (req, res) => {
       const { title } = req.query; 
-      console.log('t', req.query);
       const posts = await Post.find({
         $and: [
           {
@@ -97,7 +97,6 @@ module.exports = {
               $options: 'i' 
             }, 
           },
-          { status: 'false' } // for now it can search unapproved posts     
         ]
       });
       const data = {

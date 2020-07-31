@@ -13,42 +13,45 @@
 
   <main id="main">
     <div class="container animate__animated animate__slideInLeft">
+
       <% if( posts &&  posts.length > 0){ %>
-      <div class="d-flex flex-column">
-        <% for(var i=0; i <  posts.length; i++) { %>
-        <div class="row">
-          <div class="d-flex flex-column flex-md-row mb-5">
-            <div
-              class="col-12 col-md-3 d-md-flex justify-content-center align-items-center profile-picture mb-2 mb-md-0">
-              <img src=<%- posts[i].postPicture %> alt="user-profile-picture" class="img-fluid" />
+
+      <div class="row d-flex flex-column">
+
+        <% for(var i=0; i < posts.length; i++) { %>
+
+        <div class="d-flex flex-column flex-md-row mb-5">
+          <div class="col-12 col-md-3 d-md-flex justify-content-center align-items-center profile-picture mb-2 mb-md-0">
+            <img src=<%- posts[i].postPicture %> alt="user-profile-picture" class="img-fluid" />
+          </div>
+
+          <div class="col-12 col-md-9 article-details d-flex flex-column justify-content-center">
+            <div class="text-caption">
+              <a href=<%- "/" + posts[i].slug %>>
+                <h3 class="caption text-center text-md-left"><%- posts[i].title %></h3>
+              </a>
             </div>
 
-            <div class="col-12 col-md-9 article-details d-flex flex-column justify-content-center">
-              <div class="text-caption">
-                <a href=<%- "/" + posts[i].slug %>>
-                  <h3 class="caption text-center text-md-left"><%- posts[i].title %></h3>
-                </a>
-              </div>
-
-              <div class="meta d-flex justify-content-center justify-content-md-start">
-                <span class="calender mr-3"><i class="fa fa-calendar mr-2"></i><%- posts[i].date %></span>
-                <span class="comment"><i
-                    class="fa fa-comment mr-2"></i><%- posts[i].comments.length + " comments" %></span>
-              </div>
-
-              <p class="article-highlight text-center text-md-left"><%- posts[i].body.slice(0,120) %></p>
-
-              <div class="d-flex justify-content-center justify-content-md-start">
-                <a href=<%- "/" + posts[i].slug %> class="read-more">Read More <span
-                    class="fa fa-angle-right"></span></a>
-              </div>
+            <div class="meta d-flex justify-content-center justify-content-md-start">
+              <span class="calender mr-3"><i class="fa fa-calendar mr-2"></i><%- posts[i].date %></span>
+              <span class="comment"><i
+                  class="fa fa-comment mr-2"></i><%- posts[i].comments.length + " comments" %></span>
             </div>
 
+            <p class="article-highlight text-center text-md-left"><%- posts[i].body.slice(0,20) %></p>
+            
+            <div class="d-flex justify-content-center justify-content-md-start">
+              <a href=<%- "/" + posts[i].slug %> class="read-more">Read More <span class="fa fa-angle-right"></span></a>
+            </div>
           </div>
         </div>
+
         <% } %>
+
       </div>
+
       <% } %>
+
     </div>
   </main>
   <script src="https://kit.fontawesome.com/6518e17067.js" crossorigin="anonymous"></script>
