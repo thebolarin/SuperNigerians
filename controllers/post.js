@@ -68,18 +68,21 @@ module.exports = {
 
         const posts = await Post.find({});
         const data = {
-          posts,
-          path: 'post'
+            posts,
+            path: 'post'
         };
         renderPage(res, 'pages/posts', data, 'Posts', '/posts');
     },
 
     postSingleView: async (req, res) => {
         let slug = req.params.slug;
-        const post = await Post.find({slug})
+        const post = await Post.find({
+            slug
+        })
+        console.log(post);
         const data = {
-          post,
-          path: 'post'
+            post,
+            path: 'post'
         };
         renderPage(res, 'pages/post', data, 'Post', '/post');
     }

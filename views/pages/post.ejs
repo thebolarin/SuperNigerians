@@ -13,69 +13,17 @@
 
 	<main id="main">
 		<section class="text-center px-2 px-md-0">
+			<% if( post &&  post.length > 0){ %>
 			<div class="container mt-2 mt-md-3">
 				<div class="">
-					<img src="/images/image_1.jpg" alt="single post picture" class="img-fluid" id="singlePostPix">
+					<img src=<%- post[0].postPicture %> alt="single post picture" class="img-fluid" id="singlePostPix">
 				</div>
 				<div class="row" style="margin: 0;">
 					<div class="text-left  px-3 px-md-0">
-						<h4 class="font-weight-old py-3 py-md-4 text-center">A Loving Heart is the Truest Wisdom</h4>
-						<p class="text-secondary">Even the all-powerful Pointing has no control about the blind texts it
-							is
-							an almost life One day however a small line of blind text by the name of Lorem Ipsum decided
-							to
-							leave for the far World of Grammar.
-							Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-							tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-							quis nostrud ullamco laboris nisi ut aliquip ex ea commodo
-							consequat. Duis aute irure dolor in voluptate velit esse
-							cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-							proident, sunt in culpa qui officia deserunt mollit anim id est laborum.ur adipisicing elit,
-							sed
-							do eiusmod
-							tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-							quis nostrud ullamco laboris nisi ut aliquip ex ea commodo
-							consequat. Duis aute irure dolor in voluptate velit esse
-							cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-							proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-							ur adipisicing elit, sed do eiusmod
-							tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-							quis nostrud ullamco laboris nisi ut aliquip ex ea commodo
-							consequat. Duis aute irure dolor in voluptate velit esse
-							cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-							proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-							ur adipisicing elit, sed do eiusmod
-							tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-							quis nostrud ullamco laboris nisi ut aliquip ex ea commodo
-							consequat. Duis aute irure dolor in voluptate velit esse
-							cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-							proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-							name of Lorem Ipsum decided to leave for the far World of Grammar.
-							Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-							tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-							quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-							consequat. Duis aute irure dolor in voluptate velit esse
-							cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-							proident, sunt in culpa qui officia deserunt mollit anim id est laborum.ur adipisicing elit,
-							sed
-							do eiusmod
-							tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-							quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-							consequat. Duis aute irure dolor in voluptate velit esse
-							cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-							proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-							ur adipisicing elit, sed do eiusmod
-							tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-							quis nostrud ullamco laboris nisi ut aliquip ex ea commodo
-							consequat. Duis aute irure dolo in voluptate velit esse
-							cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-							proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-							ur adipisicing elit, sed do eiusmod
-							tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-							quis nostrud ullamco laboris nisi ut aliquip ex ea commodo
-							consequat. Duis aute irure dolor in voluptate velit esse
-							cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-							proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+						<h4 class="font-weight-old py-3 py-md-4 text-center"><%- post[0].title %></h4>
+						<p class="text-secondary">
+							<%- post[0].body %>
+						</p>
 					</div>
 
 					<div class="col-12 mt-4 mb-4 py-0 py-md-4">
@@ -86,28 +34,12 @@
 
 							<div class="text-dark pt-2 text-left">
 								<span class="text-secondary">Written by</span>
-								<h6 class="text-black pt-2"><a href="#">Dave Lewis</a><span>, June 28, 2019</span></h6>
+								<h6 class="text-black pt-2"><a href="#">Dave Lewis </a><span><%- post[0].date %></span>
+								</h6>
 							</div>
 						</div>
 					</div>
-					<div class="col-12 mb-3 mb-md-5">
-						<div class="row px-0 px-md-5">
-							<p class="mx-auto">
-								<button class="border-0 bg-white mr-1 mr-md-4 btn text-secondary">
-									<i class="fa fa-heart text-secondary" class="pr-0 pr-md-2"></i> 3
-								</button>
-								<button class="border-0 bg-white mr-1 mr-md-4 btn text-secondary">
-									<i class="fa fa-eye text-secondary" class="pr-0 pr-md-2"></i> 100
-								</button>
-								<button class="border-0 bg-white mr-1 mr-md-4 btn text-secondary">
-									<i class="fa fa-comment text-secondary" class="pr-0 pr-md-2"></i> 5
-								</button>
-								<button class="border-0 bg-white mr-1 mr-md-4 btn text-secondary">
-									<i class="fa fa-thumbs-down text-secondary" class="pr-0 pr-md-2"></i> 10
-								</button>
-							</p>
-						</div>
-					</div>
+
 					<!-- comment session -->
 
 					<div class="row mx-3 mx-md-0 justify-content-between">
@@ -227,6 +159,7 @@
 					</div>
 				</div>
 			</div>
+			<% } %>
 		</section>
 	</main>
 
