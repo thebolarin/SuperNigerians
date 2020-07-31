@@ -3,9 +3,39 @@ const User = require('../models/user');
 const { renderPage } = require('../utils/render-page');
 const sendMail = require('../utils/send-email');
 
+
+const getAllPosts = async () => {
+  const allPosts = await Post.find();
+  if(!allPosts){
+    return [];
+  }
+  return allPosts;
+};
+
+const filterPosts = async (data, key) => {
+  let filteredData;
+  if(key === 'false') { filteredData = data.filter( (myData) => {
+      return myData.status === key;
+    });
+  }
+  if(key === 'true'){ filteredData = data.filter( (myData) => {
+      return myData.status === key;
+    });
+  }
+  return filteredData;
+};
+
 module.exports = {
   dashboard: async (req, res) => {
-    const data = {};
+    const allPosts = await getAllPosts();
+    const unverifiedPosts = filterPosts(allPosts, 'false');
+    const verifiedPosts = filterPosts(allPosts, 'true');
+
+    const data = {
+      allPosts,
+      unverifiedPosts,
+      verifiedPosts,
+    };
     renderPage(res, 'pages/adminDashboard', data, 'Admin | Dashboard', '/admin/dashboard');
   },
 
