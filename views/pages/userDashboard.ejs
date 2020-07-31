@@ -158,7 +158,7 @@
                   </div>
                 </form>
                 <div class="text-center">
-                  <button class="btn btn-lg btn-secondary" type="submit" id="btnUpdateProfile">Update profile</button>
+                  <button class="btn btn-lg btn-secondary" id="btnUpdateProfile">Update profile</button>
                 </div>
               </div>
             </div>
@@ -253,7 +253,7 @@
                     </div>
 
                     <div class="form-group">
-                      <label for="subject">Subject</label>
+                      <label for="subject">Brief Description</label>
                       <input type="text" name="title" class="form-control" id="subject"
                         placeholder="Enter your post title" required="required" />
                     </div>
@@ -310,7 +310,7 @@
 
         const getData = await getFormData(title.value, subject.value, fileData.files[0], textarea);
         const response = await createPost(getData);
-        console.log(response);
+        // console.log(response);
         const redirect = () => {
           window.location.href = '/posts';
         };
@@ -368,7 +368,7 @@
 
     // profile update
     document.getElementById('btnUpdateProfile').addEventListener('click', async function (event) {
-
+      event.preventDefault();
       const form = document.getElementById('updateProfileFormId');
       const [firstName, lastName, userName, , phone, country, city] = form.querySelectorAll('input');
 
@@ -394,7 +394,7 @@
         if (response.status === 'success') {
           toaster(response.message, 'success');
           removeToaster(3000);
-          setTimeout(redirect, 3100);
+          setTimeout(3100);
         } else {
           toaster(response.message, 'error');
           removeToaster(3000);
