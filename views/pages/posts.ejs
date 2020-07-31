@@ -28,7 +28,7 @@
               </a>
             </div>
             <p class="meta d-flex justify-content-center justify-content-md-start">
-              <span class="calender"><i class="fa fa-calendar mr-2"></i><%- posts[i].date %></span>
+              <span class="calender"><i class="fa fa-calendar mr-2"></i><%- posts[i].date.toGMTString() %></span>
               <span class="comment"><i class="fa fa-comment mr-2"></i><%- posts[i].comments.length + " comments" %></span>
             </p>
             <p class="article-highlight text-center text-md-left">
