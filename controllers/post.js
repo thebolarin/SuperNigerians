@@ -88,7 +88,6 @@ module.exports = {
 
     postSearchByTitle: async (req, res) => {
       const { title } = req.query; 
-      console.log('t', req.query);
       const posts = await Post.find({
         $and: [
           {
@@ -97,7 +96,6 @@ module.exports = {
               $options: 'i' 
             }, 
           },
-          { status: 'false' } // for now it can search unapproved posts     
         ]
       });
       const data = {
