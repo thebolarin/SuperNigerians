@@ -10,25 +10,47 @@ const Model = {
     return location;
   },
 };
-const View = {};
+
+const View = {
+  displayToastProfileUpdateNotif(message) {
+    document.querySelector(".toast-body").innerHTML = message;
+    $("#tstProfileUpdate").toast("show");
+  },
+};
+
 const Controller = {
   init() {
     Controller.initEventListeners();
   },
   initEventListeners() {
-    document.getElementById('btnUpdateProfile').addEventListener("click", (event) => {
-      event.preventDefault();
-      let {
-        firstname,
-        lastname,
-        username,
-        location,
-        phone,
-        photo,
-      } = Model.getFormData(document.forms.updateProfileForm);
-      console.log(firstname, lastname, username, location, phone, photo);
-      $('#updateProfileModal').modal('hide')
-    });
+    document
+      .getElementById("btnUpdateProfile")
+      .addEventListener("click", Controller.onSubmitForm);
+  },
+  onSubmitForm(event) {
+    event.preventDefault();
+    let userData = Model.getFormData(document.forms.updateProfileForm);
+    try {
+      axios
+        .put("/user/update", JSON.stringify(userData), {
+          "content-type": "application/json",
+        })
+        .then((resp) => {
+          console.log(resp);
+          View.displayToastProfileUpdateNotif(
+            `Your profile has been successfully updated.`
+          );
+        })
+        .catch((err) => {
+          console.error(err);
+          View.displayToastProfileUpdateNotif(
+            `Sorry. An error occured while updating your profile`
+          );
+        });
+    } catch (err) {
+      console.error(err);
+    }
+    $("#updateProfileModal").modal("hide");
   },
 };
 
