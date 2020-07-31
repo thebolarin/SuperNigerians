@@ -28,6 +28,7 @@ exports.getUserDetails = async (req, res) => {
     userComments,
     userPosts,
     numberOfLikes,
+    path: 'profile'
   };
   renderPage(res, "pages/userDashboard", data, "User Dashboard");
 };
