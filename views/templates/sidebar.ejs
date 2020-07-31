@@ -1,23 +1,23 @@
 <a href="#" class="sidebar-toggle" onclick="toggleMenu()"><i></i></a>
 <aside id="aside" role="complementary" class="">
-    <nav class="aside-nav mb-3" role="navigation">
+    <nav class="aside-nav mb-4" role="navigation">
 
-            <% if(currentUser) { %>
-                <h4>Welcome, <%= currentUser.firstname %> <%= currentUser.lastname %></h4>  
-            <% } %> 
+        <% if(currentUser) { %>
+        <h5 class="welcome-text mb-3">Welcome! <br> <%= currentUser.firstname %> <%= currentUser.lastname %></h5>
+        <% } %>
         <ul>
-            <li class="<%= path === 'home' ? 'nav-active' : '' %>" ><a href="/">Home</a></li>
-            <li class="<%= path === 'post' ? 'nav-active' : '' %>" ><a href="/posts">Posts</a></li>
+            <li class="<%= path === 'home' ? 'nav-active' : '' %>"><a href="/">Home</a></li>
+            <li class="<%= path === 'post' ? 'nav-active' : '' %>"><a href="/posts">Posts</a></li>
 
             <% if(currentUser) { %>
-                <li class="<%= path === 'profile' ? 'nav-active' : '' %>"><a href="/profile">Profile</a></li>
-                <li><a href="/logout">Sign out</a></li>
-            <% } %> 
+            <li class="<%= path === 'profile' ? 'nav-active' : '' %>"><a href="/profile">Profile</a></li>
+            <li><a href="/logout">Sign out</a></li>
+            <% } %>
             <% if(!currentUser) { %>
-                <li class="<%= path === 'signin' ? 'nav-active' : '' %>" ><a href="/login">Sign In</a></li>
-                <li class="<%= path === 'signup' ? 'nav-active' : '' %>" ><a href="/register">Sign Up</a></li>
-            <% } %> 
-           
+            <li class="<%= path === 'signin' ? 'nav-active' : '' %>"><a href="/login">Sign In</a></li>
+            <li class="<%= path === 'signup' ? 'nav-active' : '' %>"><a href="/register">Sign Up</a></li>
+            <% } %>
+
 
         </ul>
     </nav>
@@ -27,7 +27,7 @@
         <form action="<%= `/posts/search/{title}` %>">
             <div class="form-group d-flex">
                 <div class="icon"><span class="icon-paper-plane"></span></div>
-                <input type="text" name="title" class="form-control" placeholder="eg. post title here">
+                <input type="text" name="title" class="form-control" placeholder="e.g.post title here">
             </div>
         </form>
     </div>
@@ -41,7 +41,7 @@
             <form action="#" class="colorlib-subscribe-form">
                 <div class="form-group d-flex">
                     <div class="icon"><span class="icon-paper-plane"></span></div>
-                    <input type="text" class="form-control" placeholder="Enter Email Address">
+                    <input type="email" class="form-control" placeholder="Enter Email Address">
                 </div>
             </form>
         </div>
