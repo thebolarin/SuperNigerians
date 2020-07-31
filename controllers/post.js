@@ -69,7 +69,7 @@ module.exports = {
     },
     postView: async (req, res) => {
 
-        const posts = await Post.find({});
+        const posts = await Post.find({}).sort({date:'desc'});
 
         const data = {
             posts,
@@ -84,12 +84,10 @@ module.exports = {
             slug
         }).populate('comments');
 
-        console.log(post[0]['creator'])
+        
         const user = await User.find({
             _id: post[0]['creator']
         })
-
-        console.log(user);
 
         const data = {
             post,
