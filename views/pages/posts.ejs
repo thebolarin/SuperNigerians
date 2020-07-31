@@ -4,6 +4,7 @@
 <head>
   <%- include('../templates/head') %>
   <link rel="stylesheet" href="/css/posts.css" />
+  <link rel="stylesheet" href="/css/animate.css"/>
   <title>Articles</title>
 </head>
 
@@ -11,9 +12,35 @@
   <%- include('../templates/sidebar') %>
 
   <main id="main">
-    <div class="container">
+    <div class="container animate__animated animate__slideInLeft">
       <div class="row" style="margin-right: 0px; margin-left: 0px;">
-        <div class="col-12 article d-flex flex-column flex-md-row mb-5">
+        <div class=" col-12 article d-flex flex-column flex-md-row mb-5">
+          <div
+            class=" d-none d-md-flex justify-content-center profile-picture d-flex align-items-center mr-4 mb-2 mb-md-0">
+            <img
+              src="https://images.unsplash.com/photo-1518806118471-f28b20a1d79d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"
+              alt="user-profile-picture" class="img-fluid"/>
+          </div>
+          <div class="article-details d-flex flex-column justify-content-center">
+            <div class="text-caption">
+              <a href="#">
+                <h3 class="caption text-center text-md-left">A Loving Heart is the Truest Wisdom</h3>
+              </a>
+            </div>
+            <p class="meta d-flex justify-content-center justify-content-md-start">
+              <span class="calender"><i class="fa fa-calendar mr-2"></i>June 28, 2019</span>
+              <span class="comment"><i class="fa fa-comment mr-2"></i>5 Comment</span>
+            </p>
+            <p class="article-highlight text-center text-md-left">
+              A small river named Duden flows by their place and supplies it
+              with the necessary regelialia.
+            </p>
+            <div class="d-flex justify-content-center justify-content-md-start">
+              <a href="#" class="read-more">Read More <span class="fa fa-angle-right"></span></a>
+            </div>
+          </div>
+        </div>
+        <div class=" col-12 article d-flex flex-column flex-md-row mb-5">
           <div
             class="d-none d-md-flex justify-content-center profile-picture d-flex align-items-center mr-4 mb-2 mb-md-0">
             <img
@@ -39,7 +66,7 @@
             </div>
           </div>
         </div>
-        <div class="col-12 article d-flex flex-column flex-md-row mb-5">
+        <div class=" col-12 article d-flex flex-column flex-md-row mb-5">
           <div
             class="d-none d-md-flex justify-content-center profile-picture d-flex align-items-center mr-4 mb-2 mb-md-0">
             <img
@@ -65,7 +92,7 @@
             </div>
           </div>
         </div>
-        <div class="col-12 article d-flex flex-column flex-md-row mb-5">
+        <div class=" col-12 article d-flex flex-column flex-md-row mb-5">
           <div
             class="d-none d-md-flex justify-content-center profile-picture d-flex align-items-center mr-4 mb-2 mb-md-0">
             <img
@@ -91,7 +118,7 @@
             </div>
           </div>
         </div>
-        <div class="col-12 article d-flex flex-column flex-md-row mb-5">
+        <div class=" col-12 article d-flex flex-column flex-md-row mb-5">
           <div
             class="d-none d-md-flex justify-content-center profile-picture d-flex align-items-center mr-4 mb-2 mb-md-0">
             <img
@@ -117,7 +144,7 @@
             </div>
           </div>
         </div>
-        <div class="col-12 article d-flex flex-column flex-md-row mb-5">
+        <div class=" col-12 article d-flex flex-column flex-md-row mb-5">
           <div
             class="d-none d-md-flex justify-content-center profile-picture d-flex align-items-center mr-4 mb-2 mb-md-0">
             <img
@@ -143,7 +170,7 @@
             </div>
           </div>
         </div>
-        <div class="col-12 article d-flex flex-column flex-md-row mb-5">
+        <div class=" col-12 article d-flex flex-column flex-md-row mb-5">
           <div
             class="d-none d-md-flex justify-content-center profile-picture d-flex align-items-center mr-4 mb-2 mb-md-0">
             <img
@@ -169,7 +196,7 @@
             </div>
           </div>
         </div>
-        <div class="col-12 article d-flex flex-column flex-md-row mb-5">
+        <div class=" col-12 article d-flex flex-column flex-md-row mb-5">
           <div
             class="d-none d-md-flex justify-content-center profile-picture d-flex align-items-center mr-4 mb-2 mb-md-0">
             <img
@@ -195,7 +222,7 @@
             </div>
           </div>
         </div>
-        <div class="col-12 article d-flex flex-column flex-md-row mb-5">
+        <div class=" col-12 article d-flex flex-column flex-md-row mb-5">
           <div
             class="d-none d-md-flex justify-content-center profile-picture d-flex align-items-center mr-4 mb-2 mb-md-0">
             <img
@@ -221,7 +248,7 @@
             </div>
           </div>
         </div>
-        <div class="col-12 article d-flex flex-column flex-md-row mb-5">
+        <div class=" col-12 article d-flex flex-column flex-md-row mb-5">
           <div
             class="d-none d-md-flex justify-content-center profile-picture d-flex align-items-center mr-4 mb-2 mb-md-0">
             <img
@@ -247,33 +274,7 @@
             </div>
           </div>
         </div>
-        <div class="col-12 article d-flex flex-column flex-md-row mb-5">
-          <div
-            class="d-none d-md-flex justify-content-center profile-picture d-flex align-items-center mr-4 mb-2 mb-md-0">
-            <img
-              src="https://images.unsplash.com/photo-1518806118471-f28b20a1d79d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"
-              alt="user-profile-picture" class="img-fluid"/>
-          </div>
-          <div class="article-details d-flex flex-column justify-content-center">
-            <div class="text-caption">
-              <a href="#">
-                <h3 class="caption text-center text-md-left">A Loving Heart is the Truest Wisdom</h3>
-              </a>
-            </div>
-            <p class="meta d-flex justify-content-center justify-content-md-start">
-              <span class="calender"><i class="fa fa-calendar mr-2"></i>June 28, 2019</span>
-              <span class="comment"><i class="fa fa-comment mr-2"></i>5 Comment</span>
-            </p>
-            <p class="article-highlight text-center text-md-left">
-              A small river named Duden flows by their place and supplies it
-              with the necessary regelialia.
-            </p>
-            <div class="d-flex justify-content-center justify-content-md-start">
-              <a href="#" class="read-more">Read More <span class="fa fa-angle-right"></span></a>
-            </div>
-          </div>
-        </div>
-        <div class="col-12 article d-flex flex-column flex-md-row mb-5">
+        <div class=" col-12 article d-flex flex-column flex-md-row mb-5">
           <div
             class="d-none d-md-flex justify-content-center profile-picture d-flex align-items-center mr-4 mb-2 mb-md-0">
             <img
