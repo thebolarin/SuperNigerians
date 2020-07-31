@@ -112,6 +112,9 @@
                 aria-labelledby="tabs-my-posts-tab">
                 <!-- My posts -->
                 <div class="my-posts-container row row-cols-1 row-cols-sm-2 row-cols-lg-3">
+                  <% if (userPosts.length === 0) { %>
+                  <div class="my-post col px-1 py-3 position-relative my-2">You don't have any posts yet</div>
+                  <% } %>
                   <% for( post in userPosts) { %>
                   <div class="my-post col px-1 py-3 position-relative my-2">
                     <div
