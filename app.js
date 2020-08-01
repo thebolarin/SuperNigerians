@@ -11,9 +11,10 @@ const mongoose = require("mongoose");
 const csrf = require('csurf');
 // const multer = require('multer');
 const indexRouter = require('./routes')
+const errorController = require('./controllers/error');
 // const config = require("./config/database");
 const auth = require('./routes/auth');
-// const User = require('./models/user');
+
 const postRouter = require('./routes/post');
 
 const app = express();
@@ -66,10 +67,13 @@ app.use(auth);
 app.use(indexRouter);
 app.use(postRouter);
 // ************ END ROUTE REGISTRATION ********** //
-
-// catch 404 and forward to error handler
-app.use((req, res, next) => {
-  next(createError(404));
+app.get ('/500',errorController.get500);
+app.use((error,req,res,next)=> {
+  res.status(500).render('pages/error500', {
+    pageName: 'Technical Error',
+    path: '/500',
+    isLoggedIn: req.session.isLoggedIn
+  });
 });
 
 

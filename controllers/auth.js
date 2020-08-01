@@ -95,7 +95,6 @@ const postUserRegister = async (req, res) => {
           return res.redirect('/');
         }
       } catch (error) {
-        console.log(error);
         return errorUserRegister(req, res, userDetails, 'Error Occoured')
       }
     }
@@ -130,7 +129,6 @@ const postUserLogin = async (req, res, next) => {
           return errorUserLogin(req, res, email, password, 'Invalid email or password.',);
         })
         .catch(() => {
-          console.log('invalid user')
           res.redirect('/login');
         });
     })
