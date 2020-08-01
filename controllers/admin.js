@@ -79,17 +79,10 @@ module.exports = {
       const {
         postId
       } = req.params;
-
-      const userPost = await Post.findById({
-        id: postId
-      });
+      
+      const userPost = await Post.findById({ _id: postId });
       if (!userPost) {
-        res
-          .status(400)
-          .json({
-            status: "error",
-            message: "Post does not exist"
-          });
+        req.flash("error", "Post does not exist");
       }
 
       const deletePost = await Post.findByIdAndRemove({
@@ -98,22 +91,11 @@ module.exports = {
       if (!deletePost) {
         res.flash("error", "An error occured while deleting post");
       }
-      const userPost = await Post.findById({
-        _id: postId
-      });
-      if (!userPost) {
-        req.flash("error", "Post does not exist");
-      }
 
-<<<<<<< HEAD
+
       Post.findByIdAndDelete(postId,(err) => {
         if(err) req.flash("error", "An error occured while deleting post");
         req.flash("Post deleted sucessfully");  
-=======
-      Post.findByIdAndDelete(postId, (err) => {
-        if (err) req.flash("error", "An error occured while deleting post");
-        console.log("Successful deletion");
->>>>>>> 965baad934f1340d817e1f58ef9df7d0611a2611
       });
 
       res.redirect('back');
@@ -240,7 +222,7 @@ module.exports = {
         unverifiedPosts,
       }
       return renderPage(res, 'pages/adminDashboard', data, 'Admin | Dashboard', '/admin/dashboard/posts/verified');
-    } catch (error) {
+    } catch (err) {
       const error = new Error(err);
       error.httpStatusCode = 500;
       return next(error);
