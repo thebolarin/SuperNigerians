@@ -173,6 +173,10 @@
 .sidebar-toggle {
   cursor: pointer;
   text-decoration: none;
+  background: #ffffffb6 !important;
+  border-radius: 50%;
+  height: 65px;
+  width: 70px;
 }
 
 .sidebar-toggle.active i::before,
