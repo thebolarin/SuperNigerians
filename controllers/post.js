@@ -6,6 +6,9 @@ const Post = require('../models/post')
 const {
     renderPage
 } = require('../utils/render-page');
+const {
+    populate
+} = require('../models/post');
 
 // cloudinary Configuration
 cloud.config({
@@ -36,7 +39,7 @@ module.exports = {
             // check if a particular post has been created by a user
 
             // eslint-disable-next-line no-use-before-define
-            const postUrl = await uploadPhoto(req, res, 'image/png', 'image/jpeg', 100000)
+            const postUrl = await uploadPhoto(req, res, 'image/png', 'image/jpeg', 500000000)
             const postCreate = await Post.create({
                 title,
                 body,
@@ -66,7 +69,10 @@ module.exports = {
     },
     postView: async (req, res) => {
 
-        const posts = await Post.find({});
+        const posts = await Post.find({}).sort({
+            date: 'desc'
+        });
+
         const data = {
             posts,
             path: 'post'
@@ -78,13 +84,40 @@ module.exports = {
         let slug = req.params.slug;
         const post = await Post.find({
             slug
-        })
+        }).populate('comments').populate('creator')
         const data = {
             post,
             path: 'post'
         };
         renderPage(res, 'pages/post', data, 'Post', '/post');
-    }
+    },
+
+    postSearchByTitle: async (req, res) => {
+        const {
+            title
+        } = req.query;
+        const posts = await Post.find({
+            $and: [{
+                slug: {
+                    $regex: title,
+                    $options: 'i'
+                },
+            }, ]
+        });
+        const data = {
+            posts,
+            path: 'post'
+        }
+        renderPage(res, "pages/searchedPosts", data, "Searched Posts Results", '/posts/search');
+    },
+
+   /*  postLike: async (req, res) => {
+
+    },
+
+    postdisLike: async (req, res) => {
+
+    } */
 }
 
 /**
