@@ -14,7 +14,7 @@ const getAllPosts = async () => {
   return allPosts;
 };
 
-const getVerifiedPosts = async () => {
+const getUnverifiedPosts = async () => {
   const verify = await Post.find({
     status: 'false'
   }).populate('creator').sort({
@@ -49,7 +49,7 @@ module.exports = {
     const totalUsers = await User.find();
     const totalUnverifiedPosts = await filterData(allPosts, 'false');
     const totalVerifiedPosts = await filterData(allPosts, 'true');
-    const unverifiedPosts = await getVerifiedPosts();
+    const unverifiedPosts = await getUnverifiedPosts();
     const allAdmins = await filterData(totalUsers, 'admin')
 
     const data = {
@@ -79,35 +79,17 @@ module.exports = {
       const {
         postId
       } = req.params;
-
-      const userPost = await Post.findById({
-        id: postId
-      });
-      if (!userPost) {
-        res
-          .status(400)
-          .json({
-            status: "error",
-            message: "Post does not exist"
-          });
-      }
-
-      const deletePost = await Post.findByIdAndRemove({
-        id: postId
-      });
-      if (!deletePost) {
-        res.flash("error", "An error occured while deleting post");
-      }
+      
+      const userPost = await Post.findById({ _id: postId });
       if (!userPost) {
         req.flash("error", "Post does not exist");
       }
 
-      Post.findByIdAndDelete(postId, (err) => {
-        if (err) req.flash("error", "An error occured while deleting post");
-        console.log("Successful deletion");
+      Post.findByIdAndDelete(postId,(err) => {
+        if(err) req.flash("error", "An error occured while deleting post");
+        req.flash("Post deleted sucessfully");  
       });
 
-      req.flash("Post deleted sucessfully");
       res.redirect('back');
     } catch (err) {
       const error = new Error(err);
