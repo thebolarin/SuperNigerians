@@ -238,18 +238,10 @@
 }
 
 .sidebar-toggle i::before {
-  top: -7px;
-}
-
-.sidebar-toggle i::after {
-  bottom: -7px;
-}
-
-.sidebar-toggle:hover i::before {
   top: -10px;
 }
 
-.sidebar-toggle:hover i::after {
+.sidebar-toggle i::after {
   bottom: -10px;
 }
 
