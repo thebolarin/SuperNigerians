@@ -84,16 +84,9 @@ module.exports = {
         let slug = req.params.slug;
         const post = await Post.find({
             slug
-        }).populate('comments');
-
-
-        const user = await User.find({
-            _id: post[0]['creator']
-        })
-
+        }).populate('comments').populate('creator')
         const data = {
             post,
-            user,
             path: 'post'
         };
         renderPage(res, 'pages/post', data, 'Post', '/post');
