@@ -140,7 +140,7 @@ module.exports = {
     }
   },
 
-  deleteUser: async (req, res) => {
+  deleteUser: async (req, res, next) => {
     const {
       userId
     } = req.params;
@@ -150,7 +150,7 @@ module.exports = {
       });
       if (!users) return req.flash("error", "No User found !");
 
-
+      return res.redirect('back')
     } catch (err) {
       const error = new Error(err);
       error.httpStatusCode = 500;
