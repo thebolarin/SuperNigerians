@@ -85,14 +85,6 @@ module.exports = {
         req.flash("error", "Post does not exist");
       }
 
-      const deletePost = await Post.findByIdAndRemove({
-        id: postId
-      });
-      if (!deletePost) {
-        res.flash("error", "An error occured while deleting post");
-      }
-
-
       Post.findByIdAndDelete(postId,(err) => {
         if(err) req.flash("error", "An error occured while deleting post");
         req.flash("Post deleted sucessfully");  
