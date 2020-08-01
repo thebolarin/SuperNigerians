@@ -52,6 +52,7 @@ module.exports = {
     const unverifiedPosts = await getUnverifiedPosts();
     const allAdmins = await filterData(totalUsers, 'admin')
 
+    console.log(unverifiedPosts);
     const data = {
       allPosts,
       totalUnverifiedPosts,
@@ -63,33 +64,28 @@ module.exports = {
     renderPage(res, 'pages/adminDashboard', data, 'Admin | Dashboard', '/admin/dashboard');
   },
 
-  profile: async (req, res) => {
-    if (!req.session.user) {
-      res.redirect("/login");
-  }
-  const user = await User.findOne({ _id: req.session.user._id });
-  if (user.role !== "admin") {
-      res.redirect("/");
-  }
-  const userComments = await Comment.find({ creator: user._id });
-  const userPosts = await Post.find({ creator: user._id });
-  const likes = [];
-  let numberOfLikes = 0;
-  userComments.forEach((comment) => {
-      likes.push(comment.like);
-  });
-  if (likes.length !== 0) {
-      numberOfLikes = likes.reduce((a, b) => {
-          return a + b;
-      });
-  }
-  const data = {
-      user,
-      userComments,
-      userPosts,
-      numberOfLikes,
-  };
-      console.log(data)
+  profile: async (req, res, next) => {
+    try {
+    const { _id } = req.session.user
+    const user = await User.findOne({ _id });
+    const userComments = await Comment.find({ creator: _id });
+    const userPosts = await Post.find({ creator: _id });
+    const likes = [];
+    let numberOfLikes = 0;
+    userComments.forEach((comment) => {
+        likes.push(comment.like);
+    });
+    if (likes.length !== 0) {
+        numberOfLikes = likes.reduce((a, b) => {
+            return a + b;
+        });
+    }
+    const data = {
+        user,
+        userComments,
+        userPosts,
+        numberOfLikes,
+    };
     renderPage(
       res,
       "pages/adminProfile",
@@ -97,6 +93,11 @@ module.exports = {
       "Admin | Profile",
       "/admin/profile"
     );
+    } catch (err) {
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
+    }
   },
 
   deletePost: async (req, res, next) => {
@@ -140,17 +141,17 @@ module.exports = {
     }
   },
 
-  deleteUser: async (req, res) => {
+  suspendUser: async (req, res, next) => {
     const {
       userId
     } = req.params;
     try {
-      const users = await User.findOneAndDelete({
-        _id: userId
+      const users = await User.findByIdAndUpdate(userId,{
+         active: 'false'
       });
       if (!users) return req.flash("error", "No User found !");
 
-
+      return res.redirect('back')
     } catch (err) {
       const error = new Error(err);
       error.httpStatusCode = 500;
